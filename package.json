@@ -1,0 +1,36 @@
+{
+  "name": "my-divjoy-project",
+  "version": "0.1.0",
+  "private": true,
+  "keywords": [
+    "divjoy"
+  ],
+  "dependencies": {
+    "@analytics/google-analytics": "0.2.2",
+    "@headlessui/react": "^1.5.0",
+    "@stripe/stripe-js": "1.11.0",
+    "@supabase/supabase-js": "1.35.6",
+    "@tailwindcss/typography": "0.5.2",
+    "analytics": "0.3.1",
+    "autoprefixer": "10.4.4",
+    "classnames": "^2.3.2",
+    "next": "12.2.5",
+    "postcss": "8.4.12",
+    "query-string": "6.13.8",
+    "raw-body": "2.4.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-hook-form": "6.15.1",
+    "react-icons": "^4.8.0",
+    "react-query": "3.32.1",
+    "react-toastify": "^9.1.1",
+    "stripe": "8.132.0",
+    "tailwindcss": "3.0.23"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "stripe-webhook": "stripe listen --forward-to localhost:3000/api/stripe-webhook"
+  }
+}
