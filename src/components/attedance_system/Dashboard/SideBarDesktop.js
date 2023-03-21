@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import classNames from "classnames";
+import { getUser } from "util/db";
+import { useEffect } from "react";
 
 function SideBarDesktop({ navigation, auth }) {
-  useRouter;
+  
   const router = useRouter();
   const location = router?.asPath;
-  console.log(location);
+
+  const [data, setData] = useState(null);
+  const user = auth?.user?.uid;
+  const query = getUser(user);
+  query.then(result => {
+    setData({
+       email: result.email ,
+       name: result.name ,
+       roleas: result.roleas 
+  });
+});
   return (
     <div
       className=" hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col 
@@ -73,7 +85,7 @@ function SideBarDesktop({ navigation, auth }) {
                   />
                 </div>
                 <p className="text-sm font-medium text-black ">
-                  {auth?.user?.name ? auth?.user?.name : "User Name"}
+                  {data?.name ? data?.name : "User Name"}
                 </p>
               </div>
 

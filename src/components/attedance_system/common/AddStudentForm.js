@@ -22,9 +22,12 @@ export default function AddStudentForm() {
   const auth = useAuth();
   const owner = auth?.user?.uid;
   const submitHandle = async (data) => {
-    await createStudent({ ...data, owner: owner });
+    // await createStudent({ ...data, owner: owner });
     reset();
     notify();
+    // const formData = new FormData();
+    // formData.append("file", data.file[0]);
+    console.log(data);
   };
   // const cnicRegex = /^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$/;
   // const sessionRegex = /^2019-(202[0-3])$/;
@@ -35,6 +38,14 @@ export default function AddStudentForm() {
         <div className="mt-5 md:col-span-2 md:mt-0">
           <form onSubmit={handleSubmit(submitHandle)}>
             <div className="overflow-hidden shadow sm:rounded-md">
+              <div>
+                <input type="file" {...register("file", { required: true })} />
+                {/* {errors.profile_img && (
+                      <p className="mt-1 text-sm text-left text-red-600">
+                        {errors.profile_img.message}
+                      </p>
+                    )} */}
+              </div>
               <div className="bg-white px-4 py-5 sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
                   {/* Name */}

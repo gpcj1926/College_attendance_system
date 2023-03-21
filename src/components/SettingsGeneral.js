@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "util/auth";
+import { getUser } from "util/db";
 
 function SettingsGeneral(props) {
   const auth = useAuth();
   const [pending, setPending] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
-
+  const [userData, setUserData] = useState(null);
+  const user = auth?.user?.uid;
+  const query = getUser(user);
+  query.then(result => {
+    setUserData({
+       email: result.email ,
+       name: result.name ,
+       roleas: result.roleas 
+  });
+});
   const onSubmit = (data) => {
     // Show pending indicator
     setPending(true);
@@ -51,7 +61,7 @@ function SettingsGeneral(props) {
           name="name"
           type="text"
           placeholder="Name"
-          defaultValue={auth.user.name}
+          defaultValue={userData?.name}
           ref={register({
             required: "Please enter your name",
           })}
@@ -69,7 +79,7 @@ function SettingsGeneral(props) {
           name="roleas"
           type="text"
           placeholder="roleas"
-          defaultValue={auth.user.roleas}
+          defaultValue={userData?.roleas}
           ref={register({
             required: "Please enter role",
           })}

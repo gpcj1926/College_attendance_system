@@ -7,7 +7,7 @@ import { requireAuth } from 'util/auth';
 
   return (
     <Dashboard>
-      <div>
+      <div className='bg-red-100 py-20'>
 <h2 className='text-3xl font-bold text-center'>Add new Student</h2>
       <AddStudentForm />
       </div>

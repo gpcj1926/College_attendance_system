@@ -63,7 +63,7 @@ export default function Dashboard({children}) {
             {/* ----------Random Components-------------- */}
             <div className="flex flex-1 flex-col md:pl-64 ">
               <main className="flex-1">
-                <div className="mt-24 h-full">
+                <div className="mt-10 h-full">
                 {children}
                 </div>
               </main>
