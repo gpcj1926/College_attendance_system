@@ -28,7 +28,7 @@ function allstudents() {
 
   return (
     <Dashboard>
-      <div className="bg-red-100 py-20">
+      <div className="bg-red-100 py-20 h-[100vh]">
         {allStudents?.length === 0 && <Loader />}
         {allStudents && (
           <>
@@ -51,20 +51,6 @@ function allstudents() {
                       <option>Punjabi</option>
                     </select>
                   </div>
-                  {/* <div className="flex items-center space-x-2 mt-3">
-                    <h2 className="sm:text-xl text-lg font-bold ">Semester:</h2>
-                    <select
-                      name="semester"
-                      ref={register()}
-                      className="mt-1 px-4 py-2 rounded-lg"
-                    >
-                      <option></option>
-                      <option>2</option>
-                      <option>4</option>
-                      <option>6</option>
-                      <option>8</option>
-                    </select>
-                  </div> */}
                   <div className="flex items-center space-x-2 mt-3">
                     <h2 className="sm:text-xl text-lg font-bold ">Shift:</h2>
                     <select

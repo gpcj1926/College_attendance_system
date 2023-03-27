@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { requireAuth } from 'util/auth';
-// import supabase from 'util/supabase';
 import Dashboard from 'components/attedance_system/Dashboard/Dashboard'
 import { useAllStudents } from 'util/db';
-// import Loader from 'components/attedance_system/common/Loader';
+import Loader from 'components/attedance_system/common/Loader';
 
 const dashboard = () => {
   const {data:allStudents} = useAllStudents();
@@ -16,7 +15,7 @@ const dashboard = () => {
       <h2 className='text-4xl font-bold'>
         Dashboard
       </h2>
-      <main className='m-4'>
+      <main className='m-4 h-[100vh]'>
         <div className='flex space-x-2'>
           <h1 className='text-xl font-bold'>Total Students :</h1>
           <h3 className='text-lg'>{allStudents.length}</h3>
