@@ -11,7 +11,7 @@ function SideBarDesktop({ navigation }) {
   const location = router?.asPath;
 
   const auth = useAuth();
-  const { data: userData } = useUser(auth.user.id);
+  const { data: userData } = useUser(auth?.user?.id);
   // console.log(userData , "userData")
 
   return (

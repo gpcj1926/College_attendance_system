@@ -18,7 +18,7 @@ export default function SideBarMobile({
   togglesidebar,
 }) {
   const auth = useAuth();
-  const {data: userData} = useUser(auth.user.id);
+  const {data: userData} = useUser(auth?.user?.id);
 
   const router = useRouter();
   const location = router?.asPath;
