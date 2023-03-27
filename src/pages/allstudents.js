@@ -6,22 +6,26 @@ import Dashboard from "components/attedance_system/Dashboard/Dashboard";
 import { requireAuth } from "util/auth";
 import { FaSearch } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import { useAllStudents } from "util/db";
 
 function allstudents() {
-  const [allStudents, setAllStudents] = useState([]);
-  useEffect(() => {
-    fetchStudents();
-  }, []);
-  const fetchStudents = async () => {
-    const { data } = await supabase.from("students").select("*");
-    // console.log(data, "data");
-    setAllStudents(data);
-  };
-  // console.log(allStudents);
-  const { register, handleSubmit, reset } = useForm();
+  // const [allStudents, setAllStudents] = useState([{name:"kashif"}]);
+  // useEffect(() => {
+  //   fetchStudents();
+  // }, []);
+  // const fetchStudents = async () => {
+  //   const { data } = await supabase.from("students").select("*");
+  //   setAllStudents(data);
+  // };
+  const { register, handleSubmit} = useForm();
+
   const submitHandle = async (data) => {
     console.log(data);
   };
+
+  const {data:allStudents , refetch: refetchStudents} = useAllStudents();
+  console.log(allStudents , "mydata")
+
   return (
     <Dashboard>
       <div className="bg-red-100 py-20">
@@ -47,7 +51,7 @@ function allstudents() {
                       <option>Punjabi</option>
                     </select>
                   </div>
-                  <div className="flex items-center space-x-2 mt-3">
+                  {/* <div className="flex items-center space-x-2 mt-3">
                     <h2 className="sm:text-xl text-lg font-bold ">Semester:</h2>
                     <select
                       name="semester"
@@ -60,7 +64,7 @@ function allstudents() {
                       <option>6</option>
                       <option>8</option>
                     </select>
-                  </div>
+                  </div> */}
                   <div className="flex items-center space-x-2 mt-3">
                     <h2 className="sm:text-xl text-lg font-bold ">Shift:</h2>
                     <select
@@ -69,6 +73,7 @@ function allstudents() {
                       className="mt-1 px-4 py-2 rounded-lg"
                     >
                       <option></option>
+                      <option>both</option>
                       <option>Morning</option>
                       <option>Evening</option>
                     </select>
@@ -84,7 +89,7 @@ function allstudents() {
                 </div>
               </form>
             </section>
-            <AllStudentsItems allStudents={allStudents} />
+            <AllStudentsItems allStudents={allStudents} refetchStudents={refetchStudents} />
           </>
         )}
       </div>

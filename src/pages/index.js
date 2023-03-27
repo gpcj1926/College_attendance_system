@@ -1,6 +1,6 @@
 import React from "react";
 import Meta from "components/Meta";
-import NewsletterSection from "components/NewsletterSection";
+// import NewsletterSection from "components/NewsletterSection";
 import { useAuth } from "util/auth";
 import Link from "next/link";
 function IndexPage(props) {

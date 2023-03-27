@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { requireAuth } from 'util/auth';
-import supabase from 'util/supabase';
+// import supabase from 'util/supabase';
 import Dashboard from 'components/attedance_system/Dashboard/Dashboard'
-import Loader from 'components/attedance_system/common/Loader';
+import { useAllStudents } from 'util/db';
+// import Loader from 'components/attedance_system/common/Loader';
 
 const dashboard = () => {
-  const [allStudents, setAllStudents] = useState([])
-  useEffect( () => {
-    fetchStudents();
-  }, [])
-  const fetchStudents = async ()=>{
-    const { data } =  await supabase.from("students").select('*')
-    console.log(data,"data")
-    setAllStudents(data)}
+  const {data:allStudents} = useAllStudents();
+  console.log(allStudents , "mydata")
   return (
     <Dashboard>
       {!allStudents && <Loader/>}
-      {allStudents && 
-    <div className='bg-red-100 py-20'>
+      {allStudents &&
+    <div className='bg-red-100 py-20 px-6'>
       <h2 className='text-4xl font-bold'>
         Dashboard
       </h2>

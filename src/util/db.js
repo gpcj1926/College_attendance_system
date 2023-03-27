@@ -129,6 +129,39 @@ export async function createStudent(data) {
   return response;
 }
 
+// Fetch all student by owner
+export function useAllStudents() {
+  return useQuery(
+    "students",
+    () =>
+      supabase
+        .from("students")
+        .select("*")
+        .then(handle),
+    { enabled: true }
+  );
+}
+
+
+// Delete an student
+export async function deleteStudent(id) {
+  const response = await supabase
+    .from("students")
+    .delete()
+    .eq("id", id)
+    .then(handle);
+  // Invalidate and refetch queries that could have old data
+  await Promise.all([
+    client.invalidateQueries(["student", { id }]),
+    client.invalidateQueries(["students"]),
+  ]);
+  return response;
+}
+
+
+
+
+
 /**** HELPERS ****/
 
 // Get response data or throw error if there is one
