@@ -3,23 +3,20 @@ import { useRouter } from "next/router";
 import Meta from "components/Meta";
 import SettingsSection from "components/SettingsSection";
 import { requireAuth } from "util/auth";
-import Dashboard from "components/attedance_system/Dashboard/Dashboard";
 
 
 function SettingsPage(props) {
   const router = useRouter();
 
   return (
-    <Dashboard>
 
-    <>
-      <Meta title="Settings" />
-      <SettingsSection
-        section={router.query.section}
-        key={router.query.section}
+      <>
+        <Meta title="Settings" />
+        <SettingsSection
+          section={router.query.section}
+          key={router.query.section}
         />
-    </>
-        </Dashboard>
+      </>
   );
 }
 

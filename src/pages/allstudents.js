@@ -2,32 +2,27 @@ import React, { useEffect, useState } from "react";
 import supabase from "util/supabase";
 import AllStudentsItems from "components/attedance_system/common/AllStudentsItems";
 import Loader from "components/attedance_system/common/Loader";
-import Dashboard from "components/attedance_system/Dashboard/Dashboard";
+import Index from "components/attedance_system/Dashboard/Index";
 import { requireAuth } from "util/auth";
 import { FaSearch } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useAllStudents } from "util/db";
+import Meta from "components/Meta";
 
 function allstudents() {
-  // const [allStudents, setAllStudents] = useState([{name:"kashif"}]);
-  // useEffect(() => {
-  //   fetchStudents();
-  // }, []);
-  // const fetchStudents = async () => {
-  //   const { data } = await supabase.from("students").select("*");
-  //   setAllStudents(data);
-  // };
-  const { register, handleSubmit} = useForm();
+
+  const { register, handleSubmit } = useForm();
 
   const submitHandle = async (data) => {
     console.log(data);
   };
 
-  const {data:allStudents , refetch: refetchStudents} = useAllStudents();
-  console.log(allStudents , "mydata")
+  const { data: allStudents, refetch: refetchStudents } = useAllStudents();
+  // console.log(allStudents, "mydata")
 
   return (
-    <Dashboard>
+    <Index>
+        <Meta title="All Students"/>
       <div className="bg-red-100 py-20 h-[100vh]">
         {allStudents?.length === 0 && <Loader />}
         {allStudents && (
@@ -79,7 +74,7 @@ function allstudents() {
           </>
         )}
       </div>
-    </Dashboard>
+    </Index>
   );
 }
 export default requireAuth(allstudents);

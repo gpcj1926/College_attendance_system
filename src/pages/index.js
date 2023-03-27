@@ -8,7 +8,7 @@ function IndexPage(props) {
   console.log(auth.user);
   return (
     <>
-      <Meta />
+        <Meta title="GPCJ" description="Government PostGraduate College Jhang" />
       <section className="py-12 px-4">
         <div>
           <div className="flex flex-col justify-center items-center">

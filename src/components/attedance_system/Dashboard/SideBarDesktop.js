@@ -2,24 +2,18 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import classNames from "classnames";
-import { getUser } from "util/db";
-import { useEffect } from "react";
-
-function SideBarDesktop({ navigation, auth }) {
-  
+import { useUser } from "util/db";
+import { useAuth } from "util/auth";
+import { Disclosure } from "@headlessui/react";
+import { FaChevronDown } from "react-icons/fa";
+function SideBarDesktop({ navigation }) {
   const router = useRouter();
   const location = router?.asPath;
 
-  const [data, setData] = useState(null);
-  const user = auth?.user?.uid;
-  const query = getUser(user);
-  query.then(result => {
-    setData({
-       email: result.email ,
-       name: result.name ,
-       roleas: result.roleas 
-  });
-});
+  const auth = useAuth();
+  const { data: userData } = useUser(auth.user.id);
+  // console.log(userData , "userData")
+
   return (
     <div
       className=" hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col 
@@ -40,32 +34,101 @@ function SideBarDesktop({ navigation, auth }) {
             </Link>
           </div>
           <nav className="mt-5 flex-1 space-y-1 px-2 pt-2  ">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                >
-                <a
-                className={classNames(
-                  location === item.href
-                    ? "bg-gray-200  text-black"
-                    : " hover:bg-gray-50 text-black  hover:text-black",
-                  "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                )}
-                >
-                  <item.icon
+            {navigation.map((item) => {
+              return !item.haveSub ? (
+                <Link key={item.name} href={item.href}>
+                  <a
                     className={classNames(
                       location === item.href
-                        ? "text-[#a02d29]"
-                        : "text-gray-400 ",
-                      "mr-3 flex-shrink-0 h-6 w-6"
+                        ? "bg-red-100   text-black"
+                        : " hover:bg-gray-50 text-black  hover:text-black",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                     )}
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </a>
-              </Link>
-            ))}
+                  >
+                    <item.icon
+                      className={classNames(
+                        location === item.href
+                          ? "text-[#a02d29]"
+                          : "text-gray-400 ",
+                        "mr-3 flex-shrink-0 h-5 w-5"
+                      )}
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </a>
+                </Link>
+              ) : (
+                <Disclosure
+                  key={item.name}
+                  defaultOpen={
+                    item.sub.filter((i) => {
+                      return i.href === location;
+                    })?.length !== 0
+                      ? true
+                      : false
+                  }
+                >
+                  <div
+                    className={classNames(
+                      item.sub.filter((i) => {
+                        return i.href === location;
+                      })?.length !== 0
+                        ? "bg-red-100  text-black"
+                        : " hover:bg-gray-50 text-black  hover:text-black",
+                      "group flex items-center justify-between px-2 py-2 text-sm font-medium rounded-md"
+                    )}
+                  >
+                    <div className="flex items-center">
+                      <item.icon
+                        className={classNames(
+                          item.sub.filter((i) => {
+                            return i.href === location;
+                          })?.length !== 0
+                            ? "text-[#a02d29]"
+                            : "text-gray-400 ",
+                          "mr-3 flex-shrink-0 h-5 w-5"
+                        )}
+                        aria-hidden="true"
+                      />
+                      <div className="cursor-default">{item.name}</div>
+                    </div>
+                    <Disclosure.Button>
+                      <FaChevronDown className="text-sm" />
+                    </Disclosure.Button>
+                  </div>
+
+                  <Disclosure.Panel>
+                    <div className="ml-3">
+                      {item.sub.map((sub) => {
+                        return (
+                          <Link key={sub.name} href={sub.href}>
+                            <a
+                              className={classNames(
+                                location === sub.href
+                                  ? "bg-red-100   text-black"
+                                  : " hover:bg-gray-50 text-black  hover:text-black",
+                                "group flex items-center px-2 py-2 text-xs font-medium rounded-md"
+                              )}
+                            >
+                              <sub.icon
+                                className={classNames(
+                                  location === sub.href
+                                    ? "text-[#a02d29]"
+                                    : "text-gray-400 ",
+                                  "mr-3 flex-shrink-0 h-5 w-5"
+                                )}
+                                aria-hidden="true"
+                              />
+                              {sub.name}
+                            </a>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </Disclosure.Panel>
+                </Disclosure>
+              );
+            })}
           </nav>
         </div>
         <div className="flex flex-shrink-0 bg-white  border-t-2  p-4">
@@ -85,7 +148,7 @@ function SideBarDesktop({ navigation, auth }) {
                   />
                 </div>
                 <p className="text-sm font-medium text-black ">
-                  {data?.name ? data?.name : "User Name"}
+                  {userData?.name ? userData?.name : "User Name"}
                 </p>
               </div>
 

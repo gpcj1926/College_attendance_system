@@ -36,7 +36,7 @@ function ContactSection(props) {
   };
 
   return (
-    <section className="py-12 px-4 bg-gray-100">
+    <section className="py-12 px-4 bg-red-200">
       <div className="container mx-auto max-w-2xl">
         <h1 className="mb-6 text-3xl font-medium text-center">Contact Us</h1>
 
@@ -87,7 +87,7 @@ function ContactSection(props) {
             )}
           </div>
           <button
-            className="py-2 px-4 mt-2 text-white bg-blue-500 rounded border-0 hover:bg-blue-600 focus:outline-none"
+            className="py-2 px-4 mt-2 text-white bg-[#a02d29] hover:bg-[#af4844] rounded border-0 focus:outline-none"
             type="submit"
             disabled={pending}
           >

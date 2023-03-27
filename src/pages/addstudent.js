@@ -1,17 +1,19 @@
 import React from 'react'
 import AddStudentForm from 'components/attedance_system/common/AddStudentForm'
-import Dashboard from 'components/attedance_system/Dashboard/Dashboard'
+import Index from 'components/attedance_system/Dashboard/Index'
 import { requireAuth } from 'util/auth';
+import Meta from 'components/Meta';
 
- function addstudent() {
+function addstudent() {
 
   return (
-    <Dashboard>
+    <Index>
+        <Meta title="Add Students"/>
       <div className='bg-red-100 py-20'>
-<h2 className='text-3xl font-bold text-center'>Add new Student</h2>
-      <AddStudentForm />
+        <h2 className='text-3xl font-bold text-center'>Add new Student</h2>
+        <AddStudentForm />
       </div>
-    </Dashboard>
+    </Index>
   )
 }
 export default requireAuth(addstudent);

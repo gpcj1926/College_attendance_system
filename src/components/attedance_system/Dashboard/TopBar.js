@@ -1,5 +1,7 @@
+import Link from "next/link";
 import React from "react";
 import {HiOutlineMoon , HiOutlineBars3CenterLeft} from "react-icons/hi2";
+import { FiSettings } from "react-icons/fi";
 export default function TopBar({
   setSidebarOpen,
 }) {
@@ -12,11 +14,14 @@ export default function TopBar({
           onClick={() => setSidebarOpen(true)}
         >
           <span className="sr-only">Open sidebar</span>
-          <HiOutlineBars3CenterLeft className=" text-[#a02d29] text-4xl" />
+          <HiOutlineBars3CenterLeft className=" text-[#a02d29] text-2xl" />
         </button>
         <div className="md:hidden block text-2xl font-bold text-[#a02d29]" >GPCJ</div>
         <div className="flex items-center mx-5 my-4">
-        <HiOutlineMoon className=" text-[#a02d29] text-4xl" />
+        <HiOutlineMoon className="ml-3 text-[#a02d29] text-2xl cursor-pointer" />
+        <Link href="/settings/general">
+        <FiSettings className="ml-3 text-[#a02d29] text-2xl cursor-pointer" />
+        </Link>
         </div>
       </div>
     </>

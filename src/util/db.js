@@ -21,7 +21,7 @@ export function useUser(uid) {
     () =>
       supabase
         .from("users")
-        .select(`*, customers ( * )`)
+        .select()
         .eq("id", uid)
         .single()
         .then(handle),

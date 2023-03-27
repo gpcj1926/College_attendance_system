@@ -1,4 +1,4 @@
-import Index from 'components/attedance_system/Dashboard/Dashboard'
+import Index from 'components/attedance_system/Dashboard/Index'
 import React from 'react'
 
 export default function dashboard({ Component, pageProps }) {
