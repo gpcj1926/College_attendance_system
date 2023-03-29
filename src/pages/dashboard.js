@@ -11,7 +11,10 @@ const dashboard = () => {
   return (
     <Index>
         <Meta title="Dashboard"/>
+        <div className='bg-red-100 pt-6'>
+
       {!allStudents && <Loader />}
+        </div>
       {allStudents &&
         <div className='bg-red-100 py-20 px-6'>
           <h2 className='text-4xl font-bold'>

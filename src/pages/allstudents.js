@@ -24,7 +24,9 @@ function allstudents() {
     <Index>
         <Meta title="All Students"/>
       <div className="bg-red-100 py-20 h-[100vh]">
+      <div className='bg-red-100 pt-6'>
         {allStudents?.length === 0 && <Loader />}
+</div>
         {allStudents && (
           <>
             <section className="flex justify-center">

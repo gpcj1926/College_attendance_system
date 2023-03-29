@@ -14,10 +14,12 @@ export default function TopBar({
           onClick={() => setSidebarOpen(true)}
         >
           <span className="sr-only">Open sidebar</span>
-          <HiOutlineBars3CenterLeft className=" text-[#a02d29] text-2xl" />
+          <HiOutlineBars3CenterLeft className=" text-[#a02d29] text-4xl" />
         </button>
+        <Link href="/">
         <div className="md:hidden block text-2xl font-bold text-[#a02d29]" >GPCJ</div>
-        <div className="flex items-center mx-5 my-4">
+        </Link>
+        <div className="flex items-center mx-5 my-3">
         <HiOutlineMoon className="ml-3 text-[#a02d29] text-2xl cursor-pointer" />
         <Link href="/settings/general">
         <FiSettings className="ml-3 text-[#a02d29] text-2xl cursor-pointer" />

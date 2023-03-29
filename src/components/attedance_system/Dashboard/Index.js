@@ -49,16 +49,6 @@ const navigation = [
       },
     ],
   },
-  {
-    name: "About",
-    href: "/about",
-    icon: HiOutlineListBullet,
-  },
-  // {
-  //   name: "Settings",
-  //   href: "/settings/general",
-  //   icon: HiOutlineCog8Tooth,
-  // },
 ];
 
 export default function Index({ children }) {

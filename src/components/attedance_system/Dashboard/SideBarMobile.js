@@ -62,7 +62,7 @@ export default function SideBarMobile({
                 leaveTo="opacity-0"
               >
                 {/* ----------close button---------- */}
-                <div className="absolute top-0 left-3 -mr-4 pt-4">
+                <div className="absolute top-0 left-3 -mr-4 pt-3">
                   <button
                     type="button"
                     className="ml-1 flex h-10 w-10 items-center justify-center"

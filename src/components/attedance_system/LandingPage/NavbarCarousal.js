@@ -3,7 +3,7 @@ import Link from "next/link";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { FiMoon } from "react-icons/fi";
+import { FiMoon , FiAlignRight} from "react-icons/fi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { useAuth } from "util/auth";
@@ -56,8 +56,11 @@ const NavbarCarousal = () => {
                 </Link>
 
                 }
-                <div className="hidden md:block text-red-6700 p-2 rounded-full">
+                <div className="hidden md:block text-red-6700 p-1 rounded-full">
                   <FiMoon className="text-3xl ml-2 text-red-700 cursor-pointer" />
+                </div>
+                <div className="block md:hidden text-red-6700 p-1 rounded-full">
+                  <FiAlignRight className="text-4xl ml-2 text-red-700 cursor-pointer" />
                 </div>
               </div>
             </div>
@@ -105,7 +108,7 @@ const NavbarCarousal = () => {
               <h1 className="text-2xl sm:text-4xl text-left font-bold mt-2 text-white shadow-2xl">
                 Government Post Graduate College Jhang
               </h1>
-              <p className="md:w-3/4 mt-3 text-white">
+              <p className="md:w-2/4 w-full mt-3 text-white">
                 Mission to raise the productivity of our graduates through
                 quality education and practical knowledge to contribute in a
                 significant way to the national economy.
