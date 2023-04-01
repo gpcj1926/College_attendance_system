@@ -29,7 +29,18 @@ export function useUser(uid) {
     { enabled: !!uid }
   );
 }
-
+// Fetch all users
+export function useAllUsers() {
+  return useQuery(
+    "users",
+    () =>
+      supabase
+        .from("users")
+        .select("*")
+        .then(handle),
+    { enabled: true }
+  );
+}
 // Fetch user data (non-hook)
 // Useful if you need to fetch data from outside of a component
 export function getUser(uid) {

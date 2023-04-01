@@ -39,38 +39,11 @@ function DashboardSection(props) {
                 You are signed in as <strong>{auth.user.email}</strong>.
               </div>
 
-              {auth.user.stripeSubscriptionId && (
-                <>
-                  <div>
-                    You are subscribed to the{" "}
-                    <strong>{auth.user.planId} plan</strong>.
-                  </div>
-                  <div>
-                    Your plan status is{" "}
-                    <strong>{auth.user.stripeSubscriptionStatus}</strong>.
-                  </div>
-                </>
-              )}
-
               <div>
-                You can change your account info{` `}
-                {auth.user.stripeSubscriptionId && <>and plan{` `}</>}
-                in{` `}
                 <Link href="/settings/general">
                   <a>settings</a>
                 </Link>
-                .
               </div>
-
-              {!auth.user.stripeSubscriptionId && (
-                <div>
-                  You can signup for a plan in{" "}
-                  <Link href="/pricing">
-                    <a>pricing</a>
-                  </Link>
-                  .
-                </div>
-              )}
             </div>
           </div>
         </div>

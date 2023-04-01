@@ -1,5 +1,5 @@
 import React from 'react'
-import AddStudentForm from 'components/attedance_system/common/AddStudentForm'
+import AddStudentForm from 'components/attedance_system/Dashboard/Addstudent/AddStudentForm'
 import Index from 'components/attedance_system/Dashboard/Index'
 import { requireAuth } from 'util/auth';
 import Meta from 'components/Meta';

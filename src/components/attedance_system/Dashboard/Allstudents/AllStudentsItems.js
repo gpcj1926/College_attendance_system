@@ -15,10 +15,10 @@ import {
 } from "react-icons/fa";
 import { MdDateRange, MdAccountBox, MdSchool } from "react-icons/md";
 import { Disclosure, Transition } from "@headlessui/react";
-import ModalButton from "./ModalButton";
-import DeleteForm from "./DeleteForm";
+import ModalButton from "../../common/ModalButton";
+import DeleteForm from "../../common/DeleteForm";
 
-export default function AllStudentsItems({ allStudents , refetchStudents }) {
+export default function AllStudentsItems({ allStudents, refetchStudents }) {
   return (
     <div>
       {allStudents.map((student) => {
@@ -43,26 +43,26 @@ export default function AllStudentsItems({ allStudents , refetchStudents }) {
                   <p className="text-gray-600 flex space-x-4 sm:text-xl text-base">
                     <FaRegEdit className="cursor-pointer" />
                     <ModalButton
-                    title="Delete Student"
-                    Content={({ toggleModal }) => {
-                      return (
-                        <DeleteForm
-                        onDone={() => {
-                          toggleModal();
-                        }}
-                        refetchStudents={refetchStudents}
-                        id={student.id}
-                      />
-                      );
-                    }}
-                    Button={({ toggleModal }) => {
-                      return (
-                        
-<FaRegTrashAlt  onClick={() => toggleModal()} className="cursor-pointer" />
-                      );
-                    }}
-                  />
-                    
+                      title="Delete Student"
+                      Content={({ toggleModal }) => {
+                        return (
+                          <DeleteForm
+                            onDone={() => {
+                              toggleModal();
+                            }}
+                            refetchStudents={refetchStudents}
+                            id={student.id}
+                          />
+                        );
+                      }}
+                      Button={({ toggleModal }) => {
+                        return (
+
+                          <FaRegTrashAlt onClick={() => toggleModal()} className="cursor-pointer" />
+                        );
+                      }}
+                    />
+
                   </p>
                   <Disclosure.Button>
                     <FaChevronDown className="sm:text-lg text-base" />

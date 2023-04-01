@@ -22,7 +22,6 @@ This project uses the following libraries and services:
 - UI Kit - [Tailwind](https://tailwindcss.com)
 - Authentication - [Supabase](https://supabase.com)
 - Database - [Supabase](https://supabase.com)
-- Payments - [Stripe](https://stripe.com)
 - Contact Form - [Google Sheets](https://www.google.com/sheets/about/)
 - Analytics - [Google Analytics](https://googleanalytics.com)
 - Hosting - [Vercel](https://vercel.com)

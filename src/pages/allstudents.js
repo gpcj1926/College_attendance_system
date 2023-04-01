@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import supabase from "util/supabase";
-import AllStudentsItems from "components/attedance_system/common/AllStudentsItems";
+import AllStudentsItems from "components/attedance_system/Dashboard/Allstudents/AllStudentsItems";
 import Loader from "components/attedance_system/common/Loader";
 import Index from "components/attedance_system/Dashboard/Index";
 import { requireAuth } from "util/auth";
@@ -22,11 +22,11 @@ function allstudents() {
 
   return (
     <Index>
-        <Meta title="All Students"/>
+      <Meta title="All Students" />
       <div className="bg-red-100 py-20 h-[100vh]">
-      <div className='bg-red-100 pt-6'>
-        {allStudents?.length === 0 && <Loader />}
-</div>
+        <div className='bg-red-100 pt-6'>
+          {allStudents?.length === 0 && <Loader />}
+        </div>
         {allStudents && (
           <>
             <section className="flex justify-center">

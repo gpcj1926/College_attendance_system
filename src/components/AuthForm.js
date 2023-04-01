@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "util/auth";
+import { updateUser } from "util/db";
 
 function AuthForm(props) {
   const auth = useAuth();
-// console.log(auth)
+
   const [pending, setPending] = useState(false);
   const { handleSubmit, register, errors, getValues } = useForm();
 
@@ -15,12 +16,11 @@ function AuthForm(props) {
         props.onAuth(user);
       });
     },
-    signup: ({ email, pass, role }) => {
-      return auth
-        .signup(email,pass)
-        .then((user) => {
-          props.onAuth(user);
-        });
+    signup: ({ email, pass, roleas, name}) => {
+      return auth.signup(email, pass).then((user) => {
+        props.onAuth(user);
+        updateUser(user?.id, { roleas: roleas , name: name });
+      });
     },
     forgotpass: ({ email }) => {
       return auth.sendPasswordResetEmail(email).then(() => {
@@ -45,7 +45,7 @@ function AuthForm(props) {
   };
 
   // Handle form submission
-  const onSubmit = ({ email, pass, role }) => {
+  const onSubmit = ({ email, pass, roleas , name }) => {
     // Show pending indicator
     setPending(true);
 
@@ -53,7 +53,8 @@ function AuthForm(props) {
     submitHandlersByType[props.type]({
       email,
       pass,
-      role,
+      roleas,
+      name,
     }).catch((error) => {
       setPending(false);
       // Show error alert message
@@ -66,8 +67,55 @@ function AuthForm(props) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {["signup"].includes(props.type) && (
+        <div className="mb-2">
+          <h1 className="text-left text-lg font-semibold mb-1">Name:</h1>
+          <input
+            className="py-1 px-3 w-full leading-8 rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
+            name="name"
+            type="text"
+            placeholder="Name"
+            ref={register({
+              required: "Please enter your name",
+            })}
+          />
+
+          {errors.name && (
+            <p className="mt-1 text-sm text-left text-red-600">
+              {errors.name.message}
+            </p>
+          )}
+        </div>
+      )}
+
+      {["signup"].includes(props.type) && (
+        <div className="mb-2">
+          <h1 className="text-left text-lg font-semibold mb-1">Role:</h1>
+          <select
+            className="py-1 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
+            name="roleas"
+            type="text"
+            ref={register({
+              required: "Please select your role",
+              validate: true,
+            })}
+          >
+            <option></option>
+            <option>Department Admin</option>
+            <option>Teacher</option>
+          </select>
+
+          {errors.roleas && (
+            <p className="mt-1 text-sm text-left text-red-600">
+              {errors.roleas.message}
+            </p>
+          )}
+        </div>
+      )}
+
       {["signup", "signin", "forgotpass"].includes(props.type) && (
         <div className="mb-2">
+          <h1 className="text-left text-lg font-semibold mb-1">Email:</h1>
           <input
             className="py-1 px-3 w-full leading-8 rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
             name="email"
@@ -88,6 +136,7 @@ function AuthForm(props) {
 
       {["signup", "signin", "changepass"].includes(props.type) && (
         <div className="mb-2">
+          <h1 className="text-left text-lg font-semibold mb-1">Password:</h1>
           <input
             className="py-1 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
             name="pass"
@@ -108,6 +157,7 @@ function AuthForm(props) {
 
       {["signup", "changepass"].includes(props.type) && (
         <div className="mb-2">
+          <h1 className="text-left text-lg font-semibold mb-1">Confirm Password:</h1>
           <input
             className="py-1 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
             name="confirmPass"
@@ -132,21 +182,7 @@ function AuthForm(props) {
           )}
         </div>
       )}
-      {["signup"].includes(props.type) && (
-        <div className="mb-2">
-          As{" "}
-          <select
-            name="role"
-            ref={register({
-              required: "Please enter your user again",
-            })}
-          >
-            <option>admin</option>
-            <option>teacher</option>
-            <option>student</option>
-          </select>
-        </div>
-      )}
+
       <button
         className="py-2 px-4 w-full text-white bg-blue-500 rounded border-0 hover:bg-blue-600 focus:outline-none"
         type="submit"

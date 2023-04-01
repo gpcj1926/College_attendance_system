@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Meta from "components/Meta";
 import SettingsSection from "components/SettingsSection";
 import { requireAuth } from "util/auth";
+import Index from "components/attedance_system/Dashboard/Index";
 
 
 function SettingsPage(props) {
@@ -11,11 +12,13 @@ function SettingsPage(props) {
   return (
 
       <>
+      <Index>
         <Meta title="Settings" />
         <SettingsSection
           section={router.query.section}
           key={router.query.section}
         />
+          </Index>
       </>
   );
 }

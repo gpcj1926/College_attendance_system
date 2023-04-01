@@ -8,7 +8,6 @@
   "dependencies": {
     "@analytics/google-analytics": "0.2.2",
     "@headlessui/react": "^1.7.13",
-    "@stripe/stripe-js": "1.11.0",
     "@supabase/supabase-js": "1.35.6",
     "@tailwindcss/typography": "0.5.2",
     "analytics": "0.3.1",
@@ -24,14 +23,12 @@
     "react-icons": "^4.8.0",
     "react-query": "3.32.1",
     "react-toastify": "^9.1.1",
-    "stripe": "8.132.0",
     "swiper": "^9.1.1",
     "tailwindcss": "3.0.23"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "stripe-webhook": "stripe listen --forward-to localhost:3000/api/stripe-webhook"
+    "start": "next start"
   }
 }

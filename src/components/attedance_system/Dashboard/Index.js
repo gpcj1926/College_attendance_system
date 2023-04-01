@@ -7,8 +7,8 @@ import {
   HiOutlineUserPlus,
   HiOutlineUserGroup,
   HiOutlineSquares2X2,
-  HiOutlineCog8Tooth,
-  HiOutlineListBullet,
+  // HiOutlineCog8Tooth,
+  // HiOutlineListBullet,
 } from "react-icons/hi2";
 import {
   // FaAddressCard,
@@ -17,20 +17,26 @@ import {
   // FaChevronDown,
   // FaRegTrashAlt,
   // FaRegEdit,
-  FaUserGraduate,
   // FaShieldAlt,
   // FaCalendarCheck,
   // FaHome,
-  // FaUserCog,
   // FaUserTie,
+  FaUserGraduate,
+  FaUserCog,
 } from "react-icons/fa";
+import { FiSettings } from "react-icons/fi";
+
 const navigation = [
   {
     name: "Dashboard",
     href: "/dashboard",
     icon: HiOutlineSquares2X2,
   },
-
+  {
+    name: "Mark Attendance",
+    href: "/markattendance",
+    icon: FaUserCog,
+  },
   {
     name: "Manage Students",
     href: "/allstudents",
@@ -49,6 +55,12 @@ const navigation = [
       },
     ],
   },
+  {
+    name: "Settings",
+    href: "/settings/general",
+    icon: FiSettings,
+    haveSub: false,
+  }
 ];
 
 export default function Index({ children }) {

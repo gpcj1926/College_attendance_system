@@ -53,7 +53,9 @@ function SettingsGeneral(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <>
+    {
+      userData && <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         Name
         <input
@@ -74,17 +76,20 @@ function SettingsGeneral(props) {
       </div>
       <div>
         Role
-        <input
-          className="py-1 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1 mt-1"
-          name="roleas"
-          type="text"
-          placeholder="roleas"
+        <select
+            className="py-2 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
+            name="roleas"
+            type="text"
           defaultValue={userData?.roleas}
-          ref={register({
-            required: "Please enter role",
-          })}
-        />
-        {errors.name && (
+            ref={register({
+              required: "Please select your role",
+              validate: true
+            })}
+          >
+            <option>Department Admin</option>
+            <option>Teacher</option>
+          </select>
+        {errors.roleas && (
           <p className="mt-1 text-sm text-left text-red-600">
             {errors?.roleas?.message}
           </p>
@@ -116,6 +121,8 @@ function SettingsGeneral(props) {
         {pending ? "..." : "Save"}
       </button>
     </form>
+  }
+        </>
   );
 }
 

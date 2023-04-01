@@ -391,12 +391,24 @@ export default function AddStudentForm() {
                       className="mt-2 block w-full border-2 border-gray-200  px-2 rounded-md bg-white py-1.5 text-gray-900 shadow-sm  sm:text-sm sm:leading-6"
                     >
                       <option></option>
-                      <option>Computer science</option>
-                      <option>English</option>
-                      <option>Math</option>
-                      <option>Physics</option>
+                      <option>Biology</option>
+                      <option>Botany</option>
                       <option>Chemistry</option>
+                      <option>Computer Science</option>
+                      <option>Economics</option>
+                      <option>English</option>
+                      <option>Geography</option>
+                      <option>Islamiyat</option>
+                      <option>Math</option>
+                      <option>Psychology</option>
+                      <option>Physics</option>
+                      <option>Political Science</option>
                       <option>Punjabi</option>
+                      <option>Pak Studies</option>
+                      <option>Sociology</option>
+                      <option>Statistics</option>
+                      <option>Urdu</option>
+                      <option>Zoology</option>
                     </select>
                     {errors.department && (
                       <p className="mt-1 text-sm text-left text-red-600">

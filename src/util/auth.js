@@ -10,7 +10,6 @@ import supabase from "./supabase";
 import { useUser, updateUser } from "./db";
 import router from "next/router";
 import PageLoader from "./../components/PageLoader";
-import { getFriendlyPlanId } from "./prices";
 import analytics from "./analytics";
 
 // Whether to merge extra user data from database into `auth.user`
@@ -203,9 +202,6 @@ function useFormatUser(user) {
     if (provider === "email") provider = "password";
     const providers = [provider];
 
-    // Get customer data
-    const customer = user.customers || {};
-
     return {
       // Include full auth user data
       ...user,
@@ -213,16 +209,6 @@ function useFormatUser(user) {
       uid: user.id,
       // User's auth providers
       providers: providers,
-      // Add customer data
-      ...customer,
-      // Add `planId` (starter, pro, etc) based on Stripe Price ID
-      ...(customer.stripePriceId && {
-        planId: getFriendlyPlanId(customer.stripePriceId),
-      }),
-      // Add `planIsActive: true` if subscription status is active or trialing
-      planIsActive: ["active", "trialing"].includes(
-        customer.stripeSubscriptionStatus
-      ),
     };
   }, [user]);
 }
