@@ -40,7 +40,7 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                   </div>
                 </div>
                 <div className="flex space-x-4 items-center">
-                  <p className="text-gray-600 flex space-x-4 sm:text-xl text-base">
+                  <div className="text-gray-600 flex space-x-4 sm:text-xl text-base">
                     <FaRegEdit className="cursor-pointer" />
                     <ModalButton
                       title="Delete Student"
@@ -63,7 +63,7 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                       }}
                     />
 
-                  </p>
+                  </div>
                   <Disclosure.Button>
                     <FaChevronDown className="sm:text-lg text-base" />
                   </Disclosure.Button>

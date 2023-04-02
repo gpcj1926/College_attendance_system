@@ -14,10 +14,13 @@ function SettingsPage(props) {
       <>
       <Index>
         <Meta title="Settings" />
+        <div className="bg-red-100 h-screen">
+
         <SettingsSection
           section={router.query.section}
           key={router.query.section}
         />
+        </div>
           </Index>
       </>
   );

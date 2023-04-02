@@ -43,7 +43,7 @@ const LandingBody = () => {
         {data.map((item) => {
           return (
             <>
-              <div className="max-w-sm lg:max-w-md lg:flex m-6">
+              <div key={item.title} className="max-w-sm lg:max-w-md lg:flex m-6">
                 <div
                   className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
                   style={{ backgroundImage: `url(${item.src})` }}

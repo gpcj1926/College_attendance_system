@@ -278,6 +278,29 @@ export const requireAuth = (Component) => {
     return <Component {...props} />;
   };
 };
+// A Higher Order Component for requiring SuperAdmin
+export const requireSuperAdmin =  (Component) => {
+  return function RequireSuperAdminHOC (props) {
+      // // Get authenticated user
+      const auth = useAuth();
+      const {data: userData } = useUser(auth?.user?.id);
+    useEffect(() => {
+      // Redirect if not signed in
+      if (userData?.roleas !== "super_admin" ) {
+        router.replace("/dashboard");
+      }
+    }, [auth,userData]);
+
+    // Show loading indicator
+    // We're either loading (user is `null`) or about to redirect from above `useEffect` (user is `false`)
+    if (!auth.user) {
+      return <PageLoader />;
+    }
+
+    // Render component now that we have user
+    return <Component {...props} />;
+  };
+};
 
 // Throw error from auth response
 // so it can be caught and displayed by UI

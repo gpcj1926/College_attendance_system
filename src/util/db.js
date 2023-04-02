@@ -37,7 +37,8 @@ export function useAllUsers() {
       supabase
         .from("users")
         .select("*")
-        .then(handle),
+        .then(handle)
+,
     { enabled: true }
   );
 }

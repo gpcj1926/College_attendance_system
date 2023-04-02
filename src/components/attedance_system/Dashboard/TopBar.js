@@ -24,19 +24,19 @@ export default function TopBar({ setSidebarOpen }) {
           </div>
         </Link>
         <div className="flex items-center mx-5 my-3">
-          {userData?.approved ? (
-            <h2 className="bg-green-600 p-2 text-sm text-white rounded-2xl ">
-              Approved
-            </h2>
-          ) : (
-            <h2 className="bg-red-600 p-2 text-sm text-white rounded-2xl ">
-              Not approved
-            </h2>
-          )}
+         
+          {userData?.roleas !== "super_admin" ?
+         
+             ( <h2 className="bg-green-600 p-2 text-sm text-white rounded-2xl ">
+                {userData?.status}
+              </h2>
+            ) 
+          :
+                        <h2 className="bg-green-600 p-2 text-sm text-white rounded-2xl ">
+                Admin
+              </h2>
+          }
           <HiOutlineMoon className="ml-3 text-[#a02d29] text-2xl cursor-pointer" />
-          {/* <Link href="/settings/general">
-            <FiSettings className="ml-3 text-[#a02d29] text-2xl cursor-pointer" />
-          </Link> */}
         </div>
       </div>
     </>

@@ -2,12 +2,20 @@ import React, { Fragment } from "react";
 import Meta from "components/Meta";
 import { requireAuth, useAuth } from "util/auth";
 import Index from "components/attedance_system/Dashboard/Index";
-import Requests from "components/attedance_system/Dashboard/Dashboard/Requests";
-import StudentsAnalytics from "components/attedance_system/Dashboard/Dashboard/StudentsAnalytics";
-import { useUser } from "util/db";
+import StudentsAnalytics from "components/attedance_system/Dashboard/Dashboard/Students/StudentsAnalytics";
+import { useAllUsers, useUser } from "util/db";
 import { Tab } from "@headlessui/react";
+import TeachersItem from "components/attedance_system/Dashboard/Dashboard/Teachers/TeachersItem";
 const dashboard = () => {
   const auth = useAuth();
+  const { data: allUsers , refetch: refetchUsers } = useAllUsers();
+  const sortedUsers = allUsers?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  const notApprovedTeachers = sortedUsers?.filter((i) => {
+    return i.roleas !== "super_admin" && i.status === "Not Approved";
+  });
+  const approvedTeachers = sortedUsers?.filter((i) => {
+    return i.roleas !== "super_admin" && i.status !== "Not Approved";
+  });
   const { data: userData } = useUser(auth?.user?.id);
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -17,7 +25,7 @@ const dashboard = () => {
       name: "Students",
     },
     {
-      name: "Teachers",
+      name: "Teachers"
     },
     {
       name: "Requests",
@@ -27,9 +35,11 @@ const dashboard = () => {
     <Index>
       <section className="bg-red-100 h-screen">
         <Meta title="Dashboard" />
-        <div className="w-[90%] px-2 mx-auto pt-10 sm:px-0 ">
+        {["super_admin"].includes(userData?.roleas) && 
+
+        <div className="w-full bg-red-100 pt-10 sm:px-0 ">
           <Tab.Group>
-          <Tab.List className="drop-shadow-lg select-none isolate flex divide-x divide-gray-200 dark:divide-gray-600 rounded-lg shadow">
+          <Tab.List className="drop-shadow-lg select-none isolate flex divide-x divide-gray-200 dark:divide-gray-600 rounded-lg shadow w-[90%] mx-auto">
               {Tabs.map((i) => {
                 return (
                   <Tab as={Fragment} key={i.name}>
@@ -60,18 +70,19 @@ const dashboard = () => {
             </Tab.List>
             <Tab.Panels className="mt-2">
               <Tab.Panel>
-        {["super_admin"].includes(userData?.roleas) && <StudentsAnalytics />}
+        <StudentsAnalytics />
 
               </Tab.Panel>
               <Tab.Panel>
-                <h2>Comming Soon</h2>
+              <TeachersItem data={approvedTeachers} refetchUsers={refetchUsers} dataType={"All Teachers"} />
+
               </Tab.Panel>
               <Tab.Panel>
-        {["super_admin"].includes(userData?.roleas) && <Requests />}
+       <TeachersItem data={notApprovedTeachers} refetchUsers={refetchUsers} dataType={"Account Requests"} />
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
-        </div>
+        </div>}
       </section>
     </Index>
   );

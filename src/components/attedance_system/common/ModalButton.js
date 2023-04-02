@@ -51,7 +51,7 @@ export default function ModalButton({ label, title, Content, Button }) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className=" inline-block my-8 w-full max-w-md text-left align-middle bg-white  rounded-2xl shadow-xl transition-all transform">
+              <div className=" inline-block my-8 w-full max-w-md md:max-w-[500px] text-left align-middle bg-white  rounded-2xl shadow-xl transition-all transform">
                 <div className="m-6">
                   <Dialog.Title
                     as="h3"

@@ -15,7 +15,7 @@ const NavbarCarousal = () => {
       <section className="relative">
         <nav className="fixed top-0 flex justify-between items-center w-full bg-red-50 bg-opacity-75 backdrop-filter backdrop-blur-lg z-50 p-3">
           <div className="flex items-center flex-shrink-0">
-            <img src={"./images/logo.png"} alt="Logo" className="h-12 mr-4" />
+            <img src={"./Images/logo.png"} alt="Logo" className="h-12 mr-4" />
             <h2 className="text-red-800 text-4xl font-semibold">GPCJ</h2>
           </div>
 

@@ -4,6 +4,7 @@ import { useAuth } from "util/auth";
 import { updateUser } from "util/db";
 
 function AuthForm(props) {
+  // console.log(process.env.CODE_FOR_REGISTRATION)
   const auth = useAuth();
 
   const [pending, setPending] = useState(false);
@@ -45,7 +46,7 @@ function AuthForm(props) {
   };
 
   // Handle form submission
-  const onSubmit = ({ email, pass, roleas , name }) => {
+  const onSubmit = ({ email, pass, roleas , name , secret_code }) => {
     // Show pending indicator
     setPending(true);
 
@@ -55,6 +56,7 @@ function AuthForm(props) {
       pass,
       roleas,
       name,
+      secret_code,
     }).catch((error) => {
       setPending(false);
       // Show error alert message
@@ -69,9 +71,9 @@ function AuthForm(props) {
     <form onSubmit={handleSubmit(onSubmit)}>
       {["signup"].includes(props.type) && (
         <div className="mb-2">
-          <h1 className="text-left text-lg font-semibold mb-1">Name:</h1>
+          <h1 className="text-left text-lg font-semibold mb-1">Name :</h1>
           <input
-            className="py-1 px-3 w-full leading-8 rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
+            className="py-1 px-3 w-full leading-8 rounded border border-gray-300 outline-none focus:border-red-500 focus:ring-1"
             name="name"
             type="text"
             placeholder="Name"
@@ -90,9 +92,9 @@ function AuthForm(props) {
 
       {["signup"].includes(props.type) && (
         <div className="mb-2">
-          <h1 className="text-left text-lg font-semibold mb-1">Role:</h1>
+          <h1 className="text-left text-lg font-semibold mb-1">Role :</h1>
           <select
-            className="py-1 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
+            className="py-1 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-red-500 focus:ring-1"
             name="roleas"
             type="text"
             ref={register({
@@ -112,12 +114,38 @@ function AuthForm(props) {
           )}
         </div>
       )}
+      {["signup"].includes(props.type) && (
+        <div className="mb-2">
+          <h1 className="text-left text-lg font-semibold mb-1">Secret Code :</h1>
+          <input
+            className="py-1 px-3 w-full leading-8 rounded border border-gray-300 outline-none focus:border-red-500 focus:ring-1"
+            name="secret_code"
+            type="text"
+            placeholder="Secret Code"
+            ref={register({
+              required: "Please enter secret code",
+              validate: (value) => {
+                if (value === "GPCJ-1926-2023") {
+                  return true;
+                } else {
+                  return "You entered a wrong secret code";
+                }
+              },
+            })}
+          />
 
+          {errors.secret_code && (
+            <p className="mt-1 text-sm text-left text-red-600">
+              {errors.secret_code.message}
+            </p>
+          )}
+        </div>
+      )}
       {["signup", "signin", "forgotpass"].includes(props.type) && (
         <div className="mb-2">
-          <h1 className="text-left text-lg font-semibold mb-1">Email:</h1>
+          <h1 className="text-left text-lg font-semibold mb-1">Email :</h1>
           <input
-            className="py-1 px-3 w-full leading-8 rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
+            className="py-1 px-3 w-full leading-8 rounded border border-gray-300 outline-none focus:border-red-500 focus:ring-1"
             name="email"
             type="email"
             placeholder="Email"
@@ -136,9 +164,9 @@ function AuthForm(props) {
 
       {["signup", "signin", "changepass"].includes(props.type) && (
         <div className="mb-2">
-          <h1 className="text-left text-lg font-semibold mb-1">Password:</h1>
+          <h1 className="text-left text-lg font-semibold mb-1">Password :</h1>
           <input
-            className="py-1 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
+            className="py-1 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-red-500 focus:ring-1"
             name="pass"
             type="password"
             placeholder="Password"
@@ -157,9 +185,9 @@ function AuthForm(props) {
 
       {["signup", "changepass"].includes(props.type) && (
         <div className="mb-2">
-          <h1 className="text-left text-lg font-semibold mb-1">Confirm Password:</h1>
+          <h1 className="text-left text-lg font-semibold mb-1">Confirm Password :</h1>
           <input
-            className="py-1 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-blue-500 focus:ring-1"
+            className="py-1 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-red-500 focus:ring-1"
             name="confirmPass"
             type="password"
             placeholder="Confirm Password"
@@ -184,7 +212,7 @@ function AuthForm(props) {
       )}
 
       <button
-        className="py-2 px-4 w-full text-white bg-blue-500 rounded border-0 hover:bg-blue-600 focus:outline-none"
+        className="py-2 px-4 w-full text-white bg-red-500 rounded border-0 hover:bg-red-600 focus:outline-none"
         type="submit"
         disabled={pending}
       >

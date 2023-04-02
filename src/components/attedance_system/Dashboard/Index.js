@@ -39,7 +39,6 @@ const navigation = [
   },
   {
     name: "Manage Students",
-    href: "/allstudents",
     icon: FaUserGraduate,
     haveSub: true,
     sub: [
@@ -64,7 +63,6 @@ const navigation = [
 ];
 
 export default function Index({ children }) {
-  const auth = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const togglesidebar = () => setSidebarOpen((oldState) => !oldState);
 

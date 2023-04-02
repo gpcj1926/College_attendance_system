@@ -1,5 +1,6 @@
 import React from 'react'
 import Index from 'components/attedance_system/Dashboard/Index'
+import { requireAuth } from 'util/auth'
 
 const markattendance = () => {
   return (
@@ -16,4 +17,4 @@ Mark Attendance
   )
 }
 
-export default markattendance
+export default requireAuth(markattendance)

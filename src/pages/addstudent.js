@@ -1,7 +1,7 @@
 import React from 'react'
 import AddStudentForm from 'components/attedance_system/Dashboard/Addstudent/AddStudentForm'
 import Index from 'components/attedance_system/Dashboard/Index'
-import { requireAuth } from 'util/auth';
+import { requireAuth, requireSuperAdmin } from 'util/auth';
 import Meta from 'components/Meta';
 
 function addstudent() {
@@ -16,4 +16,4 @@ function addstudent() {
     </Index>
   )
 }
-export default requireAuth(addstudent);
+export default requireAuth(requireSuperAdmin(addstudent));

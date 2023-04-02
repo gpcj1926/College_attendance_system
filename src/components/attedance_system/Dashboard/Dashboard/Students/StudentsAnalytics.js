@@ -31,15 +31,17 @@ const StudentsAnalytics = () => {
         <h2 className="text-2xl font-bold">Total no. of Students: </h2>
         <h3 className="text-2xl font-semibold ml-3">{studentData?.length}</h3>
       </div>
-      <main className="flex flex-wrap justify-center">
-        <table className="bg-red-600 mx-4">
+      <main className="flex flex-wrap justify-center bg-red-100">
+        <table className="bg-red-600 m-4">
           <tbody>
+            <tr>
             <td className="px-5 py-2 bg-red-700 text-white border-2 border-red-700 ">
               Subject
             </td>
             <td className="px-5 py-2 bg-red-700 text-white border-2 border-red-700 ">
               No. of Students
             </td>
+            </tr>
             {firstHalf.map((subject, index) => (
               <tr className="" key={index}>
                 <td className="px-5 py-2 bg-red-200 border-2 border-red-700">
@@ -56,14 +58,17 @@ const StudentsAnalytics = () => {
             ))}
           </tbody>
         </table>
-        <table className="bg-red-600 mx-4">
+        <table className="bg-red-600 m-4">
           <tbody>
+            <tr>
+
             <td className="px-5 py-2 bg-red-700 text-white border-2 border-red-700 ">
               Subject
             </td>
             <td className="px-5 py-2 bg-red-700 text-white border-2 border-red-700 ">
               No. of Students
             </td>
+            </tr>
             {secondHalf.map((subject, index) => (
               <tr className="" key={index}>
                 <td className="px-5 py-2 bg-red-200 border-2 border-red-700">

@@ -9,7 +9,6 @@ import LandingBody from "components/attedance_system/LandingPage/LandingBody";
 
 function IndexPage(props) {
   const auth = useAuth();
-  console.log(auth.user);
   return (
     <>
         <Meta title="GPCJ" description="Government PostGraduate College Jhang" />
