@@ -42,7 +42,6 @@ const LandingBody = () => {
       <div className="m-4 flex flex-wrap justify-center mx-auto">
         {data.map((item) => {
           return (
-            <>
               <div key={item.title} className="max-w-sm lg:max-w-md lg:flex m-6">
                 <div
                   className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
@@ -73,7 +72,6 @@ const LandingBody = () => {
                   </div>
                 </div>
               </div>
-            </>
           );
         })}
       </div>

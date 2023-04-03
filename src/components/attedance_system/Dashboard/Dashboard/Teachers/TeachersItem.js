@@ -13,6 +13,7 @@ import {
 import { Disclosure, Transition } from "@headlessui/react";
 import ModalButton from "components/attedance_system/common/ModalButton";
 import RequestEditForm from "../Requests/RequestEditForm";
+import TeacherDeleteForm from "../Requests/TeacherDeleteForm";
 
 const TeachersItem = ({refetchUsers, data , dataType}) => {
 
@@ -90,7 +91,13 @@ const TeachersItem = ({refetchUsers, data , dataType}) => {
                           <ModalButton
                             title={`Delete Request`}
                             Content={({ toggleModal }) => {
-                              return <div>Delete Request</div>;
+                              return <TeacherDeleteForm
+                              onDone={() => {
+                                toggleModal();
+                              }}
+                              id={user.id}
+                              refetchUsers={refetchUsers}
+                              />;
                             }}
                             Button={({ toggleModal }) => {
                               return (

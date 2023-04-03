@@ -65,6 +65,16 @@ export async function updateUser(uid, data) {
   return response;
 }
 
+// delete an existing user
+export async function deleteUser(uid) {
+  const response = await supabase
+    .auth
+    .deleteUser(uid);
+  // Invalidate and refetch queries that could have old data
+  await client.invalidateQueries(["user", { uid }]);
+  return response;
+}
+
 // /**** ITEMS ****/
 // /* Example query functions (modify to your needs) */
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import { HiOutlineMoon, HiOutlineBars3CenterLeft } from "react-icons/hi2";
-// import { FiSettings } from "react-icons/fi";
 import { useAuth } from "util/auth";
 import { useUser } from "util/db";
 export default function TopBar({ setSidebarOpen }) {
@@ -24,18 +23,21 @@ export default function TopBar({ setSidebarOpen }) {
           </div>
         </Link>
         <div className="flex items-center mx-5 my-3">
-         
-          {userData?.roleas !== "super_admin" ?
-         
-             ( <h2 className="bg-green-600 p-2 text-sm text-white rounded-2xl ">
+          {userData?.roleas !== "super_admin" ? (
+            userData?.status === "Approved" ? (
+              <h2 className="bg-green-600 p-2 text-sm text-white rounded-2xl ">
                 {userData?.status}
               </h2>
-            ) 
-          :
-                        <h2 className="bg-green-600 p-2 text-sm text-white rounded-2xl ">
-                Admin
+            ) : (
+              <h2 className="bg-red-600 p-2 text-sm text-white rounded-2xl ">
+                {userData?.status}
               </h2>
-          }
+            )
+          ) : (
+            <h2 className="bg-green-600 p-2 text-sm text-white rounded-2xl ">
+              Admin
+            </h2>
+          )}
           <HiOutlineMoon className="ml-3 text-[#a02d29] text-2xl cursor-pointer" />
         </div>
       </div>

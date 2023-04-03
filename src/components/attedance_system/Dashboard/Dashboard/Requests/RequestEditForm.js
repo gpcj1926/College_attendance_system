@@ -92,7 +92,7 @@ const RequestEditForm = ({ onDone, id, refetchUsers }) => {
                 <input
                   defaultValue={Userdata && Userdata.mobileno}
                   ref={register({
-                    required: "Please enter email",
+                    required: false,
                   })}
                   type="text"
                   name="mobileno"
