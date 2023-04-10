@@ -67,42 +67,22 @@ function SettingsGeneral(props) {
               </p>
             )}
           </div>
+
+            <div className="mt-3 flex justify-between items-center">
+              <h1 className="text-left text-lg font-semibold mb-1">Role :</h1>
+              <p className="font-semibold text-green-600">
+                {userData?.roleas ? userData?.roleas : "----"}
+              </p>
+            </div>
+          {userData.roleas === "super_admin" ? (
+            ""
+          ) : (
           <div className="mt-3 flex justify-between items-center">
             <h1 className="text-left text-lg font-semibold mb-1">department :</h1>
             <p className="font-semibold text-green-600">
               {userData?.department ? userData?.department : "----"}
             </p>
           </div>
-
-          {userData.roleas === "super_admin" ? (
-            <div className="mt-3 flex justify-between items-center">
-              <h1 className="text-left text-lg font-semibold mb-1">Role :</h1>
-              <p className="font-semibold text-green-600">
-                Super Admin
-              </p>
-            </div>
-          ) : (
-            <div className="mt-3">
-              Role
-              <select
-                className="py-2 px-3 w-full leading-8 bg-white rounded border border-gray-300 outline-none focus:border-red-500 focus:ring-1"
-                name="roleas"
-                type="text"
-                defaultValue={userData?.roleas}
-                ref={register({
-                  required: "Please select your role",
-                  validate: true,
-                })}
-              >
-                <option>Department Admin</option>
-                <option>Teacher</option>
-              </select>
-              {errors.roleas && (
-                <p className="mt-1 text-sm text-left text-red-600">
-                  {errors?.roleas?.message}
-                </p>
-              )}
-            </div>
           )}
           <div className="mt-3">
             <h1 className="text-left text-lg font-semibold mb-1">Number :</h1>
