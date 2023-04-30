@@ -8,13 +8,17 @@ import { Tab } from "@headlessui/react";
 import TeachersItem from "components/attedance_system/Dashboard/Dashboard/Teachers/TeachersItem";
 const dashboard = () => {
   const auth = useAuth();
+  // console.log(auth.user)
   const { data: allUsers , refetch: refetchUsers } = useAllUsers();
   const sortedUsers = allUsers?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
   const notApprovedTeachers = sortedUsers?.filter((i) => {
     return i.roleas !== "super_admin" && i.status === "Not Approved";
   });
   const approvedTeachers = sortedUsers?.filter((i) => {
-    return i.roleas !== "super_admin" && i.status !== "Not Approved";
+    return i.roleas === "Teacher" && i.status !== "Not Approved";
+  });
+  const approvedDepartAdmin = sortedUsers?.filter((i) => {
+    return i.roleas === "Department_admin" && i.status !== "Not Approved";
   });
   const { data: userData } = useUser(auth?.user?.id);
   function classNames(...classes) {
@@ -25,7 +29,7 @@ const dashboard = () => {
       name: "Students",
     },
     {
-      name: "Teachers"
+      name: "Staff"
     },
     {
       name: "Requests",
@@ -75,10 +79,12 @@ const dashboard = () => {
               </Tab.Panel>
               <Tab.Panel>
               <TeachersItem data={approvedTeachers} refetchUsers={refetchUsers} dataType={"All Teachers"} />
+              <TeachersItem data={approvedDepartAdmin} refetchUsers={refetchUsers} dataType={"Department Admins"} />
 
               </Tab.Panel>
               <Tab.Panel>
        <TeachersItem data={notApprovedTeachers} refetchUsers={refetchUsers} dataType={"Account Requests"} />
+       
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>

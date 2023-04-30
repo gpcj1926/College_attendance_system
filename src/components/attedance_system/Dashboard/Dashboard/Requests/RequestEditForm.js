@@ -6,7 +6,7 @@ import { FaUserAlt, FaUserGraduate } from "react-icons/fa";
 
 const RequestEditForm = ({ onDone, id, refetchUsers }) => {
   const { data: Userdata } = useUser(id);
-  const { register, handleSubmit, errors, reset } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const closeModal = () => {
     onDone();
   };

@@ -16,7 +16,7 @@ function SideBarDesktop({ navigation }) {
 
   return (
     <div
-      className=" hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col 
+      className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col 
     drop-shadow-xl z-40"
     >
       {/* Sidebar component, swap this element with another sidebar if you like */}

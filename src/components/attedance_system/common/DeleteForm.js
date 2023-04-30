@@ -11,7 +11,7 @@ export default function DeleteForm({
   const closeModal = () => {
     onDone();
   };
-
+console.log(refetchStudents)
   const deleteItem = () => {
     setLoading(true);
     deleteStudent(id)
@@ -21,6 +21,10 @@ export default function DeleteForm({
   };
 
   return (
+    <>
+      <div>
+        <h2 className="">Are you sure to delete this Student!</h2>
+      </div>
     <div className="flex justify-between items-center">
       <div>{loading && <Loader width="20px" />}</div>
       <div className="mt-4 flex justify-end">
@@ -42,5 +46,6 @@ export default function DeleteForm({
         </button>
       </div>
     </div>
+    </>
   );
 }

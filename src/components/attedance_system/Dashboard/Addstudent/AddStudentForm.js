@@ -1,40 +1,37 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "util/auth";
-import { createStudent } from "util/db";
-import { ToastContainer, toast } from "react-toastify";
+import { createStudent, updateStudent } from "util/db";
 import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import router from "next/router";
 
-export default function AddStudentForm() {
-  const notify = () =>
-    toast.success("Student Successfullt created", {
-      position: "bottom-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+export default function AddStudentForm({ btnText, data, target, id }) {
+
 
   const { register, handleSubmit, errors, reset } = useForm();
+
   const auth = useAuth();
   const owner = auth?.user?.uid;
   const submitHandle = async (data) => {
-    await createStudent({ ...data, owner: owner });
-    reset();
-    notify();
-
-    console.log(data);
+    if (target === "create") {
+      reset();
+      toast.success("successfully created!");
+      await createStudent({ ...data, owner: owner });
+    } else {
+      await updateStudent(id, data);
+      toast.success("successfully Updated!");
+      router.replace("/allstudents");
+    }
   };
   // const cnicRegex = /^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$/;
   // const sessionRegex = /^2019-(202[0-3])$/;
 
   return (
     <>
-      <div className="w-[80%] mx-auto my-10 shadow-lg">
-        <div className="mt-5 md:col-span-2 md:mt-0">
+      <div className="w-[80%] mx-auto py-10">
+        <div className="mt-5 md:col-span-2 md:mt-0 shadow-lg">
           <form onSubmit={handleSubmit(submitHandle)}>
             <div className="overflow-hidden shadow sm:rounded-md">
               <div className="bg-white px-4 py-5 sm:p-6">
@@ -60,6 +57,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please enter name",
                       })}
+                      defaultValue={data && data.name}
                       type="text"
                       name="name"
                       id="name"
@@ -85,6 +83,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please enter father's name",
                       })}
+                      defaultValue={data && data.father_name}
                       type="text"
                       name="father_name"
                       id="father_name"
@@ -110,6 +109,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please enter Roll no.",
                       })}
+                      defaultValue={data && data.college_rollno}
                       type="text"
                       name="college_rollno"
                       id="college_rollno"
@@ -134,6 +134,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please enter Roll no.",
                       })}
+                      defaultValue={data && data.university_rollno}
                       type="text"
                       name="university_rollno"
                       id="universty_rollno"
@@ -158,6 +159,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please enter Registration no",
                       })}
+                      defaultValue={data && data.registration_no}
                       type="text"
                       name="registration_no"
                       id="registration_no"
@@ -182,6 +184,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please enter date",
                       })}
+                      defaultValue={data && data.dateofbirth}
                       type="date"
                       name="dateofbirth"
                       id="dateofbirth"
@@ -194,6 +197,7 @@ export default function AddStudentForm() {
                     )}
                   </div>
 
+                  {/* religion and gender */}
                   <div className="col-span-6 sm:col-span-3 bg-white sm:p-2 mt-6 flex flex-wrap justify-between">
                     {/* Gender */}
                     <fieldset>
@@ -204,9 +208,10 @@ export default function AddStudentForm() {
                               ref={register({
                                 required: "Please select gender",
                               })}
+                              defaultChecked={data && data.gender === "Male"}
                               id="male"
                               name="gender"
-                              value="male"
+                              value="Male"
                               type="radio"
                               className="h-4 w-4 border-gray-200 text-indigo-600 focus:ring-indigo-600"
                             />
@@ -222,8 +227,9 @@ export default function AddStudentForm() {
                               ref={register({
                                 required: "Please select gender",
                               })}
+                              defaultChecked={data && data.gender === "Female"}
                               id="female"
-                              value="female"
+                              value="Female"
                               name="gender"
                               type="radio"
                               className="h-4 w-4 border-gray-200 text-indigo-600 focus:ring-indigo-600"
@@ -254,9 +260,10 @@ export default function AddStudentForm() {
                               ref={register({
                                 required: "Please select religion",
                               })}
+                              defaultChecked={data && data.religion === "Muslim"}
                               id="muslim"
                               name="religion"
-                              value="muslim"
+                              value="Muslim"
                               type="radio"
                               className="h-4 w-4 border-gray-200 text-indigo-600 focus:ring-indigo-600"
                             />
@@ -272,8 +279,9 @@ export default function AddStudentForm() {
                               ref={register({
                                 required: "Please select religion",
                               })}
+                              defaultChecked={data && data.religion === "Non muslim"}
                               id="non_muslim"
-                              value="non muslim"
+                              value="Non muslim"
                               name="religion"
                               type="radio"
                               className="h-4 w-4 border-gray-200 text-indigo-600 focus:ring-indigo-600"
@@ -308,6 +316,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please enter email address",
                       })}
+                      defaultValue={data && data.email_address}
                       type="email"
                       name="email_address"
                       id="email_address"
@@ -333,6 +342,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please enter phone number",
                       })}
+                      defaultValue={data && data.phone_number}
                       type="text"
                       name="phone_number"
                       id="phone_number"
@@ -361,6 +371,7 @@ export default function AddStudentForm() {
                         //   message: "Please enter a valid CNIC",
                         // },
                       })}
+                      defaultValue={data && data.cnic_no}
                       type="text"
                       name="cnic_no"
                       id="cnic_no"
@@ -386,6 +397,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please select  department",
                       })}
+                      defaultValue={data && data.department}
                       id="department"
                       name="department"
                       className="mt-2 block w-full border-2 border-gray-200  px-2 rounded-md bg-white py-1.5 text-gray-900 shadow-sm  sm:text-sm sm:leading-6"
@@ -429,6 +441,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please select semester",
                       })}
+                      defaultValue={data && data.shift}
                       id="shift"
                       name="shift"
                       className="mt-2 block w-full border-2 border-gray-200  px-2 rounded-md bg-white py-1.5 text-gray-900 shadow-sm  sm:text-sm sm:leading-6"
@@ -460,6 +473,7 @@ export default function AddStudentForm() {
                         //   message: "Please enter a valid session",
                         // },
                       })}
+                      defaultValue={data && data.session}
                       type="text"
                       name="session"
                       id="session"
@@ -484,6 +498,7 @@ export default function AddStudentForm() {
                       ref={register({
                         required: "Please enter address",
                       })}
+                      defaultValue={data && data.address}
                       type="text"
                       name="address"
                       id="address"
@@ -503,25 +518,13 @@ export default function AddStudentForm() {
                   type="submit"
                   className="inline-flex justify-center rounded-md bg-[#a02d29] hover:bg-[#a74d4a] py-2 px-3 text-sm font-semibold text-white shadow-sm "
                 >
-                  Add Student
+                  {btnText}
                 </button>
               </div>
             </div>
           </form>
         </div>
       </div>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-        theme="light"
-      />
     </>
   );
 }

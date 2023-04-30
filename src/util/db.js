@@ -18,13 +18,7 @@ export function useUser(uid) {
     // Unique query key: https://react-query.tanstack.com/guides/query-keys
     ["user", { uid }],
     // Query function that fetches data
-    () =>
-      supabase
-        .from("users")
-        .select()
-        .eq("id", uid)
-        .single()
-        .then(handle),
+    () => supabase.from("users").select().eq("id", uid).single().then(handle),
     // Only call query function if we have a `uid`
     { enabled: !!uid }
   );
@@ -33,24 +27,14 @@ export function useUser(uid) {
 export function useAllUsers() {
   return useQuery(
     "users",
-    () =>
-      supabase
-        .from("users")
-        .select("*")
-        .then(handle)
-,
+    () => supabase.from("users").select("*").then(handle),
     { enabled: true }
   );
 }
 // Fetch user data (non-hook)
 // Useful if you need to fetch data from outside of a component
 export function getUser(uid) {
-  return supabase
-    .from("users")
-    .select()
-    .eq("id", uid)
-    .single()
-    .then(handle);
+  return supabase.from("users").select().eq("id", uid).single().then(handle);
 }
 
 // Update an existing user
@@ -67,9 +51,7 @@ export async function updateUser(uid, data) {
 
 // delete an existing user
 export async function deleteUser(uid) {
-  const response = await supabase
-    .auth
-    .deleteUser(uid);
+  const response = await supabase.auth.deleteUser(uid);
   // Invalidate and refetch queries that could have old data
   await client.invalidateQueries(["user", { uid }]);
   return response;
@@ -140,7 +122,6 @@ export async function deleteUser(uid) {
 //   return response;
 // }
 
-
 // students
 
 // Create a new student
@@ -155,15 +136,33 @@ export async function createStudent(data) {
 export function useAllStudents() {
   return useQuery(
     "students",
-    () =>
-      supabase
-        .from("students")
-        .select("*")
-        .then(handle),
+    () => supabase.from("students").select("*").then(handle),
     { enabled: true }
   );
 }
 
+// Fetch student data
+export function useStudent(id) {
+  return useQuery(
+    ["student", { id }],
+    () => supabase.from("students").select().eq("id", id).single().then(handle),
+    { enabled: !!id }
+  );
+}
+
+// Update an student
+export async function updateStudent(id, data) {
+  const response = await supabase
+    .from("students")
+    .update(data)
+    .eq("id", id)
+    .then(handle);
+  await Promise.all([
+    client.invalidateQueries(["student", { id }]),
+    client.invalidateQueries(["students"]),
+  ]);
+  return response;
+}
 
 // Delete an student
 export async function deleteStudent(id) {
@@ -179,10 +178,6 @@ export async function deleteStudent(id) {
   ]);
   return response;
 }
-
-
-
-
 
 /**** HELPERS ****/
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TopBar from "./TopBar";
 import SideBarDesktop from "./SideBarDesktop";
 import SideBarMobile from "./SideBarMobile";
-import { useAuth } from "util/auth";
+import { requireAuth, useAuth } from "util/auth";
 import {
   HiOutlineUserPlus,
   HiOutlineUserGroup,
@@ -62,7 +62,7 @@ const navigation = [
   }
 ];
 
-export default function Index({ children }) {
+function Index({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const togglesidebar = () => setSidebarOpen((oldState) => !oldState);
 
@@ -94,3 +94,4 @@ export default function Index({ children }) {
     </>
   );
 }
+export default requireAuth(Index);

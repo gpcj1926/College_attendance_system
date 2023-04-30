@@ -286,10 +286,10 @@ export const requireSuperAdmin =  (Component) => {
       const {data: userData } = useUser(auth?.user?.id);
     useEffect(() => {
       // Redirect if not signed in
-      if (userData?.roleas !== "super_admin" ) {
+      if (userData?.roleas !== "super_admin" && auth.user === false ) {
         router.replace("/dashboard");
       }
-    }, [auth,userData]);
+    }, [userData]);
 
     // Show loading indicator
     // We're either loading (user is `null`) or about to redirect from above `useEffect` (user is `false`)

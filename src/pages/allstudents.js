@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AllStudentsItems from "components/attedance_system/Dashboard/Allstudents/AllStudentsItems";
 import Loader from "components/attedance_system/common/Loader";
 import Index from "components/attedance_system/Dashboard/Index";
@@ -9,21 +9,87 @@ import { useAllStudents } from "util/db";
 import Meta from "components/Meta";
 
 function allstudents() {
-
-  const { register, handleSubmit } = useForm();
-
-  const submitHandle = async (data) => {
-    console.log(data);
-  };
+  const { register, handleSubmit, errors , reset } = useForm();
 
   const { data: allStudents, refetch: refetchStudents } = useAllStudents();
-  // console.log(allStudents, "mydata")
+  const [allData, setAllData] = useState(allStudents);
+  useEffect(() => {
+    if (allStudents) {
+      setAllData(allStudents);
+    }
+  }, [allStudents]);
+  const submitHandle = async (data) => {
+    console.log(data);
+
+    if (data.reg_no) {
+      if (data.department && data.shift && data.shift !== "both") {
+        setAllData(
+          allStudents.filter((i) => {
+            return (
+              i.department === data.department &&
+              i.shift === data.shift &&
+              i.registration_no === data.reg_no
+            );
+          })
+        );
+      } else if (data.department && !data.shift) {
+        setAllData(
+          allStudents.filter((i) => {
+            return (
+              i.department === data.department &&
+              i.registration_no === data.reg_no
+            );
+          })
+        );
+      } else if (data.shift && !data.department) {
+        if (data.shift === "both") {
+          setAllData(
+            allStudents.filter((i) => {
+              return i.registration_no === data.reg_no;
+            })
+          );
+        } else {
+          setAllData(
+            allStudents.filter((i) => {
+              return (
+                i.shift === data.shift && i.registration_no === data.reg_no
+              );
+            })
+          );
+        }
+      }
+    } else {
+      if (data.department && data.shift && data.shift !== "both") {
+        setAllData(
+          allStudents.filter((i) => {
+            return i.department === data.department && i.shift === data.shift;
+          })
+        );
+      } else if (data.department && !data.shift) {
+        setAllData(
+          allStudents.filter((i) => {
+            return i.department === data.department;
+          })
+        );
+      } else if (data.shift && !data.department) {
+        if (data.shift === "both") {
+          setAllData(allStudents);
+        } else {
+          setAllData(
+            allStudents.filter((i) => {
+              return i.shift === data.shift;
+            })
+          );
+        }
+      }
+    }
+  };
 
   return (
     <Index>
       <Meta title="All Students" />
       <div className="bg-red-100 py-20 h-[100vh]">
-        <div className='bg-red-100 pt-6'>
+        <div className="bg-red-100 pt-6">
           {allStudents?.length === 0 && <Loader />}
         </div>
         {allStudents && (
@@ -32,19 +98,33 @@ function allstudents() {
               <form onSubmit={handleSubmit(submitHandle)}>
                 <div className="m-4 flex flex-col justify-items-start sm:justify-evenly sm:flex-row items-center space-x-6">
                   <div className="flex items-center space-x-2 mt-3">
-                    <h2 className="sm:text-xl text-lg font-bold ">Department:</h2>
+                    <h2 className="sm:text-xl text-lg font-bold ">
+                      Department:
+                    </h2>
                     <select
                       name="department"
                       ref={register()}
                       className="mt-1 px-4 py-2 rounded-lg"
                     >
                       <option></option>
-                      <option>Computer science</option>
-                      <option>English</option>
-                      <option>Math</option>
-                      <option>Physics</option>
+                      <option>Biology</option>
+                      <option>Botany</option>
                       <option>Chemistry</option>
+                      <option>Computer Science</option>
+                      <option>Economics</option>
+                      <option>English</option>
+                      <option>Geography</option>
+                      <option>Islamiyat</option>
+                      <option>Math</option>
+                      <option>Psychology</option>
+                      <option>Physics</option>
+                      <option>Political Science</option>
                       <option>Punjabi</option>
+                      <option>Pak Studies</option>
+                      <option>Sociology</option>
+                      <option>Statistics</option>
+                      <option>Urdu</option>
+                      <option>Zoology</option>
                     </select>
                   </div>
                   <div className="flex items-center space-x-2 mt-3">
@@ -60,6 +140,14 @@ function allstudents() {
                       <option>Evening</option>
                     </select>
                   </div>
+                  <div className="flex items-center space-x-2 mt-3">
+                    <h2 className="sm:text-xl text-lg font-bold ">Reg no.:</h2>
+                    <input
+                      name="reg_no"
+                      ref={register()}
+                      className="mt-1 px-2 py-2 rounded-lg w-44"
+                    />
+                  </div>
                   <div>
                     <button
                       type="submit"
@@ -71,11 +159,37 @@ function allstudents() {
                 </div>
               </form>
             </section>
-            <AllStudentsItems allStudents={allStudents} refetchStudents={refetchStudents} />
+            {(errors.department || errors.shift) && (
+              <p className="mt-1 text-sm text-center text-red-600">
+                {errors.shift
+                  ? errors.shift.message
+                  : errors.department.message}
+              </p>
+            )}
+            <button
+              onClick={() => {
+                setAllData(allStudents);
+                reset();
+              }}
+              className=" rounded-full mt-2 bg-[#a02d29] hover:bg-[#af4844] px-4 py-2 text-white shadow-sm block w-[100px] mx-auto"
+            >
+              Show All
+            </button>
+            {allData?.length === 0 ? (
+              <div className="text-red-400 text-center text-lg my-10">
+                *No students*
+              </div>
+            ) : (
+              ""
+            )}
+            <AllStudentsItems
+              allStudents={allData}
+              refetchStudents={refetchStudents}
+            />
           </>
         )}
       </div>
     </Index>
   );
 }
-export default requireAuth(requireSuperAdmin(allstudents));
+export default requireSuperAdmin(allstudents);

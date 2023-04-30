@@ -15,22 +15,21 @@ import ModalButton from "components/attedance_system/common/ModalButton";
 import RequestEditForm from "../Requests/RequestEditForm";
 import TeacherDeleteForm from "../Requests/TeacherDeleteForm";
 
-const TeachersItem = ({refetchUsers, data , dataType}) => {
-
+const TeachersItem = ({ refetchUsers, data, dataType }) => {
   return (
     <>
-        <div className="bg-red-100 py-6 w-[97%] md-[70%] mx-auto">
-          <main className="flex flex-wrap justify-between items-center m-4 mb-6">
-            <h2 className="text-2xl md:text-4xl font-bold m-2">
-              {dataType}
-            </h2>
-            <div className="flex space-x-2 m-2">
-              <h1 className="text-lg md:text-xl font-bold"> Number :</h1>
-              <h3 className="text-lg">{data?.length}</h3>
-            </div>
-          </main>
-          <div className="">
-            {data?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))?.map((user) => {
+      <div className="bg-red-100 py-6 w-[97%] md-[70%] mx-auto">
+        <main className="flex flex-wrap justify-between items-center m-4 mb-6">
+          <h2 className="text-2xl md:text-4xl font-bold m-2">{dataType}</h2>
+          <div className="flex space-x-2 m-2">
+            <h1 className="text-lg md:text-xl font-bold"> Number :</h1>
+            <h3 className="text-lg">{data?.length}</h3>
+          </div>
+        </main>
+        <div className="">
+          {data
+            ?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+            ?.map((user) => {
               return (
                 <div key={user.id} className=" m-4 w-[95%] lg:w-[70%] mx-auto">
                   <Disclosure>
@@ -41,23 +40,30 @@ const TeachersItem = ({refetchUsers, data , dataType}) => {
                           alt="Edit"
                           className="h-8 w-8 cursor-pointer"
                         />
-                        <div className="flex items-center ml-4">
-                          <h1 className="sm:text-xl text-base text-red-500 font-bold">
-                            {user.name}
-                          </h1>
-                          <h3 className="text-xl ml-2">
-                            {user.status === "Approved" ? (
-                              <span className="text-green-600">
-                                <FaCheckCircle />
-                              </span>
-                            ) : user.status === "Not Approved" ? (
-                              <span className="text-red-600">
-                                <FaExclamationCircle />
-                              </span>
-                            ) : (
-                              <span className="text-red-600">Blocked</span>
-                            )}
-                          </h3>
+                        <div className="ml-4">
+                          <div className="flex items-center">
+                            <h1 className="sm:text-xl text-base text-red-500 font-bold">
+                              {user.name}
+                            </h1>
+                            <h3 className="text-xl ml-2">
+                              {user.status === "Approved" ? (
+                                <span className="text-green-600">
+                                  <FaCheckCircle />
+                                </span>
+                              ) : user.status === "Not Approved" ? (
+                                <span className="text-red-600">
+                                  <FaExclamationCircle />
+                                </span>
+                              ) : (
+                                <span className="text-red-600">Blocked</span>
+                              )}
+                            </h3>
+                          </div>
+                          <h2 className="text-xs text-gray-500">
+                            {user.roleas === "Department_admin"
+                              ? "Department Admin"
+                              : user.roleas}
+                          </h2>
                         </div>
                       </div>
                       <div className="flex space-x-4 items-center">
@@ -91,13 +97,15 @@ const TeachersItem = ({refetchUsers, data , dataType}) => {
                           <ModalButton
                             title={`Delete Request`}
                             Content={({ toggleModal }) => {
-                              return <TeacherDeleteForm
-                              onDone={() => {
-                                toggleModal();
-                              }}
-                              id={user.id}
-                              refetchUsers={refetchUsers}
-                              />;
+                              return (
+                                <TeacherDeleteForm
+                                  onDone={() => {
+                                    toggleModal();
+                                  }}
+                                  id={user.id}
+                                  refetchUsers={refetchUsers}
+                                />
+                              );
                             }}
                             Button={({ toggleModal }) => {
                               return (
@@ -177,8 +185,8 @@ const TeachersItem = ({refetchUsers, data , dataType}) => {
                 </div>
               );
             })}
-          </div>
         </div>
+      </div>
     </>
   );
 };

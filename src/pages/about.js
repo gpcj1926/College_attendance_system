@@ -32,8 +32,8 @@ function AboutPage(props) {
     <>
       <Meta title="About" description="Learn about our company and team" />
       <section className="bg-red-100 h-[100vh]">
-        <header class="bg-red-100 text-[#a02d29] py-4 flex flex-col justify-center">
-          <h1 class="md:text-5xl sm:text-3xl text-2xl text-center font-bold my-2">
+        <header className="bg-red-100 text-[#a02d29] py-4 flex flex-col justify-center">
+          <h1 className="md:text-5xl sm:text-3xl text-2xl text-center font-bold my-2">
             About Us
           </h1>
           <Link href="/">

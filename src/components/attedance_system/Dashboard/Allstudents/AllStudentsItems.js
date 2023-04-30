@@ -17,11 +17,12 @@ import { MdDateRange, MdAccountBox, MdSchool } from "react-icons/md";
 import { Disclosure, Transition } from "@headlessui/react";
 import ModalButton from "../../common/ModalButton";
 import DeleteForm from "../../common/DeleteForm";
+import Link from "next/link";
 
 export default function AllStudentsItems({ allStudents, refetchStudents }) {
   return (
-    <div>
-      {allStudents.map((student) => {
+    <div className="bg-red-100 pb-10">
+      {allStudents?.map((student) => {
         return (
           <div key={student.id} className=" m-4 w-[95%] lg:w-[70%] mx-auto">
             <Disclosure>
@@ -41,7 +42,9 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                 </div>
                 <div className="flex space-x-4 items-center">
                   <div className="text-gray-600 flex space-x-4 sm:text-xl text-base">
+                    <Link href={`/allstudents/${student.id}`}>
                     <FaRegEdit className="cursor-pointer" />
+                    </Link>
                     <ModalButton
                       title="Delete Student"
                       Content={({ toggleModal }) => {
@@ -82,78 +85,78 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                     <div className=" flex flex-wrap items-center">
                       <div className="mr-0 sm:mr-8">
                         <div className="flex flex-wrap items-center mt-4 pb-4 border-b-2">
-                          <FaUserTie className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">Father Name:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.father_name}</p>
+                          <FaUserTie className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">Father Name:</p>
+                          <p className="ml-4 text-sm">{student.father_name}</p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <MdSchool className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">Department:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.department}</p>
+                          <MdSchool className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">Department:</p>
+                          <p className="ml-4 text-sm">{student.department}</p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <MdAccountBox className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">College Rollno.:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.college_rollno}</p>
+                          <MdAccountBox className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">College Rollno.:</p>
+                          <p className="ml-4 text-sm">{student.college_rollno}</p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <FaAddressCard className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">CNIC No:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.cnic_no}</p>
+                          <FaAddressCard className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">CNIC No:</p>
+                          <p className="ml-4 text-sm">{student.cnic_no}</p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <FaEnvelope className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">Email Address:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.email_address}</p>
+                          <FaEnvelope className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">Email Address:</p>
+                          <p className="ml-4 text-sm">{student.email_address}</p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <FaPhoneAlt className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">Phone Number:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.phone_number}</p>
+                          <FaPhoneAlt className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">Phone Number:</p>
+                          <p className="ml-4 text-sm">{student.phone_number}</p>
                         </div>
                       </div>
 
                       <div className="">
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <FaUserCog className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">Gender:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.gender}</p>
+                          <FaUserCog className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">Gender:</p>
+                          <p className="ml-4 text-sm">{student.gender}</p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <FaUserGraduate className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">Registration No:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.registration_no}</p>
+                          <FaUserGraduate className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">Registration No:</p>
+                          <p className="ml-4 text-sm">{student.registration_no}</p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <MdAccountBox className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">University Rollno.:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.university_rollno}</p>
+                          <MdAccountBox className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">University Rollno.:</p>
+                          <p className="ml-4 text-sm">{student.university_rollno}</p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <MdDateRange className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">Date of Birth:</p>
-                          <p className="ml-4  sm:text-base text-sm">
+                          <MdDateRange className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">Date of Birth:</p>
+                          <p className="ml-4 text-sm">
                             {new Date(student.dateofbirth).toLocaleDateString()}
                           </p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <FaCalendarCheck className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">Session:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.session}</p>
+                          <FaCalendarCheck className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">Session:</p>
+                          <p className="ml-4 text-sm">{student.session}</p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
-                          <FaShieldAlt className="text-red-600 mr-4 text-xl" />
-                          <p className="font-bold sm:text-base text-sm">Religion:</p>
-                          <p className="ml-4  sm:text-base text-sm">{student.religion}</p>
+                          <FaShieldAlt className="text-red-600 mr-4 text-lg" />
+                          <p className="font-bold text-sm">Religion:</p>
+                          <p className="ml-4 text-sm">{student.religion}</p>
                         </div>
                       </div>
                     </div>
 
                     <div className="mt-4">
                       <div className="flex items-center">
-                        <FaHome className="text-red-600 mr-4 text-xl" />
-                        <p className="font-bold sm:text-base text-sm">Address:</p>
-                        <p className="ml-4  sm:text-base text-sm">{student.address}</p>
+                        <FaHome className="text-red-600 mr-4 text-lg" />
+                        <p className="font-bold text-sm">Address:</p>
+                        <p className="ml-4 text-sm">{student.address}</p>
                       </div>
                     </div>
                   </div>

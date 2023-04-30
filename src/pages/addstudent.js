@@ -11,7 +11,7 @@ function addstudent() {
         <Meta title="Add Students"/>
       <div className='bg-red-100 py-20'>
         <h2 className='text-3xl font-bold text-center'>Add new Student</h2>
-        <AddStudentForm />
+        <AddStudentForm btnText={"Create Student"} target={"create"} />
       </div>
     </Index>
   )

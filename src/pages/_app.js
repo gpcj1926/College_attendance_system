@@ -1,18 +1,16 @@
 import React from "react";
 import "styles/global.css";
-// import Navbar from "components/Navbar";
 import "util/analytics";
 import { AuthProvider } from "util/auth";
 import { QueryClientProvider } from "util/db";
-// import Index from "components/attedance_system/Dashboard/Index";
+import { ToastContainer} from 'react-toastify';
 
 function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider>
       <AuthProvider>
         <>
-          {/* <Navbar /> */}
-
+        <ToastContainer position="bottom-center" autoClose={2000}/>
           <Component {...pageProps} />
         </>
       </AuthProvider>

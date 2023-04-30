@@ -100,3 +100,15 @@ create table public.students (
 -- create policy "Can insert items they own" on public.students for insert with check ( auth.uid() = "owner" );
 -- create policy "Can update items they own" on public.students for update using ( auth.uid() = "owner" );
 -- create policy "Can delete items they own" on public.students for delete using ( auth.uid() = "owner" );
+
+
+/*** ITEMS ***/
+
+create table public.attendance  (
+  "id" uuid primary key default uuid_generate_v4(),
+  "owner" uuid references public.users not null,
+  "student_name" text,
+  "date" text,
+  "status" text,
+  "createdAt" timestamp with time zone default timezone('utc'::text, now()) not null
+);
