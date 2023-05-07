@@ -1,6 +1,4 @@
 import React from "react";
-import { useAllUsers } from "util/db";
-import Loader from "components/attedance_system/common/Loader";
 import {
   FaChevronDown,
   FaRegTrashAlt,
@@ -18,7 +16,7 @@ import TeacherDeleteForm from "../Requests/TeacherDeleteForm";
 const TeachersItem = ({ refetchUsers, data, dataType }) => {
   return (
     <>
-      <div className="bg-red-100 py-6 w-[97%] md-[70%] mx-auto">
+      <div className="bg-red-100 py-6 w-[90%] md:w-[60%] mx-auto">
         <main className="flex flex-wrap justify-between items-center m-4 mb-6">
           <h2 className="text-2xl md:text-4xl font-bold m-2">{dataType}</h2>
           <div className="flex space-x-2 m-2">
@@ -26,12 +24,24 @@ const TeachersItem = ({ refetchUsers, data, dataType }) => {
             <h3 className="text-lg">{data?.length}</h3>
           </div>
         </main>
+        <div>
+          {
+            data
+            ?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+            ?.length === 0 ? 
+            <div>
+              <img src="/images/no_data.png" className="w-24 opacity-25 mx-auto mt-10"/>
+            </div>
+            : 
+            ""
+          }
+        </div>
         <div className="">
           {data
             ?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
             ?.map((user) => {
               return (
-                <div key={user.id} className=" m-4 w-[95%] lg:w-[70%] mx-auto">
+                <div key={user.id} className=" m-4">
                   <Disclosure>
                     <div className="flex justify-between bg-white p-4 shadow-md rounded-full">
                       <div className="flex items-center">

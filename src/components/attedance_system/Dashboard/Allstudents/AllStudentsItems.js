@@ -34,16 +34,21 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                     className="h-8 w-8 cursor-pointer"
                   />
                   <div className="flex flex-col ml-4">
-                    <h1 className="sm:text-xl text-base text-red-500 font-bold">
-                      {student.name}
-                    </h1>
+                    <div className="flex space-x-2">
+                      <h1 className="sm:text-xl text-base text-red-500 font-bold">
+                        {student.name}
+                      </h1>
+                      <div className="font-semibold text-green-600 p-1 rounded-xl">
+                        ({student.shift.slice(0, 1)})
+                      </div>
+                    </div>
                     <h3 className="text-gray-500">{student.registration_no}</h3>
                   </div>
                 </div>
                 <div className="flex space-x-4 items-center">
                   <div className="text-gray-600 flex space-x-4 sm:text-xl text-base">
                     <Link href={`/allstudents/${student.id}`}>
-                    <FaRegEdit className="cursor-pointer" />
+                      <FaRegEdit className="cursor-pointer" />
                     </Link>
                     <ModalButton
                       title="Delete Student"
@@ -60,12 +65,13 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                       }}
                       Button={({ toggleModal }) => {
                         return (
-
-                          <FaRegTrashAlt onClick={() => toggleModal()} className="cursor-pointer" />
+                          <FaRegTrashAlt
+                            onClick={() => toggleModal()}
+                            className="cursor-pointer"
+                          />
                         );
                       }}
                     />
-
                   </div>
                   <Disclosure.Button>
                     <FaChevronDown className="sm:text-lg text-base" />
@@ -82,7 +88,7 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                     <div className="text-white font-semibold bg-green-600 p-1 rounded-xl absolute right-4 top-2">
                       {student.shift}
                     </div>
-                    <div className=" flex flex-wrap items-center">
+                    <div className=" flex flex-wrap items-center justify-between md:mx-8">
                       <div className="mr-0 sm:mr-8">
                         <div className="flex flex-wrap items-center mt-4 pb-4 border-b-2">
                           <FaUserTie className="text-red-600 mr-4 text-lg" />
@@ -97,7 +103,9 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                         <div className="flex items-center mt-4 pb-4 border-b-2">
                           <MdAccountBox className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">College Rollno.:</p>
-                          <p className="ml-4 text-sm">{student.college_rollno}</p>
+                          <p className="ml-4 text-sm">
+                            {student.college_rollno}
+                          </p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
                           <FaAddressCard className="text-red-600 mr-4 text-lg" />
@@ -107,7 +115,9 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                         <div className="flex items-center mt-4 pb-4 border-b-2">
                           <FaEnvelope className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Email Address:</p>
-                          <p className="ml-4 text-sm">{student.email_address}</p>
+                          <p className="ml-4 text-sm">
+                            {student.email_address}
+                          </p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
                           <FaPhoneAlt className="text-red-600 mr-4 text-lg" />
@@ -125,12 +135,18 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                         <div className="flex items-center mt-4 pb-4 border-b-2">
                           <FaUserGraduate className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Registration No:</p>
-                          <p className="ml-4 text-sm">{student.registration_no}</p>
+                          <p className="ml-4 text-sm">
+                            {student.registration_no}
+                          </p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
                           <MdAccountBox className="text-red-600 mr-4 text-lg" />
-                          <p className="font-bold text-sm">University Rollno.:</p>
-                          <p className="ml-4 text-sm">{student.university_rollno}</p>
+                          <p className="font-bold text-sm">
+                            University Rollno.:
+                          </p>
+                          <p className="ml-4 text-sm">
+                            {student.university_rollno}
+                          </p>
                         </div>
                         <div className="flex items-center mt-4 pb-4 border-b-2">
                           <MdDateRange className="text-red-600 mr-4 text-lg" />
@@ -152,7 +168,7 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                       </div>
                     </div>
 
-                    <div className="mt-4">
+                    <div className="mt-4 md:mx-8">
                       <div className="flex items-center">
                         <FaHome className="text-red-600 mr-4 text-lg" />
                         <p className="font-bold text-sm">Address:</p>

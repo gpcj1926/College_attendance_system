@@ -9,7 +9,7 @@ import { useAllStudents } from "util/db";
 import Meta from "components/Meta";
 
 function allstudents() {
-  const { register, handleSubmit, errors , reset } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
 
   const { data: allStudents, refetch: refetchStudents } = useAllStudents();
   const [allData, setAllData] = useState(allStudents);
@@ -83,22 +83,36 @@ function allstudents() {
         }
       }
     }
+    if(!data.department && !data.shift && data.reg_no){
+      setAllData(
+        allStudents.filter((i) => {
+          return (
+            i.registration_no === data.reg_no
+          );
+        })
+      );
+    }
   };
 
   return (
     <Index>
       <Meta title="All Students" />
-      <div className="bg-red-100 py-20 h-[100vh]">
+      <div className="bg-red-100 md:py-10 py-6 h-[100vh]">
         <div className="bg-red-100 pt-6">
           {allStudents?.length === 0 && <Loader />}
         </div>
         {allStudents && (
           <>
+          <section>
+          <h1 className="md:text-5xl sm:text-3xl text-2xl text-center font-bold my-2">
+            All Students
+          </h1>
+          </section>
             <section className="flex justify-center">
               <form onSubmit={handleSubmit(submitHandle)}>
-                <div className="m-4 flex flex-col justify-items-start sm:justify-evenly sm:flex-row items-center space-x-6">
-                  <div className="flex items-center space-x-2 mt-3">
-                    <h2 className="sm:text-xl text-lg font-bold ">
+                <div className="m-4 flex flex-col sm:justify-evenly sm:flex-row md:items-center">
+                  <div className="flex items-center space-x-2 mt-3 md:mr-6">
+                    <h2 className="md:text-xl sm:text-lg text-base font-bold ">
                       Department:
                     </h2>
                     <select
@@ -127,8 +141,8 @@ function allstudents() {
                       <option>Zoology</option>
                     </select>
                   </div>
-                  <div className="flex items-center space-x-2 mt-3">
-                    <h2 className="sm:text-xl text-lg font-bold ">Shift:</h2>
+                  <div className="flex items-center space-x-2 mt-3 md:mr-6">
+                    <h2 className="md:text-xl sm:text-lg text-base font-bold ">Shift:</h2>
                     <select
                       name="shift"
                       ref={register()}
@@ -140,8 +154,8 @@ function allstudents() {
                       <option>Evening</option>
                     </select>
                   </div>
-                  <div className="flex items-center space-x-2 mt-3">
-                    <h2 className="sm:text-xl text-lg font-bold ">Reg no.:</h2>
+                  <div className="flex items-center space-x-2 mt-3 md:mr-6">
+                    <h2 className="md:text-xl sm:text-lg text-base font-bold ">Reg no.:</h2>
                     <input
                       name="reg_no"
                       ref={register()}
@@ -176,8 +190,11 @@ function allstudents() {
               Show All
             </button>
             {allData?.length === 0 ? (
-              <div className="text-red-400 text-center text-lg my-10">
-                *No students*
+              <div>
+                <img
+                  src="/images/no_data.png"
+                  className="w-24 opacity-25 mx-auto mt-10"
+                />
               </div>
             ) : (
               ""

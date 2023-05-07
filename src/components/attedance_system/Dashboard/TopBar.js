@@ -8,7 +8,7 @@ export default function TopBar({ setSidebarOpen }) {
   const { data: userData } = useUser(auth?.user?.id);
   return (
     <>
-      <div className="bg-white fixed top-0 flex  md:justify-end justify-between items-center w-full drop-shadow-xl z-30">
+      <div className="bg-white mt-[70px] flex  md:justify-end justify-between items-center w-full drop-shadow-xl z-30">
         <button
           type="button"
           className="mx-6 my-4rounded-md text-gray-500 hover:text-gray-900 md:hidden block"

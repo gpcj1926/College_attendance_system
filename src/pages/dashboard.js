@@ -37,13 +37,13 @@ const dashboard = () => {
   ];
   return (
     <Index>
-      <section className="bg-red-100 h-screen">
+      <section className="bg-red-100">
         <Meta title="Dashboard" />
         {["super_admin"].includes(userData?.roleas) && 
 
-        <div className="w-full bg-red-100 pt-10 sm:px-0 ">
+        <div className=" mx-auto bg-red-100 pt-10 sm:px-0 ">
           <Tab.Group>
-          <Tab.List className="drop-shadow-lg select-none isolate flex divide-x divide-gray-200 dark:divide-gray-600 rounded-lg shadow w-[90%] mx-auto">
+          <Tab.List className=" w-[95%] md:w-[60%] drop-shadow-lg select-none isolate flex divide-x divide-gray-200 dark:divide-gray-600 rounded-lg shadow mx-auto">
               {Tabs.map((i) => {
                 return (
                   <Tab as={Fragment} key={i.name}>
@@ -82,7 +82,7 @@ const dashboard = () => {
               <TeachersItem data={approvedDepartAdmin} refetchUsers={refetchUsers} dataType={"Department Admins"} />
 
               </Tab.Panel>
-              <Tab.Panel>
+              <Tab.Panel className="h-screen">
        <TeachersItem data={notApprovedTeachers} refetchUsers={refetchUsers} dataType={"Account Requests"} />
        
               </Tab.Panel>

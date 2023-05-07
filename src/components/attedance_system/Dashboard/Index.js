@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import TopBar from "./TopBar";
-import SideBarDesktop from "./SideBarDesktop";
 import SideBarMobile from "./SideBarMobile";
-import { requireAuth, useAuth } from "util/auth";
+import { requireAuth } from "util/auth";
 import {
   HiOutlineUserPlus,
   HiOutlineUserGroup,
   HiOutlineSquares2X2,
-  // HiOutlineCog8Tooth,
-  // HiOutlineListBullet,
 } from "react-icons/hi2";
 import {
   // FaAddressCard,
@@ -24,7 +20,9 @@ import {
   FaUserGraduate,
   FaUserCog,
 } from "react-icons/fa";
+import { RiLockPasswordLine, RiSettings2Line } from 'react-icons/ri';
 import { FiSettings } from "react-icons/fi";
+import Navbar from "../LandingPage/Navbar";
 
 const navigation = [
   {
@@ -42,10 +40,10 @@ const navigation = [
     icon: FaUserGraduate,
     haveSub: true,
     sub: [
-      { 
+      {
         name: "All Students",
         href: "/allstudents",
-        icon: HiOutlineUserGroup 
+        icon: HiOutlineUserGroup
       },
       {
         name: "Add Student",
@@ -58,7 +56,19 @@ const navigation = [
     name: "Settings",
     href: "/settings/general",
     icon: FiSettings,
-    haveSub: false,
+    haveSub: true,
+    sub: [
+      {
+        name: "General",
+        href: "/settings/general",
+        icon: RiSettings2Line
+      },
+      {
+        name: "Password",
+        href: "/settings/password",
+        icon: RiLockPasswordLine,
+      },
+    ],
   }
 ];
 
@@ -75,23 +85,21 @@ function Index({ children }) {
             navigation={navigation}
             sidebarOpen={sidebarOpen}
             togglesidebar={togglesidebar}
-          />
+            />
 
-          {/* Static sidebar for desktop */}
-          <SideBarDesktop navigation={navigation} />
+          {/* Static topBar for desktop */}
+            <Navbar navigation={navigation} setSidebarOpen={setSidebarOpen} />
 
           {/* ----------TopBar-------------- */}
-          <TopBar setSidebarOpen={setSidebarOpen} />
 
           {/* ----------Random Components-------------- */}
-          <div className="flex flex-1 flex-col md:pl-64 ">
-            <main className="flex-1">
-              <div className="mt-10 h-full">{children}</div>
-            </main>
+          {/* <div className="flex flex-1 flex-col md:pl-64 "> */}
+          <div className="">
+              <div className="mt-14 h-full">{children}</div>
           </div>
         </div>
       </div>
     </>
   );
 }
-export default requireAuth(Index);
+export default Index;

@@ -71,10 +71,10 @@ function SettingsGeneral(props) {
             <div className="mt-3 flex justify-between items-center">
               <h1 className="text-left text-lg font-semibold mb-1">Role :</h1>
               <p className="font-semibold text-green-600">
-                {userData?.roleas ? userData?.roleas : "----"}
+                {userData?.roleas ? (userData?.roleas === "super_admin" ? "Super Admin":"") : ""}
               </p>
             </div>
-          {userData.roleas === "super_admin" ? (
+          {userData?.roleas === "super_admin" ? (
             ""
           ) : (
           <div className="mt-3 flex justify-between items-center">
