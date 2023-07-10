@@ -279,14 +279,37 @@ export const requireAuth = (Component) => {
   };
 };
 // A Higher Order Component for requiring SuperAdmin
-export const requireSuperAdmin =  (Component) => {
-  return function RequireSuperAdminHOC (props) {
-      // // Get authenticated user
-      const auth = useAuth();
-      const {data: userData } = useUser(auth?.user?.id);
+export const requireSuperAdmin = (Component) => {
+  return function RequireSuperAdminHOC(props) {
+    // // Get authenticated user
+    const auth = useAuth();
+    const { data: userData } = useUser(auth?.user?.id);
     useEffect(() => {
       // Redirect if not signed in
-      if (userData?.roleas !== "super_admin" && auth.user === false ) {
+      if (userData?.roleas !== "super_admin" && auth.user === false) {
+        router.replace("/dashboard");
+      }
+    }, [userData]);
+
+    // Show loading indicator
+    // We're either loading (user is `null`) or about to redirect from above `useEffect` (user is `false`)
+    if (!auth.user) {
+      return <PageLoader />;
+    }
+
+    // Render component now that we have user
+    return <Component {...props} />;
+  };
+};
+// A Higher Order Component for requiring Teacher
+export const requireTeacher = (Component) => {
+  return function RequireSuperAdminHOC(props) {
+    // // Get authenticated user
+    const auth = useAuth();
+    const { data: userData } = useUser(auth?.user?.id);
+    useEffect(() => {
+      // Redirect if not signed in
+      if (userData?.roleas !== "teacher" && auth.user === false) {
         router.replace("/dashboard");
       }
     }, [userData]);

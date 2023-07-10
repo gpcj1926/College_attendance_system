@@ -20,3 +20,18 @@
 .hide-scrollbar::-webkit-scrollbar-thumb {
   background-color: transparent;
 }
+.white-button {
+  @apply bg-gray-200 hover:bg-gray-300 focus:bg-gray-300 text-gray-700 font-semibold py-2 px-4 mx-2 rounded-lg shadow-md;
+}
+
+.white-button-rounded {
+  @apply bg-gray-200 hover:bg-gray-300 focus:bg-gray-300 text-gray-700 font-semibold py-2 px-4 mx-2 rounded-full shadow-md;
+}
+
+.red-button {
+  @apply bg-red-700 hover:bg-red-600 focus:bg-red-600 text-white font-semibold py-2 px-4 mx-2 rounded-lg shadow-md;
+}
+
+.red-button-rounded {
+  @apply bg-red-700 hover:bg-red-600 focus:bg-red-600 text-white font-semibold py-2 px-4 mx-2 rounded-full shadow-md;
+}

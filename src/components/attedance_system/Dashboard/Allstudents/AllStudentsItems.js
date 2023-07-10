@@ -58,8 +58,9 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                             onDone={() => {
                               toggleModal();
                             }}
-                            refetchStudents={refetchStudents}
+                            refetch={refetchStudents}
                             id={student.id}
+                            target={"student"}
                           />
                         );
                       }}
@@ -90,36 +91,36 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                     </div>
                     <div className=" flex flex-wrap items-center justify-between md:mx-8">
                       <div className="mr-0 sm:mr-8">
-                        <div className="flex flex-wrap items-center mt-4 pb-4 border-b-2">
+                        <div className="flex flex-wrap items-center mt-4 pb-4">
                           <FaUserTie className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Father Name:</p>
                           <p className="ml-4 text-sm">{student.father_name}</p>
                         </div>
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <MdSchool className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Department:</p>
                           <p className="ml-4 text-sm">{student.department}</p>
                         </div>
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <MdAccountBox className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">College Rollno.:</p>
                           <p className="ml-4 text-sm">
                             {student.college_rollno}
                           </p>
                         </div>
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <FaAddressCard className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">CNIC No:</p>
                           <p className="ml-4 text-sm">{student.cnic_no}</p>
                         </div>
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <FaEnvelope className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Email Address:</p>
                           <p className="ml-4 text-sm">
                             {student.email_address}
                           </p>
                         </div>
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <FaPhoneAlt className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Phone Number:</p>
                           <p className="ml-4 text-sm">{student.phone_number}</p>
@@ -127,19 +128,19 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                       </div>
 
                       <div className="">
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <FaUserCog className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Gender:</p>
                           <p className="ml-4 text-sm">{student.gender}</p>
                         </div>
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <FaUserGraduate className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Registration No:</p>
                           <p className="ml-4 text-sm">
                             {student.registration_no}
                           </p>
                         </div>
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <MdAccountBox className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">
                             University Rollno.:
@@ -148,19 +149,19 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
                             {student.university_rollno}
                           </p>
                         </div>
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <MdDateRange className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Date of Birth:</p>
                           <p className="ml-4 text-sm">
                             {new Date(student.dateofbirth).toLocaleDateString()}
                           </p>
                         </div>
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <FaCalendarCheck className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Session:</p>
                           <p className="ml-4 text-sm">{student.session}</p>
                         </div>
-                        <div className="flex items-center mt-4 pb-4 border-b-2">
+                        <div className="flex items-center mt-4 pb-4">
                           <FaShieldAlt className="text-red-600 mr-4 text-lg" />
                           <p className="font-bold text-sm">Religion:</p>
                           <p className="ml-4 text-sm">{student.religion}</p>

@@ -20,7 +20,7 @@ const Navbar = ({ setSidebarOpen, navigation }) => {
   return (
     <>
       <section className="relative">
-        <nav className="fixed top-0 flex justify-between items-center w-full bg-red-50 bg-opacity-75 backdrop-filter backdrop-blur-lg z-40 p-3 border-b-2 border-red-200">
+        <nav className="fixed top-0 flex justify-between items-center w-full bg-red-50 bg-opacity-75 backdrop-filter backdrop-blur-lg z-[800] p-3 shadow-md">
           <button
             type="button"
             className=" rounded-md text-gray-500 hover:text-gray-900 md:hidden block"
@@ -178,7 +178,7 @@ const Navbar = ({ setSidebarOpen, navigation }) => {
                 )}
               </div>
               {/* signin / signout */}
-              <div className="mr-3 mt-2 hidden md:block">
+              <div className="mr-3 hidden md:block">
                 {auth?.user ? (
                   <Link href="/">
                     <button
@@ -186,22 +186,18 @@ const Navbar = ({ setSidebarOpen, navigation }) => {
                         e.preventDefault();
                         auth.signout();
                       }}
-                      className="text-red-700 text-xl cursor-pointer"
-                     
+                      className="red-button text-base"
                     >
-                      <FaSignOutAlt />
+                      Sign out
                     </button>
                   </Link>
                 ) : (
                   <Link href="/auth/signin">
-                    <div className="text-red-700 text-xl cursor-pointer">
-                      <FaSignInAlt />
-                    </div>
+                    <button className="red-button text-base">
+                      Sign in
+                    </button>
                   </Link>
                 )}
-              </div>
-              <div className="mr-3">
-                <FiMoon className="text-2xl text-red-700 cursor-pointer" />
               </div>
             </div>
           </div>

@@ -27,13 +27,13 @@ const TeachersItem = ({ refetchUsers, data, dataType }) => {
         <div>
           {
             data
-            ?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
-            ?.length === 0 ? 
-            <div>
-              <img src="/images/no_data.png" className="w-24 opacity-25 mx-auto mt-10"/>
-            </div>
-            : 
-            ""
+              ?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+              ?.length === 0 ?
+              <div>
+                <img src="/images/no_data.png" className="w-24 opacity-25 mx-auto mt-10" />
+              </div>
+              :
+              ""
           }
         </div>
         <div className="">
@@ -147,7 +147,7 @@ const TeachersItem = ({ refetchUsers, data, dataType }) => {
                         <div className="p-6 bg-gray-50 rounded-3xl mx-2 mt-4 shadow-lg">
                           <div className="flex flex-wrap md:flex-nowrap items-center md:justify-between justify-start">
                             <div className="mx-2">
-                              <div className="flex items-center mt-4 pb-4 border-b-2">
+                              <div className="flex items-center mt-4 pb-4 ">
                                 <FaUserTie className="text-red-600 mr-4 text-xl" />
                                 <p className="font-bold sm:text-base text-sm">
                                   Email :
@@ -156,7 +156,7 @@ const TeachersItem = ({ refetchUsers, data, dataType }) => {
                                   {user.email}
                                 </p>
                               </div>
-                              <div className="flex items-center mt-4 pb-4 border-b-2">
+                              <div className="flex items-center mt-4 pb-4 ">
                                 <FaUserTie className="text-red-600 mr-4 text-xl" />
                                 <p className="font-bold sm:text-base text-sm">
                                   Status :
@@ -168,7 +168,7 @@ const TeachersItem = ({ refetchUsers, data, dataType }) => {
                             </div>
 
                             <div className="mx-2">
-                              <div className="flex items-center mt-4 pb-4 border-b-2">
+                              <div className="flex items-center mt-4 pb-4 ">
                                 <FaUserCog className="text-red-600 mr-4 text-xl" />
                                 <p className="font-bold sm:text-base text-sm">
                                   Role :
@@ -177,7 +177,7 @@ const TeachersItem = ({ refetchUsers, data, dataType }) => {
                                   {user.roleas}
                                 </p>
                               </div>
-                              <div className="flex items-center mt-4 pb-4 border-b-2">
+                              <div className="flex items-center mt-4 pb-4 ">
                                 <FaUserCog className="text-red-600 mr-4 text-xl" />
                                 <p className="font-bold sm:text-base text-sm">
                                   Department :

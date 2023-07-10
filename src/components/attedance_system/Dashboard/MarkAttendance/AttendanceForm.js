@@ -63,7 +63,7 @@ const AttendanceForm = () => {
             </div>
             </main>
             <div>
-              <img src="/images/border.png" className="h-6 w-[40%] mx-auto object-cover my-6"/>
+              <img src="/Images/border.png" className="h-6 w-[40%] mx-auto object-cover my-6"/>
             </div>
             <form className="" onSubmit={handleSubmit(onSubmit)}>
               <div className=" overflow-x-auto">

@@ -132,7 +132,7 @@ export async function createStudent(data) {
   return response;
 }
 
-// Fetch all student by owner
+// Fetch all student
 export function useAllStudents() {
   return useQuery(
     "students",
@@ -179,6 +179,43 @@ export async function deleteStudent(id) {
   return response;
 }
 
+
+
+//*****************classes data********************
+
+// Fetch all classes by
+export function useAllclasses() {
+  return useQuery(
+    "classes",
+    () => supabase.from("classes").select("*").then(handle),
+    { enabled: true }
+  );
+}
+
+// Delete an class
+export async function deleteClass(id) {
+  const response = await supabase
+    .from("classes")
+    .delete()
+    .eq("id", id)
+    .then(handle);
+  // Invalidate and refetch queries that could have old data
+  await Promise.all([
+    client.invalidateQueries(["classes", { id }]),
+    client.invalidateQueries(["classes"]),
+  ]);
+  return response;
+}
+
+
+// Create a new class
+export async function createClass(data) {
+  const response = await supabase.from("classes").insert([data]).then(handle);
+  // Invalidate and refetch queries that could have old data
+  await client.invalidateQueries(["classes"]);
+  return response;
+}
+
 /**** HELPERS ****/
 
 // Get response data or throw error if there is one
@@ -186,6 +223,16 @@ function handle(response) {
   if (response.error) throw response.error;
   return response.data;
 }
+
+// Fetch student class
+export function useClass(id) {
+  return useQuery(
+    ["classes", { id }],
+    () => supabase.from("classes").select().eq("id", id).single().then(handle),
+    { enabled: !!id }
+  );
+}
+
 
 // React Query context provider that wraps our app
 export function QueryClientProvider(props) {

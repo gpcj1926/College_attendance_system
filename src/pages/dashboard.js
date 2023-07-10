@@ -9,7 +9,7 @@ import TeachersItem from "components/attedance_system/Dashboard/Dashboard/Teache
 const dashboard = () => {
   const auth = useAuth();
   // console.log(auth.user)
-  const { data: allUsers , refetch: refetchUsers } = useAllUsers();
+  const { data: allUsers, refetch: refetchUsers } = useAllUsers();
   const sortedUsers = allUsers?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
   const notApprovedTeachers = sortedUsers?.filter((i) => {
     return i.roleas !== "super_admin" && i.status === "Not Approved";
@@ -37,58 +37,57 @@ const dashboard = () => {
   ];
   return (
     <Index>
-      <section className="bg-red-100">
+      <section className="bg-red-100 h-screen">
         <Meta title="Dashboard" />
-        {["super_admin"].includes(userData?.roleas) && 
+        {["super_admin"].includes(userData?.roleas) &&
 
-        <div className=" mx-auto bg-red-100 pt-10 sm:px-0 ">
-          <Tab.Group>
-          <Tab.List className=" w-[95%] md:w-[60%] drop-shadow-lg select-none isolate flex divide-x divide-gray-200 dark:divide-gray-600 rounded-lg shadow mx-auto">
-              {Tabs.map((i) => {
-                return (
-                  <Tab as={Fragment} key={i.name}>
-                    {({ selected }) => (
-                      <span
-                        className={classNames(
-                          selected
-                            ? "text-gray-900 bg-gray-50"
-                            : "text-gray-500 hover:text-gray-700",
-                          "group relative min-w-0 flex-1 overflow-hidden dark:bg-[#262525] dark:text-white bg-white py-4  text-sm font-medium text-center hover:bg-gray-50 focus:z-10 cursor-pointer"
-                        )}
-                      >
-                        <button>{i.name}</button>
+          <div className=" mx-auto bg-red-100 pt-10 sm:px-0 ">
+            <Tab.Group>
+              <Tab.List className=" w-[95%] md:w-[60%] drop-shadow-lg select-none isolate flex divide-x divide-gray-200 dark:divide-gray-600 rounded-lg shadow mx-auto">
+                {Tabs.map((i) => {
+                  return (
+                    <Tab as={Fragment} key={i.name}>
+                      {({ selected }) => (
                         <span
-                          aria-hidden="true"
                           className={classNames(
                             selected
-                              ? "bg-red-500 dark:bg-[#ec615b] "
-                              : "bg-transparent",
-                            "absolute inset-x-0 bottom-0 h-1"
+                              ? "text-gray-900 bg-gray-50"
+                              : "text-gray-500 hover:text-gray-700",
+                            "group relative min-w-0 flex-1 overflow-hidden dark:bg-[#262525] dark:text-white bg-white py-4  text-sm font-medium text-center hover:bg-gray-50 focus:z-10 cursor-pointer"
                           )}
-                        />
-                      </span>
-                    )}
-                  </Tab>
-                );
-              })}
-            </Tab.List>
-            <Tab.Panels className="mt-2">
-              <Tab.Panel>
-        <StudentsAnalytics />
+                        >
+                          <button>{i.name}</button>
+                          <span
+                            aria-hidden="true"
+                            className={classNames(
+                              selected
+                                ? "bg-red-500 dark:bg-[#ec615b] "
+                                : "bg-transparent",
+                              "absolute inset-x-0 bottom-0 h-1"
+                            )}
+                          />
+                        </span>
+                      )}
+                    </Tab>
+                  );
+                })}
+              </Tab.List>
+              <Tab.Panels className="mt-2">
+                <Tab.Panel>
+                  <StudentsAnalytics />
 
-              </Tab.Panel>
-              <Tab.Panel>
-              <TeachersItem data={approvedTeachers} refetchUsers={refetchUsers} dataType={"All Teachers"} />
-              <TeachersItem data={approvedDepartAdmin} refetchUsers={refetchUsers} dataType={"Department Admins"} />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <TeachersItem data={approvedTeachers} refetchUsers={refetchUsers} dataType={"All Teachers"} />
+                  <TeachersItem data={approvedDepartAdmin} refetchUsers={refetchUsers} dataType={"Department Admins"} />
+                </Tab.Panel>
+                <Tab.Panel className="h-screen">
+                  <TeachersItem data={notApprovedTeachers} refetchUsers={refetchUsers} dataType={"Account Requests"} />
 
-              </Tab.Panel>
-              <Tab.Panel className="h-screen">
-       <TeachersItem data={notApprovedTeachers} refetchUsers={refetchUsers} dataType={"Account Requests"} />
-       
-              </Tab.Panel>
-            </Tab.Panels>
-          </Tab.Group>
-        </div>}
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
+          </div>}
       </section>
     </Index>
   );

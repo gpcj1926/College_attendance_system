@@ -2,7 +2,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "util/auth";
 import { createStudent, updateStudent } from "util/db";
-import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import router from "next/router";
@@ -35,15 +34,6 @@ export default function AddStudentForm({ btnText, data, target, id }) {
           <form onSubmit={handleSubmit(submitHandle)}>
             <div className="overflow-hidden shadow sm:rounded-md">
               <div className="bg-white px-4 py-5 sm:p-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Profile
-                  </label>
-                  <input type="file" className="my-4" />
-                </div>
                 <div className="grid grid-cols-6 gap-6">
                   {/* Name */}
                   <div className="col-span-6 sm:col-span-3">

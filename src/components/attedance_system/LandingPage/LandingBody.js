@@ -98,14 +98,14 @@ const LandingBody = () => {
                 {auth?.user ? (
                   <Link href="/dashboard">
                     <button
-                      className="text-white hover:bg-red-600 bg-red-700 font-semibold py-2 px-4 rounded-full ml-2"
+                      className="red-button-rounded"
                     >
                       Dashboard
                     </button>
                   </Link>
                 ) : (
                   <Link href="/auth/signin">
-                    <button className="text-white hover:bg-red-600 bg-red-700 font-semibold py-2 px-4 rounded-full ml-2">
+                    <button className="red-button-rounded">
                       Sign In
                     </button>
                   </Link>

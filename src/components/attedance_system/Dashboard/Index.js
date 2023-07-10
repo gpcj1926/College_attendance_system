@@ -31,6 +31,11 @@ const navigation = [
     icon: HiOutlineSquares2X2,
   },
   {
+    name: "Classes",
+    href: "/classes",
+    icon: HiOutlineSquares2X2,
+  },
+  {
     name: "Mark Attendance",
     href: "/markattendance",
     icon: FaUserCog,
@@ -85,17 +90,17 @@ function Index({ children }) {
             navigation={navigation}
             sidebarOpen={sidebarOpen}
             togglesidebar={togglesidebar}
-            />
+          />
 
           {/* Static topBar for desktop */}
-            <Navbar navigation={navigation} setSidebarOpen={setSidebarOpen} />
+          <Navbar navigation={navigation} setSidebarOpen={setSidebarOpen} />
 
           {/* ----------TopBar-------------- */}
 
           {/* ----------Random Components-------------- */}
           {/* <div className="flex flex-1 flex-col md:pl-64 "> */}
           <div className="">
-              <div className="mt-14 h-full">{children}</div>
+            <div className="mt-14 h-full">{children}</div>
           </div>
         </div>
       </div>

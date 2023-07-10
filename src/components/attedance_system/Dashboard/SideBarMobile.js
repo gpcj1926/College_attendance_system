@@ -24,7 +24,7 @@ export default function SideBarMobile({
     <Transition.Root show={sidebarOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-40 md:hidden"
+        className="relative z-[850] md:hidden"
         onClose={() => togglesidebar()}
       >
         <Transition.Child

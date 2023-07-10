@@ -9,7 +9,10 @@ create table public.users (
   "id" uuid references auth.users not null primary key,
   -- User data
   "email" text,
-  "role" text,
+  "roleas" text,
+  "status" text,
+  "department" text,
+  "mobileno" text
   "name" text,
   -- Validate data
   constraint "email" check (char_length("email") >= 3 OR char_length("email") <= 500),
@@ -108,7 +111,18 @@ create table public.attendance  (
   "id" uuid primary key default uuid_generate_v4(),
   "owner" uuid references public.users not null,
   "student_name" text,
+  "student_id" uuid,
+  "department" text,
   "date" text,
   "status" text,
+  "createdAt" timestamp with time zone default timezone('utc'::text, now()) not null
+);
+create table public.classes  (
+  "id" uuid primary key default uuid_generate_v4(),
+  "owner" uuid references public.users not null,
+  "class_name" text,
+  "department" text,
+  "semester" text,
+  "teacher_name" text,
   "createdAt" timestamp with time zone default timezone('utc'::text, now()) not null
 );
