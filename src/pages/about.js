@@ -31,8 +31,8 @@ function AboutPage(props) {
   return (
     <>
       <Meta title="About" description="Learn about our company and team" />
-      <section className="bg-red-100 h-[100vh]">
-        <header className="bg-red-100 text-[#a02d29] py-4 flex flex-col justify-center">
+      <section className="red-primary h-[100vh]">
+        <header className="red-primary text-[#a02d29] py-4 flex flex-col justify-center">
           <h1 className="md:text-5xl sm:text-3xl text-2xl text-center font-bold my-2">
             About Us
           </h1>
@@ -41,7 +41,7 @@ function AboutPage(props) {
           </Link>
         </header>
 
-        <main className="bg-red-100">
+        <main className="red-primary">
           <section className="flex flex-col-reverse lg:flex-row items-center justify-center md:justify-between lg:mx-20 mx-4 pb-28 pt-10 border-b-2 border-gray-400">
             <div className="w-[90%] lg:w-1/2 mx-4">
               <h2 className="md:text-3xl text-2xl text-center lg:text-left font-bold mb-4 text-[#a02d29]">

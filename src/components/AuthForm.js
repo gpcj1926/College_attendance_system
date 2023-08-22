@@ -17,10 +17,10 @@ function AuthForm(props) {
         props.onAuth(user);
       });
     },
-    signup: ({ email, pass, roleas, name}) => {
+    signup: ({ email, pass, roleas, name }) => {
       return auth.signup(email, pass).then((user) => {
         props.onAuth(user);
-        updateUser(user?.id, { roleas: roleas , name: name });
+        updateUser(user?.id, { roleas: roleas, name: name });
       });
     },
     forgotpass: ({ email }) => {
@@ -46,7 +46,7 @@ function AuthForm(props) {
   };
 
   // Handle form submission
-  const onSubmit = ({ email, pass, roleas , name , secret_code }) => {
+  const onSubmit = ({ email, pass, roleas, name, secret_code }) => {
     // Show pending indicator
     setPending(true);
 
@@ -103,8 +103,8 @@ function AuthForm(props) {
             })}
           >
             <option></option>
-            <option>Department Admin</option>
-            <option>Teacher</option>
+            <option value='department_admin' >Department Admin</option>
+            <option value='teacher'>Teacher</option>
           </select>
 
           {errors.roleas && (

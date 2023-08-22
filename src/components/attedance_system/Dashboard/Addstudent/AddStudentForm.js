@@ -25,7 +25,7 @@ export default function AddStudentForm({ btnText, data, target, id }) {
     }
   };
   // const cnicRegex = /^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$/;
-  // const sessionRegex = /^2019-(202[0-3])$/;
+  // const sessionRegex = /^\d{4}-\d{4}$/;
 
   return (
     <>
@@ -419,7 +419,7 @@ export default function AddStudentForm({ btnText, data, target, id }) {
                     )}
                   </div>
 
-                  {/* Semester */}
+                  {/* Shift */}
                   <div className="col-span-6 sm:col-span-6 lg:col-span-2">
                     <label
                       htmlFor="shift"
@@ -429,7 +429,7 @@ export default function AddStudentForm({ btnText, data, target, id }) {
                     </label>
                     <select
                       ref={register({
-                        required: "Please select semester",
+                        required: "Please select shift",
                       })}
                       defaultValue={data && data.shift}
                       id="shift"

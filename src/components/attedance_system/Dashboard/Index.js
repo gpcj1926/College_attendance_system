@@ -28,22 +28,20 @@ const navigation = [
   {
     name: "Dashboard",
     href: "/dashboard",
+    allow: ['super_admin', 'teacher', 'department_admin'],
     icon: HiOutlineSquares2X2,
   },
   {
     name: "Classes",
     href: "/classes",
+    allow: ['super_admin', 'department_admin'],
     icon: HiOutlineSquares2X2,
-  },
-  {
-    name: "Mark Attendance",
-    href: "/markattendance",
-    icon: FaUserCog,
   },
   {
     name: "Manage Students",
     icon: FaUserGraduate,
     haveSub: true,
+    allow: ['super_admin'],
     sub: [
       {
         name: "All Students",
@@ -61,6 +59,7 @@ const navigation = [
     name: "Settings",
     href: "/settings/general",
     icon: FiSettings,
+    allow: ['super_admin', 'teacher', 'department_admin'],
     haveSub: true,
     sub: [
       {
@@ -94,8 +93,6 @@ function Index({ children }) {
 
           {/* Static topBar for desktop */}
           <Navbar navigation={navigation} setSidebarOpen={setSidebarOpen} />
-
-          {/* ----------TopBar-------------- */}
 
           {/* ----------Random Components-------------- */}
           {/* <div className="flex flex-1 flex-col md:pl-64 "> */}

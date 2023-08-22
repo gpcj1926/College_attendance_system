@@ -59,8 +59,7 @@ const Navbar = ({ setSidebarOpen, navigation }) => {
                 <nav className="flex px-2">
                   {navigation?.map((item) => {
                     if (
-                      item.name === "Manage Students" &&
-                      userData?.roleas !== "super_admin"
+                      !item.allow.includes(userData?.roleas)
                     ) {
                       return "";
                     } else {
@@ -118,8 +117,8 @@ const Navbar = ({ setSidebarOpen, navigation }) => {
                           <div className=" bg-white absolute left-7 top-8 hidden group-hover:block shadow-xl ">
                             {item.sub.map((sub) => {
                               return (
-                                <div className="py-3 pl-3 pr-5 border-b-2 hover:bg-red-50 hover:text-red-700">
-                                  <Link key={sub.name} href={sub.href}>
+                                <div key={sub.name} className="py-3 pl-3 pr-5 border-b-2 hover:bg-red-50 hover:text-red-700">
+                                  <Link href={sub.href}>
                                     <a
                                       className={classNames(
                                         location === sub.href

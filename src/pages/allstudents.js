@@ -83,7 +83,7 @@ function allstudents() {
         }
       }
     }
-    if(!data.department && !data.shift && data.reg_no){
+    if (!data.department && !data.shift && data.reg_no) {
       setAllData(
         allStudents.filter((i) => {
           return (
@@ -97,17 +97,17 @@ function allstudents() {
   return (
     <Index>
       <Meta title="All Students" />
-      <div className="bg-red-100 md:py-10 py-6 h-[100vh]">
-        <div className="bg-red-100 pt-6">
+      <div className="red-primary md:py-10 py-6 h-[100vh]">
+        <div className="red-primary pt-6">
           {allStudents?.length === 0 && <Loader />}
         </div>
         {allStudents && (
           <>
-          <section>
-          <h1 className="md:text-5xl sm:text-3xl text-2xl text-center font-bold my-2">
-            All Students
-          </h1>
-          </section>
+            <section>
+              <h1 className="md:text-5xl sm:text-3xl text-2xl text-center font-bold my-2">
+                All Students
+              </h1>
+            </section>
             <section className="flex justify-center">
               <form onSubmit={handleSubmit(submitHandle)}>
                 <div className="m-4 flex flex-col sm:justify-evenly sm:flex-row md:items-center">

@@ -12,8 +12,8 @@ const editform = () => {
     <>
       {!data && <Loader />}
       {data && (
-        
-    <div className="bg-red-100 py-4">
+
+        <div className="red-primary py-4">
           <h1 className="text-3xl text-center font-bold">Update Student</h1>
           <h1 className="text-xl text-center mt-3">
             {data?.name} <FaRegEdit className="inline-block mb-1 ml-2 text-red-500" />

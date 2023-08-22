@@ -10,9 +10,9 @@ create table public.users (
   -- User data
   "email" text,
   "roleas" text,
-  "status" text,
+  "status" text default 'Not Approved',
   "department" text,
-  "mobileno" text
+  "mobileno" text,
   "name" text,
   -- Validate data
   constraint "email" check (char_length("email") >= 3 OR char_length("email") <= 500),
@@ -29,7 +29,7 @@ create or replace function public.handle_new_user()
 returns trigger as $$
 begin
   insert into public.users ("id", "email", "name" , "role")
-  values (new."id", new."email", new."role", new."raw_user_meta_data"->>'full_name');
+  values (new."id", new."email", new."raw_user_meta_data"->>'full_name');
   return new;
 end;
 $$ language plpgsql security definer;
@@ -53,30 +53,6 @@ create trigger on_auth_user_updated
   for each row execute procedure public.handle_update_user();
 
 
-/*** ITEMS ***/
-
--- create table public.items (
---   -- Auto-generated UUID
---   "id" uuid primary key default uuid_generate_v4(),
---   -- UUID from public.users
---   "owner" uuid references public.users not null,
---   -- Item data
---   "name" text,
---   "featured" boolean,
---   "createdAt" timestamp with time zone default timezone('utc'::text, now()) not null
---   -- Validate data
---   constraint name check (char_length("name") >= 1 OR char_length("name") <= 144)
--- );
-
--- -- Create security policies
--- alter table public.items enable row level security;
--- create policy "Can read items they own" on public.items for select using ( auth.uid() = "owner" );
--- create policy "Can insert items they own" on public.items for insert with check ( auth.uid() = "owner" );
--- create policy "Can update items they own" on public.items for update using ( auth.uid() = "owner" );
--- create policy "Can delete items they own" on public.items for delete using ( auth.uid() = "owner" );
-
-/*** ITEMS ***/
-
 create table public.students (
   "id" uuid primary key default uuid_generate_v4(),
   "owner" uuid references public.users not null,
@@ -93,36 +69,35 @@ create table public.students (
   "registration_no" text,
   "session" text,
   "shift" text,
+  "religion" text,
   "university_rollno" text,
   "createdAt" timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
--- -- Create security policies
--- alter table public.items enable row level security;
--- create policy "Can read items they own" on public.students for select using ( auth.uid() = "owner" );
--- create policy "Can insert items they own" on public.students for insert with check ( auth.uid() = "owner" );
--- create policy "Can update items they own" on public.students for update using ( auth.uid() = "owner" );
--- create policy "Can delete items they own" on public.students for delete using ( auth.uid() = "owner" );
-
-
-/*** ITEMS ***/
 
 create table public.attendance  (
   "id" uuid primary key default uuid_generate_v4(),
   "owner" uuid references public.users not null,
-  "student_name" text,
+  "attendance" text,
+  "class_id" uuid,
+  "teacher_id" uuid,
   "student_id" uuid,
-  "department" text,
-  "date" text,
-  "status" text,
+  "phone_number" text,
+  "subject" text,
+  "university_rollno" text,
+  "college_rollno" text,
+  "name" text,
   "createdAt" timestamp with time zone default timezone('utc'::text, now()) not null
 );
+
+
 create table public.classes  (
   "id" uuid primary key default uuid_generate_v4(),
   "owner" uuid references public.users not null,
   "class_name" text,
   "department" text,
   "semester" text,
-  "teacher_name" text,
+  "shift" text,
+  "teacher_id" uuid,
   "createdAt" timestamp with time zone default timezone('utc'::text, now()) not null
 );

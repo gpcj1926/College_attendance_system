@@ -29,9 +29,12 @@
 }
 
 .red-button {
-  @apply bg-red-700 hover:bg-red-600 focus:bg-red-600 text-white font-semibold py-2 px-4 mx-2 rounded-lg shadow-md;
+  @apply bg-red-800 hover:bg-red-600 focus:bg-red-600 text-white font-semibold py-2 px-4 mx-2 rounded-lg shadow-md;
 }
 
 .red-button-rounded {
-  @apply bg-red-700 hover:bg-red-600 focus:bg-red-600 text-white font-semibold py-2 px-4 mx-2 rounded-full shadow-md;
+  @apply bg-red-800 hover:bg-red-600 focus:bg-red-600 text-white font-semibold py-2 px-4 mx-2 rounded-full shadow-md;
+}
+.red-primary {
+  @apply bg-red-100
 }

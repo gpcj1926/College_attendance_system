@@ -91,8 +91,7 @@ export default function SideBarMobile({
                 <nav className="mt-5 flex-1 space-y-1 px-2 pt-2  ">
                   {navigation.map((item) => {
                     if (
-                      item.name === "Manage Students" &&
-                      userData?.roleas !== "super_admin"
+                      !item.allow.includes(userData?.roleas)
                     ) {
                       return "";
                     } else {
@@ -101,7 +100,7 @@ export default function SideBarMobile({
                           <a
                             className={classNames(
                               location === item.href
-                                ? "bg-red-100   text-black"
+                                ? "red-primary   text-black"
                                 : " hover:bg-gray-50 text-black  hover:text-black",
                               "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                             )}
@@ -134,7 +133,7 @@ export default function SideBarMobile({
                               item.sub.filter((i) => {
                                 return i.href === location;
                               })?.length !== 0
-                                ? "bg-red-100  text-black"
+                                ? "red-primary  text-black"
                                 : " hover:bg-gray-50 text-black  hover:text-black",
                               "group flex items-center justify-between px-2 py-2 text-sm font-medium rounded-md"
                             )}
@@ -166,7 +165,7 @@ export default function SideBarMobile({
                                     <a
                                       className={classNames(
                                         location === sub.href
-                                          ? "bg-red-100   text-black"
+                                          ? "red-primary   text-black"
                                           : " hover:bg-gray-50 text-black  hover:text-black",
                                         "group flex items-center px-2 py-2 text-xs font-medium rounded-md"
                                       )}

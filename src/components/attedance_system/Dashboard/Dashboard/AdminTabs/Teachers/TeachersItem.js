@@ -16,7 +16,7 @@ import TeacherDeleteForm from "../Requests/TeacherDeleteForm";
 const TeachersItem = ({ refetchUsers, data, dataType }) => {
   return (
     <>
-      <div className="bg-red-100 py-6 w-[90%] md:w-[60%] mx-auto">
+      <div className="red-primary py-6 w-[90%] md:w-[60%] mx-auto">
         <main className="flex flex-wrap justify-between items-center m-4 mb-6">
           <h2 className="text-2xl md:text-4xl font-bold m-2">{dataType}</h2>
           <div className="flex space-x-2 m-2">
@@ -70,9 +70,12 @@ const TeachersItem = ({ refetchUsers, data, dataType }) => {
                             </h3>
                           </div>
                           <h2 className="text-xs text-gray-500">
-                            {user.roleas === "Department_admin"
-                              ? "Department Admin"
-                              : user.roleas}
+                            {
+                              user.roleas === "department_admin"
+                                ? "Department Admin"
+                                : user.roleas === "teacher"
+                                  ? 'Teacher' : 'Null'
+                            }
                           </h2>
                         </div>
                       </div>

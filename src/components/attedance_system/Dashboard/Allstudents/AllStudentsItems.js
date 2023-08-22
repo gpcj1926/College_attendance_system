@@ -21,7 +21,7 @@ import Link from "next/link";
 
 export default function AllStudentsItems({ allStudents, refetchStudents }) {
   return (
-    <div className="bg-red-100 pb-10">
+    <div className="red-primary pb-10">
       {allStudents?.map((student) => {
         return (
           <div key={student.id} className=" m-4 w-[95%] lg:w-[70%] mx-auto">

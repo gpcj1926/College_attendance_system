@@ -57,73 +57,6 @@ export async function deleteUser(uid) {
   return response;
 }
 
-// /**** ITEMS ****/
-// /* Example query functions (modify to your needs) */
-
-// // Fetch item data
-// export function useItem(id) {
-//   return useQuery(
-//     ["item", { id }],
-//     () => supabase.from("items").select().eq("id", id).single().then(handle),
-//     { enabled: !!id }
-//   );
-// }
-
-// // Fetch all items by owner
-// export function useItemsByOwner(owner) {
-//   return useQuery(
-//     ["items", { owner }],
-//     () =>
-//       supabase
-//         .from("items")
-//         .select()
-//         .eq("owner", owner)
-//         .order("createdAt", { ascending: false })
-//         .then(handle),
-//     { enabled: !!owner }
-//   );
-// }
-
-// // Create a new item
-// export async function createItem(data) {
-//   const response = await supabase.from("items").insert([data]).then(handle);
-//   // Invalidate and refetch queries that could have old data
-//   await client.invalidateQueries(["items"]);
-//   return response;
-// }
-
-// // Update an item
-// export async function updateItem(id, data) {
-//   const response = await supabase
-//     .from("items")
-//     .update(data)
-//     .eq("id", id)
-//     .then(handle);
-//   // Invalidate and refetch queries that could have old data
-//   await Promise.all([
-//     client.invalidateQueries(["item", { id }]),
-//     client.invalidateQueries(["items"]),
-//   ]);
-//   return response;
-// }
-
-// // Delete an item
-// export async function deleteItem(id) {
-//   const response = await supabase
-//     .from("items")
-//     .delete()
-//     .eq("id", id)
-//     .then(handle);
-//   // Invalidate and refetch queries that could have old data
-//   await Promise.all([
-//     client.invalidateQueries(["item", { id }]),
-//     client.invalidateQueries(["items"]),
-//   ]);
-//   return response;
-// }
-
-// students
-
 // Create a new student
 export async function createStudent(data) {
   const response = await supabase.from("students").insert([data]).then(handle);
@@ -216,13 +149,20 @@ export async function createClass(data) {
   return response;
 }
 
-/**** HELPERS ****/
-
-// Get response data or throw error if there is one
-function handle(response) {
-  if (response.error) throw response.error;
-  return response.data;
+// Update an student
+export async function updateClass(id, data) {
+  const response = await supabase
+    .from("classes")
+    .update(data)
+    .eq("id", id)
+    .then(handle);
+  await Promise.all([
+    client.invalidateQueries(["class", { id }]),
+    client.invalidateQueries(["classes"]),
+  ]);
+  return response;
 }
+
 
 // Fetch student class
 export function useClass(id) {
@@ -231,6 +171,34 @@ export function useClass(id) {
     () => supabase.from("classes").select().eq("id", id).single().then(handle),
     { enabled: !!id }
   );
+}
+
+
+//********Attendance****  */
+
+// Fetch all student
+export function useAllAttendance() {
+  return useQuery(
+    "attendance",
+    () => supabase.from("attendance").select("*").then(handle),
+    { enabled: true }
+  );
+}
+
+// Create a new class
+export async function createAttendance(data) {
+  const response = await supabase.from("attendance").insert(data).then(handle);
+  // Invalidate and refetch queries that could have old data
+  await client.invalidateQueries(["attendance"]);
+  return response;
+}
+
+/**** HELPERS ****/
+
+// Get response data or throw error if there is one
+function handle(response) {
+  if (response.error) throw response.error;
+  return response.data;
 }
 
 

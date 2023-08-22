@@ -48,7 +48,7 @@ function SettingsGeneral(props) {
   return (
     <>
       {userData && (
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-red-100">
+        <form onSubmit={handleSubmit(onSubmit)} className="red-primary">
           <div>
             <h1 className="text-left text-lg font-semibold mb-1">Name :</h1>
             <input
@@ -68,21 +68,25 @@ function SettingsGeneral(props) {
             )}
           </div>
 
-            <div className="mt-3 flex justify-between items-center">
-              <h1 className="text-left text-lg font-semibold mb-1">Role :</h1>
-              <p className="font-semibold text-green-600">
-                {userData?.roleas ? (userData?.roleas === "super_admin" ? "Super Admin":"") : ""}
-              </p>
-            </div>
+          <div className="mt-3 flex justify-between items-center">
+            <h1 className="text-left text-lg font-semibold mb-1">Role :</h1>
+            <p className="font-semibold text-green-600">
+              {userData?.roleas === "super_admin" && "Super Admin"}
+              {userData?.roleas === "department_admin" && "Department Admin"}
+              {userData?.roleas === "teacher" && "Teacher"}
+
+            </p>
+          </div>
+
           {userData?.roleas === "super_admin" ? (
             ""
           ) : (
-          <div className="mt-3 flex justify-between items-center">
-            <h1 className="text-left text-lg font-semibold mb-1">department :</h1>
-            <p className="font-semibold text-green-600">
-              {userData?.department ? userData?.department : "----"}
-            </p>
-          </div>
+            <div className="mt-3 flex justify-between items-center">
+              <h1 className="text-left text-lg font-semibold mb-1">department :</h1>
+              <p className="font-semibold text-green-600">
+                {userData?.department ? userData?.department : "----"}
+              </p>
+            </div>
           )}
           <div className="mt-3">
             <h1 className="text-left text-lg font-semibold mb-1">Number :</h1>

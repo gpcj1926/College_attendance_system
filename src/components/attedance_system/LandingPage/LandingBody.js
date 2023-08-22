@@ -91,7 +91,7 @@ const LandingBody = () => {
               </p>
               <div className="flex items-center mt-4">
                 <Link href="/about">
-                  <button className="flex rounded-full bg-red-700 hover:bg-red-600 py-2 px-4 font-semibold text-white shadow-sm ">
+                  <button className="flex rounded-full bg-red-800 hover:bg-red-600 py-2 px-4 font-semibold text-white shadow-sm ">
                     About Us
                   </button>
                 </Link>
