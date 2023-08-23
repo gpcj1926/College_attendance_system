@@ -81,9 +81,13 @@ export default function SideBarMobile({
                         alt="Logo"
                         className="h-16 mr-4"
                       />
-                      <h2 className="text-red-800 text-4xl font-semibold mr-4">
-                        GPCJ
-                      </h2>
+                      <div className="flex flex-col space-y-2">
+                        <h2 className="text-red-800 text-4xl font-semibold mr-4">
+                          GPGCJ
+                        </h2>
+                        <p className="md:text-sm text-xs">Attendance system</p>
+                      </div>
+
                     </div>
                   </Link>
                 </div>

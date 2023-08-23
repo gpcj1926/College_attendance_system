@@ -17,7 +17,6 @@ const ClassForm = ({ onDone, refetch, target, id }) => {
 
     const auth = useAuth();
     const owner = auth?.user?.uid;
-
     const { data: itemData } = useClass(id);
 
     const handleClose = () => {
@@ -46,12 +45,15 @@ const ClassForm = ({ onDone, refetch, target, id }) => {
     const fetchUsers = () => {
         supabase.from("users").select("*").then((data) => { setAllusers(data.data) })
     }
-
+    const userData = allUsers.filter(i => { return i.id === owner })?.[0]
     const sortedUsers = allUsers?.sort(
         (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
     );
-    const teachers = sortedUsers?.filter((i) => {
+    const teachersForDepartAdmin = sortedUsers?.filter((i) => {
         return i.roleas !== "super_admin";
+    });
+    const teachersForSuperAdmin = sortedUsers?.filter((i) => {
+        return i.roleas !== "super_admin" && i.department === userData.department;
     });
 
     const myFormComp = () => {
@@ -104,7 +106,16 @@ const ClassForm = ({ onDone, refetch, target, id }) => {
                             className="mt-2 block w-full border-2 border-gray-200  px-2 rounded-md bg-white py-1.5 text-gray-900 shadow-sm  sm:text-sm sm:leading-6"
                         >
                             <option></option>
-                            {teachers?.map((i, index) => {
+
+                            {['super_admin'].includes(userData?.roleas) && teachersForSuperAdmin?.map((i, index) => {
+                                return (
+                                    <option value={i.id} key={index}>
+                                        {i.name}
+                                    </option>
+                                );
+                            })}
+
+                            {!['super_admin'].includes(userData?.roleas) && teachersForDepartAdmin?.map((i, index) => {
                                 return (
                                     <option value={i.id} key={index}>
                                         {i.name}
@@ -137,24 +148,29 @@ const ClassForm = ({ onDone, refetch, target, id }) => {
                             className="mt-2 block w-full border-2 border-gray-200  px-2 rounded-md bg-white py-1.5 text-gray-900 shadow-sm  sm:text-sm sm:leading-6"
                         >
                             <option></option>
-                            <option>Biology</option>
-                            <option>Botany</option>
-                            <option>Chemistry</option>
-                            <option>Computer Science</option>
-                            <option>Economics</option>
-                            <option>English</option>
-                            <option>Geography</option>
-                            <option>Islamiyat</option>
-                            <option>Math</option>
-                            <option>Psychology</option>
-                            <option>Physics</option>
-                            <option>Political Science</option>
-                            <option>Punjabi</option>
-                            <option>Pak Studies</option>
-                            <option>Sociology</option>
-                            <option>Statistics</option>
-                            <option>Urdu</option>
-                            <option>Zoology</option>
+                            {['super_admin'].includes(userData?.roleas) && <>
+                                <option>Biology</option>
+                                <option>Botany</option>
+                                <option>Chemistry</option>
+                                <option>Computer Science</option>
+                                <option>Economics</option>
+                                <option>English</option>
+                                <option>Geography</option>
+                                <option>Islamiyat</option>
+                                <option>Math</option>
+                                <option>Psychology</option>
+                                <option>Physics</option>
+                                <option>Political Science</option>
+                                <option>Punjabi</option>
+                                <option>Pak Studies</option>
+                                <option>Sociology</option>
+                                <option>Statistics</option>
+                                <option>Urdu</option>
+                                <option>Zoology</option>
+                            </>}
+                            {!['super_admin'].includes(userData?.roleas) && <>
+                                <option>{userData?.department}</option>
+                            </>}
                         </select>
                         {errors.department && (
                             <p className="mt-1 text-sm text-left text-red-600">

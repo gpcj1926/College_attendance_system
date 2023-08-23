@@ -15,17 +15,17 @@ export default function AddStudentForm({ btnText, data, target, id }) {
   const owner = auth?.user?.uid;
   const submitHandle = async (data) => {
     if (target === "create") {
-      reset();
-      toast.success("successfully created!");
       await createStudent({ ...data, owner: owner });
+      toast.success("successfully created!");
+      reset();
     } else {
       await updateStudent(id, data);
       toast.success("successfully Updated!");
       router.replace("/allstudents");
     }
   };
-  // const cnicRegex = /^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$/;
-  // const sessionRegex = /^\d{4}-\d{4}$/;
+  const cnicRegex = /^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$/;
+  const sessionRegex = /^\d{4}-\d{4}$/;
 
   return (
     <>
@@ -356,10 +356,10 @@ export default function AddStudentForm({ btnText, data, target, id }) {
                     <input
                       ref={register({
                         required: "Please enter Student CNIC",
-                        // pattern: {
-                        //   value: cnicRegex,
-                        //   message: "Please enter a valid CNIC",
-                        // },
+                        pattern: {
+                          value: cnicRegex,
+                          message: "Please enter a valid CNIC",
+                        },
                       })}
                       defaultValue={data && data.cnic_no}
                       type="text"
@@ -458,10 +458,10 @@ export default function AddStudentForm({ btnText, data, target, id }) {
                     <input
                       ref={register({
                         required: "Please enter session",
-                        // pattern: {
-                        //   value: sessionRegex,
-                        //   message: "Please enter a valid session",
-                        // },
+                        pattern: {
+                          value: sessionRegex,
+                          message: "Please enter a valid session",
+                        },
                       })}
                       defaultValue={data && data.session}
                       type="text"

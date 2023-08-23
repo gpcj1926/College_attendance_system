@@ -11,7 +11,7 @@ function IndexPage(props) {
   const auth = useAuth();
   return (
     <>
-      <Meta title="GPCJ" description="Government PostGraduate College Jhang" />
+      <Meta title="GPGCJ" description="Government PostGraduate College Jhang" />
       <Navbar />
       <LandingBody />
       <Footer />

@@ -84,7 +84,7 @@ function SettingsGeneral(props) {
             <div className="mt-3 flex justify-between items-center">
               <h1 className="text-left text-lg font-semibold mb-1">department :</h1>
               <p className="font-semibold text-green-600">
-                {userData?.department ? userData?.department : "----"}
+                {userData?.department ? userData?.department : "Not yet assigned"}
               </p>
             </div>
           )}

@@ -5,8 +5,8 @@ import 'jspdf-autotable';
 import collegeLogo from './../../common/collegeLogo'
 
 const ClassAttendanceView = ({ attendanceData, myClass }) => {
-    const bodyCellStyles = "md:text-lg text-sm font-semibold px-3 py-4 bg-red-200 border-b-2 border-red-300"
-    const headCellStyles = "p-3 md:text-lg text-sm border-r-[1px] text-white text-center bg-red-800"
+    const bodyCellStyles = "md:min-w-[140px] md:text-lg text-sm font-semibold px-3 py-4 bg-red-200 border-b-2 border-red-300 text-sm md:text-lg"
+    const headCellStyles = "md:min-w-[140px] p-3 md:text-lg text-sm border-r-[1px] text-white text-center bg-red-800 text-sm md:text-lg"
     function formatDate(inputDate) {
         let dateObj;
 
@@ -112,8 +112,8 @@ const ClassAttendanceView = ({ attendanceData, myClass }) => {
                     </h3>
                 </div>
             </main>
-            <section>
-                <table className='mx-auto'>
+            <section className=' md:overflow-hidden overflow-x-scroll'>
+                <table className='md:mx-auto'>
                     <thead>
                         <tr>
                             <td className={headCellStyles}>sr no.</td>

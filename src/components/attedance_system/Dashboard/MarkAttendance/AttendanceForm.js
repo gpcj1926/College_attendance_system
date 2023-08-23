@@ -3,14 +3,16 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useAuth } from "util/auth";
-import { createAttendance } from "util/db";
+import { createAttendance, useAllAttendance } from "util/db";
 
 const AttendanceForm = ({ students, subject, class_id }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const auth = useAuth();
   const onSubmit = async (data) => {
     const attendanceData = Object.keys(data).map((studentId) => {
-      const selectedStudent = students.find((student) => student.id === studentId);
+      const selectedStudent = students.find(
+        (student) => student.id === studentId
+      );
       return {
         student_id: studentId,
         class_id: class_id,
@@ -23,14 +25,15 @@ const AttendanceForm = ({ students, subject, class_id }) => {
         subject: subject,
       };
     });
-    // createAttendance(attendanceData)
-    console.log(attendanceData)
     const successResults = [];
     const errorResults = [];
 
     for (const data of attendanceData) {
       try {
-        const result = await createAttendance({ ...data, owner: auth.user.uid });
+        const result = await createAttendance({
+          ...data,
+          owner: auth.user.uid,
+        });
         successResults.push(result);
       } catch (error) {
         errorResults.push({ data, error });
@@ -45,19 +48,51 @@ const AttendanceForm = ({ students, subject, class_id }) => {
       errorResults.forEach(({ data, error }) => {
         console.error(`Error marking attendance for:`, data);
         console.error("Error details:", error);
-        toast.error(`Error marking attendance for: ${data.someUniqueIdentifier}`);
+        toast.error(
+          `Error marking attendance for: ${data.someUniqueIdentifier}`
+        );
       });
     }
 
     reset();
   };
+  function formatDate(inputDate) {
+    let dateObj;
 
+    if (typeof inputDate === "string") {
+      dateObj = new Date(inputDate);
+    } else if (inputDate instanceof Date) {
+      dateObj = inputDate;
+    } else {
+      throw new Error("Invalid input date format");
+    }
 
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObj.getDate()).padStart(2, "0");
+
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+  }
+  const { data: attendanceData } = useAllAttendance();
+  const CheckAttendance = attendanceData?.filter((i) => {
+    return (
+      i.class_id === class_id &&
+      formatDate(i.createdAt) === formatDate(new Date())
+    );
+  });
   return (
     <div className="h-screen">
       {!students && <Loader />}
       {students && (
         <>
+          {CheckAttendance.length > 0 &&
+            <div>
+              <h3 className="text-center text-red-800 my-4 animate-bounce">
+                *Today's attendance has already been taken*
+              </h3>
+            </div>
+          }
           <section className="m-3 w-[95%] lg:w-[80%] mx-auto">
             <form className="" onSubmit={handleSubmit(onSubmit)}>
               <div className="md:overflow-x-hidden overflow-x-scroll">
@@ -142,9 +177,15 @@ const AttendanceForm = ({ students, subject, class_id }) => {
                 </table>
               </div>
               <div className="flex justify-end mt-6">
-                <button className="red-button" type="submit">
-                  Submit Attendance
-                </button>
+                {CheckAttendance.length > 0 ? (
+                  <button className="red-button" disabled>
+                    Already taken
+                  </button>
+                ) : (
+                  <button className="red-button" type="submit">
+                    Submit Attendance
+                  </button>
+                )}
               </div>
             </form>
           </section>

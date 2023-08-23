@@ -28,7 +28,7 @@ const ClassesPage = () => {
     return (
         <>
             {myClasses && <section className="red-primary pt-10 h-screen relative">
-                <div className="fixed bottom-16 right-16">
+                <div className="fixed bottom-16 right-16 z-[900]">
                     {
                         ["super_admin", 'department_admin'].includes(userData?.roleas) ?
                             <main className="ml-2">

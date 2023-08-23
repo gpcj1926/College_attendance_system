@@ -17,37 +17,36 @@ const Navbar = ({ setSidebarOpen, navigation }) => {
   const { data: userData } = useUser(auth?.user?.id);
   const router = useRouter();
   const location = router?.asPath;
+  console.log(location)
   return (
     <>
       <section className="relative">
         <nav className="fixed top-0 flex justify-between items-center w-full bg-red-50 bg-opacity-75 backdrop-filter backdrop-blur-lg z-[800] p-3 shadow-md">
-          <button
-            type="button"
-            className=" rounded-md text-gray-500 hover:text-gray-900 md:hidden block"
-            onClick={() => setSidebarOpen(true)}
-          >
-            <span className="sr-only">Open sidebar</span>
-            <HiOutlineBars3CenterLeft className=" text-red-700 text-4xl" />
-          </button>
-          {/* Logo/GPCJ */}
-          <div>
+          <div className="flex space-x-4">
+            {
+              !(location === "/") ?
+                <button
+                  type="button"
+                  className=" rounded-md text-gray-500 hover:text-gray-900 md:hidden block"
+                  onClick={() => setSidebarOpen(true)}
+                >
+                  <span className="sr-only">Open sidebar</span>
+                  <HiOutlineBars3CenterLeft className=" text-red-700 text-4xl" />
+                </button> : ""
+            }
+            {/* Logo/GPGCJ */}
             <Link href="/">
-              <div className=" hidden items-center flex-shrink-0 cursor-pointer md:flex">
+              <div className="items-center flex cursor-pointer md:flex">
                 <img
                   src={"/Images/logo.png"}
                   alt="Logo"
-                  className="h-12 mr-4"
+                  className="md:h-16 h-10 mr-4"
                 />
-                <h2 className="text-red-700 text-4xl font-semibold">GPCJ</h2>
-              </div>
-            </Link>
-            <Link href="/">
-              <div className="flex items-center cursor-pointer md:hidden">
-                <img
-                  src={"/Images/logo.png"}
-                  alt="Logo"
-                  className="h-12 ml-8"
-                />
+                <div>
+
+                  <h2 className="text-red-700 md:text-4xl text-lg font-semibold">GPGCJ</h2>
+                  <p className="md:text-sm text-xs">Attendance system</p>
+                </div>
               </div>
             </Link>
           </div>
@@ -177,7 +176,7 @@ const Navbar = ({ setSidebarOpen, navigation }) => {
                 )}
               </div>
               {/* signin / signout */}
-              <div className="mr-3 hidden md:block">
+              <div className="mr-3">
                 {auth?.user ? (
                   <Link href="/">
                     <button

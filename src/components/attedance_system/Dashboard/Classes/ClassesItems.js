@@ -20,7 +20,7 @@ const ClassesItems = ({ data, refetch }) => {
 
   return (
     <>
-      <div className='flex justify-center my-6 flex-wrap'>
+      <div className='flex justify-center my-6 flex-wrap red-primary'>
         {data?.map((i) => {
           return (
             <main key={i.id} className="bg-white p-4 shadow-lg m-4 min-w-[250px] relative rounded-lg">

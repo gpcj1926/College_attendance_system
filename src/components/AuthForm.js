@@ -125,7 +125,7 @@ function AuthForm(props) {
             ref={register({
               required: "Please enter secret code",
               validate: (value) => {
-                if (value === "GPCJ-1926-2023") {
+                if (value === "12345678") {
                   return true;
                 } else {
                   return "You entered a wrong secret code";
