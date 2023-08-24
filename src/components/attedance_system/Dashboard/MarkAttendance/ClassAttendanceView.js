@@ -61,13 +61,15 @@ const ClassAttendanceView = ({ attendanceData, myClass }) => {
     const [myDate, setMyDate] = useState(formatDate(new Date()))
     const [myAttendance, setMyAttendance] = useState(attendanceData?.filter(i => { return formatDate(i.createdAt) === myDate }))
     useEffect(() => {
-        setMyAttendance(attendanceData)
+        setMyAttendance(attendanceData?.filter(i => { return formatDate(i.createdAt) === myDate }))
     }, [attendanceData])
     const handleAttendance = () => {
         setMyAttendance(attendanceData?.filter(i => { return formatDate(i.createdAt) === myDate }))
     }
+    console.log(formatDate(attendanceData?.[0].createdAt))
+    console.log(myDate)
     return (
-        <div>
+        <div className='red-primary pb-10'>
             <h1 className="pt-10 pb-6 text-3xl text-center font-bold">
                 Attendance
             </h1>

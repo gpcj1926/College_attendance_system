@@ -21,10 +21,10 @@ export default function ModalButton({ label, title, Content, Button }) {
         <Dialog
           id="Modal_container"
           as="div"
-          className="overflow-y-auto fixed inset-0 z-40 "
+          className="overflow-y-auto fixed inset-0  z-[800] "
           onClose={() => toggleModal()}
         >
-          <div className="px-4 min-h-screen text-center">
+          <div className="px-4 h-screen text-center">
             <Transition.Child
               as={React.Fragment}
               enter="ease-out duration-300"
@@ -61,8 +61,8 @@ export default function ModalButton({ label, title, Content, Button }) {
                   </Dialog.Title>
                   <div className="mt-4 z-50">
                     <Content
-                        toggleModal={toggleModal}
-                      />
+                      toggleModal={toggleModal}
+                    />
                   </div>
                 </div>
               </div>

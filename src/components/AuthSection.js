@@ -1,6 +1,7 @@
 import React from "react";
 import Auth from "components/Auth";
 import AuthFooter from "components/AuthFooter";
+import Link from "next/link";
 
 function AuthSection(props) {
   // Options by auth type
@@ -50,9 +51,10 @@ function AuthSection(props) {
   const options = optionsByType[type];
 
   return (
-    <section className="py-12 px-4">
+    <section className="py-12 px-4 h-screen">
       <div className="container mx-auto max-w-sm text-center">
         <h1 className="mb-6 text-3xl font-medium">{options.title}</h1>
+        <Link href="/"><div className="text-center hover:underline cursor-pointer text-blue-600">GPCJ</div></Link>
         <Auth
           type={type}
           buttonAction={options.buttonAction}

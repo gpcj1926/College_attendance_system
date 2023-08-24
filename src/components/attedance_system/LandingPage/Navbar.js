@@ -3,8 +3,6 @@ import Link from "next/link";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { FiMoon } from "react-icons/fi";
-import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "util/auth";
 import { HiOutlineBars3CenterLeft } from "react-icons/hi2";
 import { useUser } from "util/db";
@@ -17,11 +15,10 @@ const Navbar = ({ setSidebarOpen, navigation }) => {
   const { data: userData } = useUser(auth?.user?.id);
   const router = useRouter();
   const location = router?.asPath;
-  console.log(location)
   return (
     <>
       <section className="relative">
-        <nav className="fixed top-0 flex justify-between items-center w-full bg-red-50 bg-opacity-75 backdrop-filter backdrop-blur-lg z-[800] p-3 shadow-md">
+        <nav className="fixed top-0 flex justify-between items-center w-full bg-red-50 bg-opacity-75 backdrop-filter backdrop-blur-lg z-[700] p-3 shadow-md">
           <div className="flex space-x-4">
             {
               !(location === "/") ?
@@ -40,11 +37,11 @@ const Navbar = ({ setSidebarOpen, navigation }) => {
                 <img
                   src={"/Images/logo.png"}
                   alt="Logo"
-                  className="md:h-16 h-10 mr-4"
+                  className="md:h-14 h-10 mr-4"
                 />
                 <div>
 
-                  <h2 className="text-red-700 md:text-4xl text-lg font-semibold">GPGCJ</h2>
+                  <h2 className="text-red-700 md:text-3xl text-lg font-semibold">GPGCJ</h2>
                   <p className="md:text-sm text-xs">Attendance system</p>
                 </div>
               </div>

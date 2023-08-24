@@ -26,7 +26,7 @@ export default function AllStudentsItems({ allStudents, refetchStudents }) {
         return (
           <div key={student.id} className=" m-4 w-[95%] lg:w-[70%] mx-auto">
             <Disclosure>
-              <div className="flex justify-between bg-white p-4 shadow-md rounded-full">
+              <div className="flex justify-between bg-white px-3 py-2 shadow-md rounded-full">
                 <div className="flex items-center">
                   <img
                     src="https://cdn-icons-png.flaticon.com/512/149/149071.png"

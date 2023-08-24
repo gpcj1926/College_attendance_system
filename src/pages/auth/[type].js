@@ -2,21 +2,18 @@ import React from "react";
 import { useRouter } from "next/router";
 import Meta from "components/Meta";
 import AuthSection from "components/AuthSection";
-import Index from "components/attedance_system/Dashboard/Index";
 
 function AuthPage(props) {
   const router = useRouter();
 
   return (
     <>
-      <Index>
       <Meta title="Auth" />
       <AuthSection
         type={router.query.type}
         providers={["google", "facebook", "twitter"]}
         afterAuthPath={router.query.next || "/dashboard"}
-        />
-        </Index>
+      />
     </>
   );
 }

@@ -42,7 +42,7 @@ function ReauthModal(props) {
         className="overflow-y-auto fixed inset-0 z-10"
         onClose={() => props.onDone()}
       >
-        <div className="px-4 min-h-screen text-center">
+        <div className="px-4 h-screen text-center">
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"

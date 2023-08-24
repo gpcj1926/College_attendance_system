@@ -97,7 +97,7 @@ function Index({ children }) {
           {/* ----------Random Components-------------- */}
           {/* <div className="flex flex-1 flex-col md:pl-64 "> */}
           <div className="">
-            <div className="mt-14 h-full">{children}</div>
+            <div className="mt-14 min-h-screen">{children}</div>
           </div>
         </div>
       </div>

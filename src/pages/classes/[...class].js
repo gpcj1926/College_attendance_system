@@ -7,6 +7,7 @@ import { useAllStudents, useClass } from "util/db";
 
 const Class = () => {
     const route = useRouter();
+    console.log(route)
     const id = route?.asPath?.split("/")?.[2];
 
     const { data: classData } = useClass(id);

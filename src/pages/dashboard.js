@@ -8,7 +8,6 @@ import { Tab } from "@headlessui/react";
 import TeachersItem from "components/attedance_system/Dashboard/Dashboard/AdminTabs/Teachers/TeachersItem";
 import AssignedClasses from "./../components/attedance_system/Dashboard/Dashboard/TeacherTabs/AssignedClasses/AssignedClasses"
 import ClassesAttendance from "./../components/attedance_system/Dashboard/Dashboard/TeacherTabs/Attendance/ClassesAttendance"
-import { useRouter } from "next/router";
 import NotApproved from "components/attedance_system/common/NotApproved"
 const dashboard = () => {
   const auth = useAuth();
@@ -45,7 +44,7 @@ const dashboard = () => {
       name: "Students",
     },
     {
-      name: "Staff",
+      name: "Teachers",
     },
     {
       name: "Requests",
@@ -64,12 +63,12 @@ const dashboard = () => {
       {userData?.status === "Not Approved" ?
         <NotApproved title={"still not approved"} />
         :
-        <section className="red-primary h-screen">
+        <section className="red-primary h-screen py-6">
           <Meta title="Dashboard" />
           {["super_admin"].includes(userData?.roleas) && (
             <div className=" mx-auto red-primary pt-10 sm:px-0 ">
               <Tab.Group>
-                <Tab.List className=" w-[95%] md:w-[60%] drop-shadow-lg select-none isolate flex divide-x divide-gray-200 dark:divide-gray-600 rounded-lg shadow mx-auto">
+                <Tab.List className=" w-[95%] md:w-[60%] drop-shadow-lg select-none isolate flex divide-x divide-gray-200 rounded-lg shadow mx-auto">
                   {super_admin_tabs.map((i) => {
                     return (
                       <Tab as={Fragment} key={i.name}>
@@ -79,7 +78,7 @@ const dashboard = () => {
                               selected
                                 ? "text-gray-900 bg-gray-50"
                                 : "text-gray-500 hover:text-gray-700",
-                              "group relative min-w-0 flex-1 overflow-hidden dark:bg-[#262525] dark:text-white bg-white py-4  text-sm font-medium text-center hover:bg-gray-50 focus:z-10 cursor-pointer"
+                              "group relative min-w-0 flex-1 overflow-hidden bg-white py-4  text-sm font-medium text-center hover:bg-gray-50 focus:z-10 cursor-pointer"
                             )}
                           >
                             <button>{i.name}</button>
@@ -87,7 +86,7 @@ const dashboard = () => {
                               aria-hidden="true"
                               className={classNames(
                                 selected
-                                  ? "bg-red-500 dark:bg-[#ec615b] "
+                                  ? "bg-red-500"
                                   : "bg-transparent",
                                 "absolute inset-x-0 bottom-0 h-1"
                               )}
@@ -133,7 +132,7 @@ const dashboard = () => {
           {!["super_admin"].includes(userData?.roleas) && (
             <div className=" mx-auto red-primary pt-10 sm:px-0 ">
               <Tab.Group>
-                <Tab.List className=" w-[95%] md:w-[60%] drop-shadow-lg select-none isolate flex divide-x divide-gray-200 dark:divide-gray-600 rounded-lg shadow mx-auto">
+                <Tab.List className=" w-[95%] md:w-[60%] drop-shadow-lg select-none isolate flex divide-x divide-gray-200 rounded-lg shadow mx-auto">
                   {Tabs.map((i) => {
                     return (
                       <Tab as={Fragment} key={i.name}>
@@ -143,7 +142,7 @@ const dashboard = () => {
                               selected
                                 ? "text-gray-900 bg-gray-50"
                                 : "text-gray-500 hover:text-gray-700",
-                              "group relative min-w-0 flex-1 overflow-hidden dark:bg-[#262525] dark:text-white bg-white py-4  text-sm font-medium text-center hover:bg-gray-50 focus:z-10 cursor-pointer"
+                              "group relative min-w-0 flex-1 overflow-hidden bg-white py-4  text-sm font-medium text-center hover:bg-gray-50 focus:z-10 cursor-pointer"
                             )}
                           >
                             <button>{i.name}</button>
@@ -151,7 +150,7 @@ const dashboard = () => {
                               aria-hidden="true"
                               className={classNames(
                                 selected
-                                  ? "bg-red-500 dark:bg-[#ec615b] "
+                                  ? "bg-red-500"
                                   : "bg-transparent",
                                 "absolute inset-x-0 bottom-0 h-1"
                               )}

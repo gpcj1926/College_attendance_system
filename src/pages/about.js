@@ -37,7 +37,7 @@ function AboutPage(props) {
             About Us
           </h1>
           <Link href="/">
-            <a className="underline text-blue-600 text-center my-2">Home</a>
+            <a className="underline text-blue-600 text-center my-2">GPCJ</a>
           </Link>
         </header>
 

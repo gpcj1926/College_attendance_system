@@ -50,10 +50,10 @@ const ClassForm = ({ onDone, refetch, target, id }) => {
         (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
     );
     const teachersForDepartAdmin = sortedUsers?.filter((i) => {
-        return i.roleas !== "super_admin";
+        return i.roleas !== "super_admin" && i.department === userData.department;
     });
     const teachersForSuperAdmin = sortedUsers?.filter((i) => {
-        return i.roleas !== "super_admin" && i.department === userData.department;
+        return i.roleas !== "super_admin";
     });
 
     const myFormComp = () => {

@@ -30,10 +30,10 @@ const ClassesItems = ({ data, refetch }) => {
                     {i.class_name}
                   </h1>
                 </Link>
-                <h3 className="text-gray-500">Teacher : {approvedTeachers?.filter(teacher => { return teacher?.id === i?.teacher_id })?.[0]?.name}</h3>
-                <h3 className="text-gray-500">session : {i.session}</h3>
-                <h3 className="text-gray-500">Shift : {i.shift}</h3>
-                <h3 className="text-gray-500">Department : {i.department}</h3>
+                <h3 className="text-gray-500"><span className='font-bold'>Teacher : </span>{approvedTeachers?.filter(teacher => { return teacher?.id === i?.teacher_id })?.[0]?.name}</h3>
+                <h3 className="text-gray-500"><span className='font-bold'>Session : </span>{i.session}</h3>
+                <h3 className="text-gray-500"><span className='font-bold'>Shift : </span>{i.shift}</h3>
+                <h3 className="text-gray-500"><span className='font-bold'>Department : </span>{i.department}</h3>
               </div>
               {["super_admin", 'department_admin'].includes(userData?.roleas) && (
                 <div className="flex space-x-4 items-center absolute top-3 right-3">

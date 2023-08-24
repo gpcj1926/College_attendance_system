@@ -28,7 +28,7 @@ const ClassesPage = () => {
     return (
         <>
             {myClasses && <section className="red-primary pt-10 h-screen relative">
-                <div className="fixed bottom-16 right-16 z-[900]">
+                <div className="fixed bottom-16 right-16 z-[600]">
                     {
                         ["super_admin", 'department_admin'].includes(userData?.roleas) ?
                             <main className="ml-2">
@@ -47,7 +47,7 @@ const ClassesPage = () => {
                                     }}
                                     Button={({ toggleModal }) => {
                                         return (
-                                            <button className="text-3xl rounded-full mt-3 bg-red-800 hover:bg-red-700 p-4 text-white shadow-sm " onClick={() => toggleModal()}>
+                                            <button className="text-3xl rounded-full mt-3 bg-red-800 opacity-70 hover:opacity-100 hover:bg-red-700 p-4 text-white shadow-sm " onClick={() => toggleModal()}>
                                                 <FaPlus />
                                             </button>
                                         );

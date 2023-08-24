@@ -6,36 +6,24 @@ import { useAuth } from "util/auth";
 const LandingBody = () => {
   const data = [
     {
-      title: "block-1",
+      title: "Quality Education",
       src: "/Images/slider-1.jpg",
-      description:
-        "Mission to raise the productivity of our graduates through quality education and practical knowledge to contribute in a significant way to the national economy.",
-      person: "M Kashif Bilal",
-      date: "July 12",
+      description: "Our commitment to providing quality education ensures that students receive a comprehensive learning experience that prepares them for the future.",
     },
     {
-      title: "block-2",
+      title: "Innovative Learning",
       src: "/Images/slider-2.jpg",
-      description:
-        "Mission to raise the productivity of our graduates through quality education and practical knowledge to contribute in a significant way to the national economy.",
-      person: "M Adeel",
-      date: "Nov 10",
+      description: "We embrace innovative teaching methods to engage students and foster a passion for learning in a dynamic and ever-changing world.",
     },
     {
-      title: "block-3",
+      title: "Empowering Students",
       src: "/Images/slider-3.jpg",
-      description:
-        "Mission to raise the productivity of our graduates through quality education and practical knowledge to contribute in a significant way to the national economy.",
-      person: "Hanzlah Ashraf",
-      date: "Jun 4",
+      description: "We empower students with knowledge, critical thinking skills, and the confidence to contribute positively to their communities and society at large.",
     },
     {
-      title: "block-4",
-      src: "Images/slider-4.jpg",
-      description:
-        "Mission to raise the productivity of our graduates through quality education and practical knowledge to contribute in a significant way to the national economy.",
-      person: "Asif Bilal",
-      date: "Dec 23",
+      title: "Holistic Development",
+      src: "/Images/slider-4.jpg",
+      description: "Our holistic approach to education focuses not only on academics but also on nurturing well-rounded individuals with strong values and ethics.",
     },
   ];
   const auth = useAuth();
@@ -115,42 +103,36 @@ const LandingBody = () => {
           </section>
         </main>
       </section>
-      <h2 className="text-lg text-red-500 underline text-center mt-6">
-        *Under Development*
-      </h2>
-      <h2 className="text-sm text-red-500 underline text-center mt-2">
-        kashif & Adeel
-      </h2>
 
       <div className="m-4 flex flex-wrap justify-center mx-auto">
-        {data.map((item) => {
+        {data.map((item, index) => {
           return (
-            <div key={item.title} className="max-w-sm lg:max-w-md lg:flex m-6">
-              <div
-                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                style={{ backgroundImage: `url(${item.src})` }}
-                title="Woman holding a mug"
-              ></div>
-              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <div className="mb-8">
-                  <div className="text-gray-900 font-bold text-xl mb-2">
+            <>
+              <main className={` lg:px-20 py-32 lg:flex ${!((index + 1) % 2 === 0) ? "lg:felx-row" : "lg:flex-row-reverse"} items-center justify-evenly `}>
+                <div className=" lg-p-14 p-8 lg:pt-16 lg:text-left  lg:w-1/2 w-max-1/2 text-center">
+                  <h2
+                    className="lg:text-5xl text-4xl mb-4 text-[#202226] font-semibold"
+                    id="Landing-main"
+                  >
                     {item.title}
-                  </div>
-                  <p className="text-gray-700 text-base">{item.description}</p>
+                  </h2>
+                  <p className="text-xl mb-4 text-[#888C8F]  text-nomral font-semibold">
+                    {item.description}
+                  </p>
                 </div>
-                <div className="flex items-center">
+                <div className="flex">
                   <img
-                    className="w-10 h-10 rounded-full mr-4"
-                    src="https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small_2x/profile-icon-design-free-vector.jpg"
-                    alt="Avatar of Jonathan Reinink"
+                    className=" w-[400px] mx-auto object-cover"
+                    src={item.src}
+                    alt="Time managment"
                   />
-                  <div className="text-sm">
-                    <p className="text-gray-900 leading-none">{item.person}</p>
-                    <p className="text-gray-600"> {item.date}</p>
-                  </div>
                 </div>
-              </div>
-            </div>
+              </main>
+              {
+                !(data.length === (index + 1)) &&
+                <div className="h-[2px] bg-gray-200 w-[80%] mx-auto"></div>
+              }
+            </>
           );
         })}
       </div>

@@ -86,7 +86,7 @@ const AttendanceForm = ({ students, subject, class_id }) => {
       {!students && <Loader />}
       {students && (
         <>
-          {CheckAttendance.length > 0 &&
+          {CheckAttendance?.length > 0 &&
             <div>
               <h3 className="text-center text-red-800 my-4 animate-bounce">
                 *Today's attendance has already been taken*
@@ -177,7 +177,7 @@ const AttendanceForm = ({ students, subject, class_id }) => {
                 </table>
               </div>
               <div className="flex justify-end mt-6">
-                {CheckAttendance.length > 0 ? (
+                {CheckAttendance?.length > 0 ? (
                   <button className="red-button" disabled>
                     Already taken
                   </button>
