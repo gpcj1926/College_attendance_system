@@ -66,8 +66,6 @@ const ClassAttendanceView = ({ attendanceData, myClass }) => {
     const handleAttendance = () => {
         setMyAttendance(attendanceData?.filter(i => { return formatDate(i.createdAt) === myDate }))
     }
-    console.log(formatDate(attendanceData?.[0].createdAt))
-    console.log(myDate)
     return (
         <div className='red-primary pb-10'>
             <h1 className="pt-10 pb-6 text-3xl text-center font-bold">

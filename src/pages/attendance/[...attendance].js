@@ -8,8 +8,7 @@ import { requireAuth } from "util/auth";
 
 const attendance = () => {
     const route = useRouter();
-    const id = route?.asPath?.split("/")?.[2];
-
+    const id = route?.query?.attendance?.[0];
     const { data: myClass } = useClass(id)
     const { data: attendanceData } = useAllAttendance();
     const Attendance = attendanceData?.filter(i => { return i.class_id === id })
