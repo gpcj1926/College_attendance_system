@@ -74,14 +74,6 @@ export function useAllStudents() {
   );
 }
 
-// Fetch student data
-export function useStudent(id) {
-  return useQuery(
-    ["student", { id }],
-    () => supabase.from("students").select().eq("id", id).single().then(handle),
-    { enabled: !!id }
-  );
-}
 
 // Update an student
 export async function updateStudent(id, data) {
@@ -149,19 +141,6 @@ export async function createClass(data) {
   return response;
 }
 
-// Update an student
-export async function updateClass(id, data) {
-  const response = await supabase
-    .from("classes")
-    .update(data)
-    .eq("id", id)
-    .then(handle);
-  await Promise.all([
-    client.invalidateQueries(["class", { id }]),
-    client.invalidateQueries(["classes"]),
-  ]);
-  return response;
-}
 
 
 // Fetch student class
@@ -176,7 +155,7 @@ export function useClass(id) {
 
 //********Attendance****  */
 
-// Fetch all student
+// Fetch all Attendance
 export function useAllAttendance() {
   return useQuery(
     "attendance",
@@ -185,11 +164,49 @@ export function useAllAttendance() {
   );
 }
 
-// Create a new class
+// Create a new Attendance
 export async function createAttendance(data) {
   const response = await supabase.from("attendance").insert(data).then(handle);
   // Invalidate and refetch queries that could have old data
   await client.invalidateQueries(["attendance"]);
+  return response;
+}
+
+// Update an Attendance
+export async function updateAttendance(id, data) {
+  const response = await supabase
+    .from("attendance")
+    .update(data)
+    .eq("id", id)
+    .then(handle);
+  await Promise.all([
+    client.invalidateQueries(["attendance", { id }]),
+    client.invalidateQueries(["attendance"]),
+  ]);
+  return response;
+}
+
+// Fetch Attendance data
+export function useAttendance(id) {
+  return useQuery(
+    ["attendance", { id }],
+    () => supabase.from("attendance").select().eq("id", id).single().then(handle),
+    { enabled: !!id }
+  );
+}
+
+// Delete an Attendance
+export async function deleteAttendance(id) {
+  const response = await supabase
+    .from("attendance")
+    .delete()
+    .eq("id", id)
+    .then(handle);
+  // Invalidate and refetch queries that could have old data
+  await Promise.all([
+    client.invalidateQueries(["attendance", { id }]),
+    client.invalidateQueries(["attendance"]),
+  ]);
   return response;
 }
 

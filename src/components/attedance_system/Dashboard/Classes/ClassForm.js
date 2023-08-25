@@ -24,7 +24,6 @@ const ClassForm = ({ onDone, refetch, target, id }) => {
     };
 
     const submitHandle = async (data) => {
-        console.log("submit");
         if (target === "create") {
             await createClass({ ...data, owner: owner });
             toast.success("successfully created!");

@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import jsPDF from 'jspdf';
-import { FaFilePdf } from 'react-icons/fa';
+import { FaFilePdf, FaRegEdit } from 'react-icons/fa';
 import 'jspdf-autotable';
 import collegeLogo from './../../common/collegeLogo'
+import ModalButton from 'components/attedance_system/common/ModalButton';
+import AttendanceUpdateForm from './AttendanceUpdateForm';
+import { toast } from 'react-toastify';
+import { useUser } from 'util/db';
+import { useAuth } from 'util/auth';
 
 const ClassAttendanceView = ({ attendanceData, myClass }) => {
+    const currentTime = new Date();
     const bodyCellStyles = "md:min-w-[140px] md:text-lg text-sm font-semibold px-3 py-4 bg-red-200 border-b-2 border-red-300 text-sm md:text-lg"
     const headCellStyles = "md:min-w-[140px] p-3 md:text-lg text-sm border-r-[1px] text-white text-center bg-red-800 text-sm md:text-lg"
+    const auth = useAuth();
+    const { data: userData } = useUser(auth?.user?.uid);
     function formatDate(inputDate) {
         let dateObj;
 
@@ -24,6 +32,11 @@ const ClassAttendanceView = ({ attendanceData, myClass }) => {
 
         const formattedDate = `${year}-${month}-${day}`;
         return formattedDate;
+    }
+    function formatTime(inputDate) {
+        const dateObject = new Date(inputDate);
+        const formattedTime = dateObject.toLocaleTimeString([], { timeStyle: 'short' });
+        return formattedTime
     }
     function generatePDF(data) {
         const doc = new jsPDF();
@@ -58,7 +71,7 @@ const ClassAttendanceView = ({ attendanceData, myClass }) => {
         doc.save('attendance_report.pdf');
     }
 
-    const [myDate, setMyDate] = useState(formatDate(new Date()))
+    const [myDate, setMyDate] = useState(formatDate(currentTime))
     const [myAttendance, setMyAttendance] = useState(attendanceData?.filter(i => { return formatDate(i.createdAt) === myDate }))
     useEffect(() => {
         setMyAttendance(attendanceData?.filter(i => { return formatDate(i.createdAt) === myDate }))
@@ -78,58 +91,93 @@ const ClassAttendanceView = ({ attendanceData, myClass }) => {
             <div className='flex justify-center'>
                 <button className='white-button' onClick={() => { generatePDF(myAttendance) }}>Generate pdf <FaFilePdf className='inline-block ml-2' /> </button>
             </div>
-            <main className="flex flex-wrap justify-center space-x-6 py-4">
-                <div className="flex space-x-2">
-                    <h2 className="md:text-lg text-sm font-semibold text-red-700">
-                        Subject:
-                    </h2>
-                    <h3 className="md:text-lg text-sm font-semibold">
-                        {myClass?.class_name}
-                    </h3>
+            <main className="flex flex-col">
+                <div className='flex flex-wrap justify-center space-x-6 pt-4 pb-2'>
+                    <div className="flex space-x-2">
+                        <h2 className="md:text-lg text-sm font-semibold text-red-700">
+                            Subject:
+                        </h2>
+                        <h3 className="md:text-lg text-sm font-semibold">
+                            {myClass?.class_name}
+                        </h3>
+                    </div>
+                    <div className="flex space-x-2">
+                        <h2 className="md:text-lg text-sm font-semibold text-red-700">
+                            Students:
+                        </h2>
+                        <h3 className="md:text-lg text-sm font-semibold">
+                            {myAttendance?.length}
+                        </h3>
+                    </div>
+                    <div className="flex space-x-2">
+                        <h2 className="md:text-lg text-sm font-semibold text-red-700">
+                            Date:
+                        </h2>
+                        <h3 className="md:text-lg text-sm font-semibold">
+                            {myDate}
+                        </h3>
+                    </div>
+                    <div className="flex space-x-2">
+                        <h2 className="md:text-lg text-sm font-semibold text-red-700">
+                            Time:
+                        </h2>
+                        <h3 className="md:text-lg text-sm font-semibold">
+                            {myAttendance?.[0]?.createdAt ? formatTime(myAttendance?.[0]?.createdAt) : "00:00"}
+                        </h3>
+                    </div>
                 </div>
-                <div className="flex space-x-2">
-                    <h2 className="md:text-lg text-sm font-semibold text-red-700">
-                        Students:
-                    </h2>
-                    <h3 className="md:text-lg text-sm font-semibold">
-                        {myAttendance?.length}
-                    </h3>
+                <div className='flex flex-wrap justify-center space-x-6 pt-4 pb-2'>
+                    <div className="flex space-x-2">
+                        <h2 className="md:text-lg text-sm font-semibold text-red-700">
+                            Present:
+                        </h2>
+                        <h3 className="md:text-lg text-sm font-semibold">
+                            {myAttendance?.filter(i => { return i.attendance === "Present" })?.length}
+                        </h3>
+                    </div>
+                    <div className="flex space-x-2">
+                        <h2 className="md:text-lg text-sm font-semibold text-red-700">
+                            Absent:
+                        </h2>
+                        <h3 className="md:text-lg text-sm font-semibold">
+                            {myAttendance?.filter(i => { return i.attendance === "Absent" })?.length}
+                        </h3>
+                    </div>
+                    <div className="flex space-x-2">
+                        <h2 className="md:text-lg text-sm font-semibold text-red-700">
+                            Leave:
+                        </h2>
+                        <h3 className="md:text-lg text-sm font-semibold">
+                            {myAttendance?.filter(i => { return i.attendance === "Leave" })?.length}
+                        </h3>
+                    </div>
                 </div>
-                <div className="flex space-x-2">
-                    <h2 className="md:text-lg text-sm font-semibold text-red-700">
-                        Date:
-                    </h2>
-                    <h3 className="md:text-lg text-sm font-semibold">
-                        {myDate}
-                    </h3>
-                </div>
-                <div className="flex space-x-2">
-                    <h2 className="md:text-lg text-sm font-semibold text-red-700">
-                        Session:
-                    </h2>
-                    <h3 className="md:text-lg text-sm font-semibold">
-                        {myClass?.session}
-                    </h3>
-                </div>
+                {["teacher"].includes(userData?.roleas)
+                    &&
+                    <h2 className='text-center text-red-800 mb-2'>Note: You can't edit attendance after 40 minutes</h2>
+                }
             </main>
             <section className=' md:overflow-hidden overflow-x-scroll'>
                 <table className='md:mx-auto'>
                     <thead>
                         <tr>
-                            <td className={headCellStyles}>sr no.</td>
                             <td className={headCellStyles}>Roll No.</td>
+                            <td className={headCellStyles}>Uni roll No.</td>
                             <td className={headCellStyles}>Name</td>
                             <td className={headCellStyles}>Attendance</td>
-                            <td className={headCellStyles}>Uni roll No.</td>
                             <td className={headCellStyles}>Phone Number</td>
+                            <td className={headCellStyles}>Edit</td>
                         </tr>
                     </thead>
                     <tbody>
                         {myAttendance?.map((i, index) => {
+                            const givenDate = new Date(i.createdAt);
+                            givenDate?.setMinutes(givenDate.getMinutes() + 40);
+
                             return (
-                                <tr>
-                                    <td className={`${bodyCellStyles} text-center`}>{index + 1}</td>
+                                <tr key={index}>
                                     <td className={`${bodyCellStyles} text-center`}>{i.college_rollno}</td>
+                                    <td className={`${bodyCellStyles} text-center`}>{i.university_rollno}</td>
                                     <td className={`${bodyCellStyles} text-left`}>{i.name}</td>
                                     <td className={`${bodyCellStyles} text-center`}>
                                         {i.attendance === 'Present' ? (
@@ -140,14 +188,54 @@ const ClassAttendanceView = ({ attendanceData, myClass }) => {
                                             <span style={{ color: 'red' }}>Absent</span>
                                         )}
                                     </td>
-                                    <td className={`${bodyCellStyles} text-center`}>{i.university_rollno}</td>
                                     <td className={`${bodyCellStyles} text-left`}>{i.phone_number}</td>
+                                    <td className={`${bodyCellStyles} text-center`}>
+                                        <ModalButton
+                                            title="Update Students Attendance"
+                                            Content={({ toggleModal }) => {
+                                                return (
+                                                    <AttendanceUpdateForm
+                                                        onDone={() => {
+                                                            toggleModal();
+                                                        }}
+                                                        refetch={handleAttendance}
+                                                        id={i.id}
+
+                                                    />
+                                                );
+                                            }}
+                                            Button={({ toggleModal }) => {
+                                                return (
+                                                    <div className='flex justify-center'>
+                                                        {["super_admin", "department_Admin"].includes(userData?.roleas)
+                                                            &&
+                                                            <FaRegEdit onClick={() => toggleModal()} className="cursor-pointer" />
+                                                        }
+                                                        {["teacher"].includes(userData?.roleas)
+                                                            &&
+                                                            ((currentTime > givenDate) ?
+                                                                <FaRegEdit onClick={() => toast.warn("Attendance edit time out")} className="cursor-pointer" />
+                                                                :
+                                                                <FaRegEdit onClick={() => toggleModal()} className="cursor-pointer" />)
+                                                        }
+                                                    </div>
+                                                );
+                                            }}
+                                        />
+                                        <div className='flex justify-center'>
+                                        </div>
+                                    </td>
                                 </tr>
                             )
                         })
                         }
                     </tbody>
                 </table>
+                {
+                    myAttendance?.length === 0 ?
+                        <img src="/Images/no_data.png" className="w-24 opacity-25 mx-auto mt-10" />
+                        : ""
+                }
             </section>
         </div>
     )

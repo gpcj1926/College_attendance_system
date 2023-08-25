@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { deleteClass, deleteStudent } from "util/db";
+import { deleteAttendance, deleteClass, deleteStudent, useAllAttendance } from "util/db";
 import Loader from "./Loader";
 import { toast } from "react-toastify";
 
@@ -13,6 +13,7 @@ export default function DeleteForm({
   const closeModal = () => {
     onDone();
   };
+  const { data: allAttendance } = useAllAttendance();
   const deleteItem = () => {
     setLoading(true);
     if (target === "student") {
@@ -20,6 +21,10 @@ export default function DeleteForm({
     }
     else if (target === "class") {
       deleteClass(id)
+      const attendanceForDeletion = allAttendance.filter(i => { return i.class_id === id })
+      attendanceForDeletion.forEach(x => {
+        deleteAttendance(x.id)
+      });
     }
     toast.success("successfully Deleted!");
     refetch();

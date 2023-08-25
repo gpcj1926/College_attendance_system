@@ -30,7 +30,7 @@ const RequestEditForm = ({ onDone, id, refetchUsers }) => {
 
       {Userdata && (
         <form onSubmit={handleSubmit(UpdateUserHandle)}>
-          <main style={sectionStyle} className="shadow-inner px-2 hide-scrollbar">
+          <main style={sectionStyle} className="">
 
             {/* personal Information */}
             <section>
@@ -41,74 +41,20 @@ const RequestEditForm = ({ onDone, id, refetchUsers }) => {
                 <FaUserAlt className="text-red-700 text-xl" />
               </div>
               <div className="my-4">
-                <div className="flex items-center">
-                  <label className="text-lg text-normal mr-4 font-medium text-gray-700">
-                    Name:
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Name"
-                    className="mb-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm py-2 px-1"
-                    defaultValue={Userdata && Userdata.name}
-                    ref={register({
-                      required: "Please enter Name",
-                    })}
-                  />
+                <div className='flex justify-start space-x-2'>
+                  <h2 className='md:text-lg text-sm font-bold'>Name : </h2>
+                  <h5 className='md:text-lg text-sm'>{Userdata?.name}</h5>
                 </div>
-                {errors.name && (
-                  <div className="text-sm text-red-700">
-                    {errors.name.message}
-                  </div>
-                )}
-
-                <div className="flex items-center">
-                  <label className="text-lg text-normal mr-4 font-medium text-gray-700">
-                    Email:
-                  </label>
-                  <input
-                    defaultValue={Userdata && Userdata.email}
-                    ref={register({
-                      required: "Please enter email",
-                    })}
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Email"
-                    className="mb-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm py-2 px-1"
-                  />
+                <div className='flex justify-start space-x-2'>
+                  <h2 className='md:text-lg text-sm font-bold'>Email. : </h2>
+                  <h5 className='md:text-lg text-sm'>{Userdata?.email}</h5>
                 </div>
-                {errors.email && (
-                  <div className="text-sm text-red-700">
-                    {errors.email.message}
-                  </div>
-                )}
-
-                <div className="flex items-center">
-                  <label className="text-lg text-normal mr-4 font-medium text-gray-700">
-                    Number:
-                  </label>
-                  <input
-                    defaultValue={Userdata && Userdata.mobileno}
-                    ref={register({
-                      required: false,
-                    })}
-                    type="text"
-                    name="mobileno"
-                    id="mobileno"
-                    placeholder="0312-3456789"
-                    className="mb-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm py-2 px-1"
-                  />
+                <div className='flex justify-start space-x-2'>
+                  <h2 className='md:text-lg text-sm font-bold'>Phone number : </h2>
+                  <h5 className='md:text-lg text-sm'>{Userdata.mobileno ? Userdata?.mobileno : "Not yet Added"}</h5>
                 </div>
-                {errors.mobileno && (
-                  <div className="text-sm text-red-700">
-                    {errors.mobileno.message}
-                  </div>
-                )}
               </div>
             </section>
-
             <hr />
             {/* College Information */}
             <section>

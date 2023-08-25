@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useAuth } from "util/auth";
 import { createAttendance, useAllAttendance } from "util/db";
+import Link from 'next/link';
 
 const AttendanceForm = ({ students, subject, class_id }) => {
   const { register, handleSubmit, errors, reset } = useForm();
@@ -93,6 +94,11 @@ const AttendanceForm = ({ students, subject, class_id }) => {
               </h3>
             </div>
           }
+          <div className="flex justify-center mt-3">
+            <Link href={`/attendance/${class_id}`}>
+              <button className='red-button text-xs'>Show attendance</button>
+            </Link>
+          </div>
           <section className="m-3 w-[95%] lg:w-[80%] mx-auto">
             <form className="" onSubmit={handleSubmit(onSubmit)}>
               <div className="md:overflow-x-hidden overflow-x-scroll">

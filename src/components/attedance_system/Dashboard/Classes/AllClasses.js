@@ -31,6 +31,9 @@ const AllClasses = ({ data, refetch, title }) => {
                     <h2 className="text-2xl text-center md:text-4xl font-bold m-2">
                         {title}
                     </h2>
+                    <h2 className="text-lg text-center font-semibold m-2">
+                        On Updating Class previous attendance will be lost
+                    </h2>
                     <div className="flex justify-center items-center space-x-4 my-10">
                         <select
                             value={myclass}
