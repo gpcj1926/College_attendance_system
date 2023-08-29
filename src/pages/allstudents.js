@@ -110,7 +110,7 @@ function allstudents() {
             </section>
             <section className="flex justify-center">
               <form onSubmit={handleSubmit(submitHandle)}>
-                <div className="m-4 flex flex-col sm:justify-evenly sm:flex-row md:items-center">
+                <div className="m-4 flex flex-col items-center sm:justify-evenly sm:flex-row md:items-center">
                   <div className="flex items-center space-x-2 mt-3 md:mr-6">
                     <h2 className="md:text-xl sm:text-lg text-base font-bold ">
                       Department:

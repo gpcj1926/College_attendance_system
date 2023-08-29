@@ -61,7 +61,7 @@ function AboutPage(props) {
             </div>
             <div className="mx-4 lg:my-0 my-5 ">
               <img
-                src={"./Images/slider-1.jpg"}
+                src={"./Images/slider_1.jpg"}
                 alt="Team Member"
                 className="w-full lg:w-[500px] md:h-[250px] h-[190px] object-cover lg:mx-auto rounded-lg shadow-md"
               />
