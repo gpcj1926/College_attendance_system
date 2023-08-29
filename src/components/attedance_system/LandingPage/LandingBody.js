@@ -7,22 +7,22 @@ const LandingBody = () => {
   const data = [
     {
       title: "Quality Education",
-      src: "/Images/slider-1.jpg",
+      src: "/Images/slider_1.jpg",
       description: "Our commitment to providing quality education ensures that students receive a comprehensive learning experience that prepares them for the future.",
     },
     {
       title: "Innovative Learning",
-      src: "/Images/slider-2.jpg",
+      src: "/Images/slider_2.jpg",
       description: "We embrace innovative teaching methods to engage students and foster a passion for learning in a dynamic and ever-changing world.",
     },
     {
       title: "Empowering Students",
-      src: "/Images/slider-3.jpg",
+      src: "/Images/slider_3.jpg",
       description: "We empower students with knowledge, critical thinking skills, and the confidence to contribute positively to their communities and society at large.",
     },
     {
       title: "Holistic Development",
-      src: "/Images/slider-4.jpg",
+      src: "/Images/slider_4.jpg",
       description: "Our holistic approach to education focuses not only on academics but also on nurturing well-rounded individuals with strong values and ethics.",
     },
   ];
@@ -48,22 +48,36 @@ const LandingBody = () => {
             <SwiperSlide>
               <img
                 className="object-cover w-full h-screen"
-                src="/Images/demo.jpg"
+                src="/Images/slider_1.jpg"
                 alt="image slide 1"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
                 className="object-cover w-full h-screen"
-                src="/Images/demo.jpg"
+                src="/Images/slider_2.jpg"
                 alt="image slide 2"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
                 className="object-cover w-full h-screen"
-                src="/Images/demo.jpg"
+                src="/Images/slider_3.jpg"
                 alt="image slide 3"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img
+                className="object-cover w-full h-screen"
+                src="/Images/slider_4.jpg"
+                alt="image slide 4"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img
+                className="object-cover w-full h-screen"
+                src="/Images/slider_5.jpg"
+                alt="image slide 5"
               />
             </SwiperSlide>
           </Swiper>
