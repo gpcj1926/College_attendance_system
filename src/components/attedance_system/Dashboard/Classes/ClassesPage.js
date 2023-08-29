@@ -2,9 +2,9 @@ import ClassForm from "./ClassForm";
 import AllClasses from "./AllClasses";
 import DepartmentClasses from "./DepartmentClasses";
 import React, { useEffect, useState } from "react";
-import { useAuth } from "./../../../../util/auth";
-import { useUser } from "./../../../../util/db";
-import supabase from "./../../../../util/supabase";
+import { useAuth } from "util/auth";
+import { useUser } from "util/db";
+import supabase from "util/supabase";
 import ModalButton from './../../common/ModalButton'
 import { FaPlus } from "react-icons/fa";
 

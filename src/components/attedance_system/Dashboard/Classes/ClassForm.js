@@ -250,8 +250,8 @@ const ClassForm = ({ onDone, refetch, target, id }) => {
     return (
         <>
             <div className="min-h-[200px]">
-                {id ? (itemData && id) && myFormComp() : myFormComp()}
-                {(id && !(itemData && id)) && <Loader />}
+                {id ? (itemData && (allUsers.length > 0) && id) && myFormComp() : myFormComp()}
+                {(id && !(itemData && (allUsers.length > 0) && id)) && <Loader />}
             </div>
         </>
     );

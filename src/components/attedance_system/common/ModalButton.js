@@ -55,7 +55,7 @@ export default function ModalButton({ label, title, Content, Button }) {
                 <div className="m-6">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium  leading-6  text-gray-900"
+                    className="text-xl font-bold leading-6  text-gray-900"
                   >
                     {title}
                   </Dialog.Title>

@@ -106,6 +106,17 @@ export async function deleteStudent(id) {
 
 
 
+// Fetch student student
+export function useStudent(id) {
+  return useQuery(
+    ["students", { id }],
+    () => supabase.from("students").select().eq("id", id).single().then(handle),
+    { enabled: !!id }
+  );
+}
+
+
+
 //*****************classes data********************
 
 // Fetch all classes by
@@ -141,6 +152,20 @@ export async function createClass(data) {
   return response;
 }
 
+
+// Update an Class
+export async function updateClass(id, data) {
+  const response = await supabase
+    .from("classes")
+    .update(data)
+    .eq("id", id)
+    .then(handle);
+  await Promise.all([
+    client.invalidateQueries(["classes", { id }]),
+    client.invalidateQueries(["classes"]),
+  ]);
+  return response;
+}
 
 
 // Fetch student class
