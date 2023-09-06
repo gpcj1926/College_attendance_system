@@ -6,7 +6,7 @@ import { useAuth } from "util/auth";
 import { createAttendance, useAllAttendance } from "util/db";
 import Link from 'next/link';
 
-const AttendanceForm = ({ students, subject, class_id }) => {
+const AttendanceForm = ({ students, class_id }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const auth = useAuth();
   const onSubmit = async (data) => {
@@ -19,13 +19,10 @@ const AttendanceForm = ({ students, subject, class_id }) => {
         class_id: class_id,
         teacher_id: auth.user.uid,
         attendance: data[studentId],
-        name: selectedStudent.name,
         college_rollno: selectedStudent.college_rollno,
-        university_rollno: selectedStudent.university_rollno,
-        phone_number: selectedStudent.phone_number,
-        subject: subject,
       };
     });
+    console.log(attendanceData)
     const successResults = [];
     const errorResults = [];
 
@@ -33,7 +30,7 @@ const AttendanceForm = ({ students, subject, class_id }) => {
       try {
         const result = await createAttendance({
           ...data,
-          owner: auth.user.uid,
+          owner: auth.user.uid
         });
         successResults.push(result);
       } catch (error) {
@@ -46,13 +43,9 @@ const AttendanceForm = ({ students, subject, class_id }) => {
     }
 
     if (errorResults.length > 0) {
-      errorResults.forEach(({ data, error }) => {
-        console.error(`Error marking attendance for:`, data);
-        console.error("Error details:", error);
-        toast.error(
-          `Error marking attendance for: ${data.someUniqueIdentifier}`
-        );
-      });
+      toast.error(
+        `Error marking attendance`
+      );
     }
 
     reset();
@@ -154,23 +147,75 @@ const AttendanceForm = ({ students, subject, class_id }) => {
                             </h2>
                           </td>
                           <td className="flex mt-1 justify-center py-4">
-                            <select
-                              ref={register({
-                                required: "Required",
-                              })}
-                              name={student.id}
-                              className=" text-center p-1"
-                            >
-                              <option className="p-2"></option>
-                              <option className="p-2">Present</option>
-                              <option className="p-2">Absent</option>
-                              <option className="p-2">Leave</option>
-                            </select>
                             {errors.student?.id && (
                               <p className="mt-1 text-sm text-left text-red-600">
                                 {errors.student?.id.message}
                               </p>
                             )}
+                            <fieldset>
+                              <div className="flex flex-col space-x-3">
+                                <div className=" flex space-x-3">
+                                  <div className="flex items-center">
+                                    <label
+                                      className="mr-2 block text-sm font-medium leading-6 text-gray-900"
+                                    >
+                                      P
+                                    </label>
+                                    <input
+                                      ref={register({
+                                        required: "Required",
+                                      })}
+                                      defaultChecked={true}
+                                      value="Present"
+                                      name={student.id}
+                                      type="radio"
+                                      disabled={CheckAttendance?.length > 0 ? true : false}
+                                      className="h-4 w-4 border-gray-200 text-indigo-600 focus:ring-indigo-600"
+                                    />
+                                  </div>
+                                  <div className="flex items-center">
+                                    <label
+                                      className="mr-2 block text-sm font-medium leading-6 text-gray-900"
+                                    >
+                                      A
+                                    </label>
+                                    <input
+                                      ref={register({
+                                        required: "Required",
+                                      })}
+                                      value="Absent"
+                                      name={student.id}
+                                      type="radio"
+                                      disabled={CheckAttendance?.length > 0 ? true : false}
+                                      className="h-4 w-4 border-gray-200 text-indigo-600 focus:ring-indigo-600"
+                                    />
+                                  </div>
+                                  <div className="flex items-center">
+                                    <label
+                                      className="mr-2 block text-sm font-medium leading-6 text-gray-900"
+                                    >
+                                      L
+                                    </label>
+                                    <input
+                                      ref={register({
+                                        required: "Required",
+                                      })}
+                                      value="Leave"
+                                      name={student.id}
+                                      type="radio"
+                                      disabled={CheckAttendance?.length > 0 ? true : false}
+                                      className="h-4 w-4 border-gray-200 text-indigo-600 focus:ring-indigo-600"
+                                    />
+                                  </div>
+                                </div>
+
+                                {errors.student?.id && (
+                                  <p className="mt-1 text-sm text-left text-red-600">
+                                    {errors.student?.id.message}
+                                  </p>
+                                )}
+                              </div>
+                            </fieldset>
                           </td>
                           <td>
                             <h2 className="md:text-lg text-center text-sm text-red-700 font-semibold px-3 py-4">

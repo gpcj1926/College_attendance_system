@@ -20,18 +20,25 @@ export default function DeleteForm({
       deleteStudent(id)
     }
     else if (target === "class") {
-      deleteClass(id)
-      const attendanceForDeletion = allAttendance.filter(i => { return i.class_id === id })
-      attendanceForDeletion.forEach(x => {
-        deleteAttendance(x.id)
-      });
-    }
-    toast.success("successfully Deleted!");
-    refetch();
-    setLoading(false);
-    onDone();
-  };
+      try {
+        deleteClass().then(() => {
+          toast.success("successfully Deleted!");
+        }).catch(() => {
+          toast.error("Error deleting Class!");
+        })
 
+        const attendanceForDeletion = allAttendance.filter(i => { return i.class_id === id })
+        attendanceForDeletion.forEach(x => {
+          deleteAttendance(x.id)
+        });
+      } catch {
+        toast.error("Error deleting Class!");
+      }
+      refetch();
+      setLoading(false);
+      onDone();
+    };
+  }
   return (
     <>
       <div>

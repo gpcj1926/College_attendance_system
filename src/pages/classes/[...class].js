@@ -66,7 +66,7 @@ const Class = () => {
                         </div>
                     </main>
                     <div className="red-primary">
-                        <AttendanceForm class_id={id} students={students} subject={classData?.class_name} />
+                        <AttendanceForm class_id={id} students={students} />
                     </div>
                 </section>
             </Index>

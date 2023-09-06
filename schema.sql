@@ -74,6 +74,27 @@ create table public.students (
   "createdAt" timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
+CREATE POLICY "Enable delete for users with role super admin" ON "public"."students"
+FOR DELETE
+TO authenticated
+USING (((SELECT roleas FROM public.users WHERE id = auth.uid()) = 'super_admin'));
+
+CREATE POLICY "Enable insert for users with role super admin" ON "public"."students"
+FOR INSERT
+TO authenticated
+WITH CHECK (((SELECT roleas FROM public.users WHERE id = auth.uid()) = 'super_admin'));
+
+CREATE POLICY "Enable read for all users" ON "public"."students"
+FOR SELECT
+TO public
+USING (true);
+
+CREATE POLICY "Enable update for users with role super admin" ON "public"."students"
+FOR UPDATE
+TO authenticated
+USING (((SELECT roleas FROM public.users WHERE id = auth.uid()) = 'super_admin'));
+
+
 
 create table public.attendance  (
   "id" uuid primary key default uuid_generate_v4(),
@@ -82,11 +103,7 @@ create table public.attendance  (
   "class_id" uuid,
   "teacher_id" uuid,
   "student_id" uuid,
-  "phone_number" text,
-  "subject" text,
-  "university_rollno" text,
   "college_rollno" text,
-  "name" text,
   "createdAt" timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
@@ -100,4 +117,33 @@ create table public.classes  (
   "shift" text,
   "teacher_id" uuid,
   "createdAt" timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+CREATE POLICY "Enable delete for users with role super admin or department admin" ON "public"."classes"
+FOR DELETE
+TO authenticated
+USING (
+  ((SELECT roleas FROM public.users WHERE id = auth.uid()) = 'super_admin') OR
+  ((SELECT roleas FROM public.users WHERE id = auth.uid()) = 'department_admin')
+);
+
+CREATE POLICY "Enable insert for users with role super admin or department admin" ON "public"."classes"
+FOR INSERT
+TO authenticated
+WITH CHECK (
+  ((SELECT roleas FROM public.users WHERE id = auth.uid()) = 'super_admin') OR
+  ((SELECT roleas FROM public.users WHERE id = auth.uid()) = 'department_admin')
+);
+
+CREATE POLICY "Enable read for users with role super admin or department admin" ON "public"."classes"
+FOR SELECT
+TO public
+USING (true);
+
+CREATE POLICY "Enable update for users with role super admin or department admin" ON "public"."classes"
+FOR UPDATE
+TO authenticated
+USING (
+  ((SELECT roleas FROM public.users WHERE id = auth.uid()) = 'super_admin') OR
+  ((SELECT roleas FROM public.users WHERE id = auth.uid()) = 'department_admin')
 );

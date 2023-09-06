@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import jsPDF from 'jspdf';
-import { FaFilePdf, FaRegEdit } from 'react-icons/fa';
+import { FaFilePdf } from 'react-icons/fa';
 import 'jspdf-autotable';
 import collegeLogo from './../../common/collegeLogo'
-import ModalButton from 'components/attedance_system/common/ModalButton';
-import AttendanceUpdateForm from './AttendanceUpdateForm';
-import { toast } from 'react-toastify';
 import { useUser } from 'util/db';
 import { useAuth } from 'util/auth';
+import ClassAttendanceViewItem from './ClassAttendanceViewItem';
 
 const ClassAttendanceView = ({ attendanceData, myClass }) => {
     const currentTime = new Date();
-    const bodyCellStyles = "md:min-w-[140px] md:text-lg text-sm font-semibold px-3 py-4 bg-red-200 border-b-2 border-red-300 text-sm md:text-lg"
     const headCellStyles = "md:min-w-[140px] p-3 md:text-lg text-sm border-r-[1px] text-white text-center bg-red-800 text-sm md:text-lg"
     const auth = useAuth();
     const { data: userData } = useUser(auth?.user?.uid);
@@ -170,62 +167,18 @@ const ClassAttendanceView = ({ attendanceData, myClass }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {myAttendance?.map((i, index) => {
-                            const givenDate = new Date(i.createdAt);
+                        {myAttendance?.sort((a, b) => a.college_rollno - b.college_rollno)?.map((item, index) => {
+                            const givenDate = new Date(item.createdAt);
                             givenDate?.setMinutes(givenDate.getMinutes() + 40);
 
                             return (
-                                <tr key={index}>
-                                    <td className={`${bodyCellStyles} text-center`}>{i.college_rollno}</td>
-                                    <td className={`${bodyCellStyles} text-center`}>{i.university_rollno}</td>
-                                    <td className={`${bodyCellStyles} text-left`}>{i.name}</td>
-                                    <td className={`${bodyCellStyles} text-center`}>
-                                        {i.attendance === 'Present' ? (
-                                            <span style={{ color: 'green' }}>Present</span>
-                                        ) : i.attendance === 'Leave' ? (
-                                            <span style={{ color: 'blue' }}>Leave</span>
-                                        ) : (
-                                            <span style={{ color: 'red' }}>Absent</span>
-                                        )}
-                                    </td>
-                                    <td className={`${bodyCellStyles} text-left`}>{i.phone_number}</td>
-                                    <td className={`${bodyCellStyles} text-center`}>
-                                        <ModalButton
-                                            title="Update Students Attendance"
-                                            Content={({ toggleModal }) => {
-                                                return (
-                                                    <AttendanceUpdateForm
-                                                        onDone={() => {
-                                                            toggleModal();
-                                                        }}
-                                                        refetch={handleAttendance}
-                                                        id={i.id}
-
-                                                    />
-                                                );
-                                            }}
-                                            Button={({ toggleModal }) => {
-                                                return (
-                                                    <div className='flex justify-center'>
-                                                        {["super_admin", "department_Admin"].includes(userData?.roleas)
-                                                            &&
-                                                            <FaRegEdit onClick={() => toggleModal()} className="cursor-pointer" />
-                                                        }
-                                                        {["teacher"].includes(userData?.roleas)
-                                                            &&
-                                                            ((currentTime > givenDate) ?
-                                                                <FaRegEdit onClick={() => toast.warn("Attendance edit time out")} className="cursor-pointer" />
-                                                                :
-                                                                <FaRegEdit onClick={() => toggleModal()} className="cursor-pointer" />)
-                                                        }
-                                                    </div>
-                                                );
-                                            }}
-                                        />
-                                        <div className='flex justify-center'>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <ClassAttendanceViewItem
+                                    key={index}
+                                    item={item}
+                                    currentTime={currentTime}
+                                    givenDate={givenDate}
+                                    handleAttendance={handleAttendance}
+                                />
                             )
                         })
                         }

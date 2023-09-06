@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AllStudentsItems from "components/attedance_system/Dashboard/Allstudents/AllStudentsItems";
 import Loader from "components/attedance_system/common/Loader";
 import Index from "components/attedance_system/Dashboard/Index";
-import { requireAuth, requireSuperAdmin } from "util/auth";
+import { requireAuth } from "util/auth";
 import { FaSearch } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useAllStudents } from "util/db";
@@ -209,4 +209,4 @@ function allstudents() {
     </Index>
   );
 }
-export default requireSuperAdmin(allstudents);
+export default requireAuth(allstudents);
